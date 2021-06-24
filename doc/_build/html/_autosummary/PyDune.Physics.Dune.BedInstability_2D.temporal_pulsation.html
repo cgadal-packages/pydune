@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation &#8212; PyDune  documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.f6b7ca918bee2f46fd9abac01cfb07d5.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/numpy.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/numpy.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1e043a052b0af929e4d8.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PyDune.Physics.Dune.CourrechDuPont2014" href="PyDune.Physics.Dune.CourrechDuPont2014.html" />
+    <link rel="prev" title="PyDune.Physics.Dune.BedInstability_2D.temporal_growth_rate_multi" href="PyDune.Physics.Dune.BedInstability_2D.temporal_growth_rate_multi.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+<link rel="stylesheet" href="../_static/numpy.css" type="text/css" />
+
+    <!-- PR #17220: This is added via javascript in versionwarning.js  -->
+    <!-- link rel="canonical" href="http://numpy.org/doc/stable/_autosummary/PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation.html" / -->
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+
+    
+    <a class="navbar-brand" href="../index.html">
+      <p class="title">PyDune</p>
+    </a>
+    
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  Home page
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials/index.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="PyDune.html">
+  PyDune
+ </a>
+</li>
+
+        
+      </ul>
+
+      <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l2">
+  <a class="reference internal" href="PyDune.Data_processing.html">
+   PyDune.Data_processing
+  </a>
+ </li>
+ <li class="toctree-l2">
+  <a class="reference internal" href="PyDune.General.html">
+   PyDune.General
+  </a>
+ </li>
+ <li class="toctree-l2 current active">
+  <a class="reference internal" href="PyDune.Physics.html">
+   PyDune.Physics
+  </a>
+  <ul class="current">
+   <li class="toctree-l3 current active">
+    <a class="reference internal" href="PyDune.Physics.Dune.html">
+     PyDune.Physics.Dune
+    </a>
+    <ul class="current">
+     <li class="toctree-l4">
+      <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.html">
+       PyDune.Physics.Dune.BedInstability_1D
+      </a>
+     </li>
+     <li class="toctree-l4 current active">
+      <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.html">
+       PyDune.Physics.Dune.BedInstability_2D
+      </a>
+     </li>
+     <li class="toctree-l4">
+      <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.html">
+       PyDune.Physics.Dune.CourrechDuPont2014
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l3">
+    <a class="reference internal" href="PyDune.Physics.Hydrodynamics.html">
+     PyDune.Physics.Hydrodynamics
+    </a>
+   </li>
+   <li class="toctree-l3">
+    <a class="reference internal" href="PyDune.Physics.SedTransport.html">
+     PyDune.Physics.SedTransport
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="pydune-physics-dune-bedinstability-2d-temporal-pulsation">
+<h1>PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation<a class="headerlink" href="#pydune-physics-dune-bedinstability-2d-temporal-pulsation" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation">
+<code class="sig-name descname"><span class="pre">temporal_pulsation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Bx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">By</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PyDune/Physics/Dune/BedInstability_2D.html#temporal_pulsation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dune instability temporalpulsation under a unidirectional wind - real part of the complex pulsation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>scalar</em><em>, </em><em>numpy array</em>) – Non dimensional wavenumber <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><strong>alpha</strong> (<em>scalar</em><em>, </em><em>numpy array</em>) – Direction <span class="math notranslate nohighlight">\(alpha\)</span> of the wavevector <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>. It is also the dune orientation measured with respect to the perpendicular to the wind direction .</p></li>
+<li><p><strong>Ax</strong> (<em>function</em>) – Hydrodynamic coefficient in the <span class="math notranslate nohighlight">\(x\)</span>-direction <span class="math notranslate nohighlight">\(\mathcal{A}_{x}\)</span> (in-phase). A vectorial function taking <cite>k</cite> as first argument and <cite>alpha</cite> as second one.</p></li>
+<li><p><strong>Ay</strong> (<em>function</em>) – Hydrodynamic coefficient in the <span class="math notranslate nohighlight">\(y\)</span>-direction <span class="math notranslate nohighlight">\(\mathcal{A}_{y}\)</span> (in-phase). A vectorial function taking <cite>k</cite> as first argument and <cite>alpha</cite> as second one.</p></li>
+<li><p><strong>Bx</strong> (<em>function</em>) – Hydrodynamic coefficient in the <span class="math notranslate nohighlight">\(x\)</span>-direction <span class="math notranslate nohighlight">\(\mathcal{B}_{x}\)</span> (in-qudrature). A vectorial function taking <cite>k</cite> as first argument and <cite>alpha</cite> as second one.</p></li>
+<li><p><strong>By</strong> (<em>function</em>) – Hydrodynamic coefficient in the <span class="math notranslate nohighlight">\(y\)</span>-direction <span class="math notranslate nohighlight">\(\mathcal{B}_{y}\)</span> (in-qudrature). A vectorial function taking <cite>k</cite> as first argument and <cite>alpha</cite> as second one.</p></li>
+<li><p><strong>r</strong> (<em>scalar</em><em>, </em><em>numpy array</em>) – Velocity ratio <span class="math notranslate nohighlight">\(u_{*}/u_{\rm d} = \sqrt{\theta/\theta_{d}}\)</span></p></li>
+<li><p><strong>mu</strong> (<em>scalar</em><em>, </em><em>numpy array</em>) – Friction coefficient <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p><strong>delta</strong> (<em>scalar</em><em>, </em><em>numpy array</em>) – Cross-stream diffusion coefficient. Set to 0 if you want to recover the exact results of Andreotti et al. 2012, Gadal et al. 2019.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Temporal dune growth rate <span class="math notranslate nohighlight">\(\sigma\)</span> calculated elementwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>scalar, numpy array</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The dune migration velocity is then <span class="math notranslate nohighlight">\(\omega/k\)</span>.</p>
+<p>Note that all quantities are made non dimensional:</p>
+<ul class="simple">
+<li><p>length scales by the saturation length <span class="math notranslate nohighlight">\(L_{\rm sat}\)</span>.</p></li>
+<li><p>time scales by <span class="math notranslate nohighlight">\(L_{\rm sat}^{2}/Q\)</span>, where <span class="math notranslate nohighlight">\(Q\)</span> is the characteristic flux.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Range of parameter exploration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="p">,</span> <span class="n">ALPHA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Defining all parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A0</span><span class="p">,</span> <span class="n">B0</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Chosing a form for the hydrodyanmic coefficients</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ax</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="n">A0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bx</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="n">B0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ay</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">A0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">By</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">B0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">alpha</span><span class="o">/</span><span class="mi">180</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Calculating growth function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PULSATION</span> <span class="o">=</span> <span class="n">temporal_pulsation</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">ALPHA</span><span class="p">,</span> <span class="n">Ax</span><span class="p">,</span> <span class="n">Ay</span><span class="p">,</span> <span class="n">Bx</span><span class="p">,</span> <span class="n">By</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.1e043a052b0af929e4d8.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright 2021, Cyril Gadal.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

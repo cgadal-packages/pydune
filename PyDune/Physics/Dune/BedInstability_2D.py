@@ -1,9 +1,3 @@
-# @Author: gadal
-# @Date:   2021-02-11T16:04:17+01:00
-# @Email:  gadal@ipgp.fr
-# @Last modified by:   gadal
-# @Last modified time: 2021-03-07T19:10:10+01:00
-
 r"""
 Dune flat bed instability taking into account two spatial direction (x and y), under unidirectional, bidirectional and multidirectional wind regimes. Here, only the temporal instability is derived,
 following Gadal et al. 2019.
@@ -268,7 +262,6 @@ def temporal_celerity(k, alpha, Ax, Ay, Bx, By, r, mu, delta):
     """
     return temporal_pulsation(k, alpha, Ax, Ay, Bx, By, r, mu, delta)/k
     # return (k/(1 + (k*cosd(alpha))**2))*(ax*cosd(alpha) + ay*sind(alpha) + k*cosd(alpha)*(bx*cosd(alpha) + by*sind(alpha)))
-
 
 
 ################################################################################

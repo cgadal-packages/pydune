@@ -1,9 +1,3 @@
-# @Author: gadal
-# @Date:   2021-02-11T15:10:09+01:00
-# @Email:  gadal@ipgp.fr
-# @Last modified by:   gadal
-# @Last modified time: 2021-04-01T18:30:29+02:00
-
 r"""
 Dune growth mechanism theory developped by Courrech du Pont et al. 2014.
 

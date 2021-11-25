@@ -1,0 +1,23 @@
+
+
+Examples using ``PyDune.Physics.SedTransport.Transport_laws.quadratic_transport_law``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create a plot comparing the different transport laws.">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_plot_transport_laws_thumb.png
+     :alt: Transport laws
+
+     :ref:`sphx_glr_examples_plot_transport_laws.py`
+
+.. raw:: html
+
+    </div>
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_plot_transport_laws.py`

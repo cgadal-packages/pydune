@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:00.118** total execution time for **examples** files:
+**00:00.090** total execution time for **examples** files:
 
 +------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_transport_laws.py` (``plot_transport_laws.py``) | 00:00.118 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_transport_laws.py` (``plot_transport_laws.py``) | 00:00.090 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+

@@ -24,3 +24,8 @@ clean:
 	rm -rf _autosummary
 	rm -rf gen_modules
 	rm -rf examples
+
+# build documentation also for github pages
+github:
+	@make html
+	@cp -ar _build/html/. ../docs

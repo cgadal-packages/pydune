@@ -61,7 +61,7 @@ Create a plot comparing the different transport laws.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.118 seconds)
+   **Total running time of the script:** ( 0 minutes  0.090 seconds)
 
 
 .. _sphx_glr_download_examples_plot_transport_laws.py:

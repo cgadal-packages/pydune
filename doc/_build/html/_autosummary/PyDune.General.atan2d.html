@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PyDune.General.atan2d &#8212; PyDune  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydata-custom.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PyDune.General.atand" href="PyDune.General.atand.html" />
+    <link rel="prev" title="PyDune.General.Vector_average" href="PyDune.General.Vector_average.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">PyDune</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  Home page
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../examples/index.html">
+  Examples
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="PyDune.html">
+  API reference
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="PyDune.Data_processing.html">
+   PyDune.Data_processing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="PyDune.Data_processing.Meteorological.html">
+     PyDune.Data_processing.Meteorological
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.html">
+       PyDune.Data_processing.Meteorological.Era_5
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.Convert_time.html">
+         PyDune.Data_processing.Meteorological.Era_5.Convert_time
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.Create_KMZ.html">
+         PyDune.Data_processing.Meteorological.Era_5.Create_KMZ
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.Getting_wind_data.html">
+         PyDune.Data_processing.Meteorological.Era_5.Getting_wind_data
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.Load_netcdf.html">
+         PyDune.Data_processing.Meteorological.Era_5.Load_netcdf
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.Save_spec_to_txt.html">
+         PyDune.Data_processing.Meteorological.Era_5.Save_spec_to_txt
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.file_lenght.html">
+         PyDune.Data_processing.Meteorological.Era_5.file_lenght
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.format_time.html">
+         PyDune.Data_processing.Meteorological.Era_5.format_time
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.ind2sub.html">
+         PyDune.Data_processing.Meteorological.Era_5.ind2sub
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Era_5.sub2ind.html">
+         PyDune.Data_processing.Meteorological.Era_5.sub2ind
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.html">
+       PyDune.Data_processing.Meteorological.Wind_processing
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+      <label for="toctree-checkbox-4">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.Calculate_Fluxes.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.Calculate_Fluxes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.Make_angular_PDF.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.Make_angular_PDF
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.Make_angular_average.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.Make_angular_average
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.Shear_to_velocity.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.Shear_to_velocity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.Velocity_to_shear.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.Velocity_to_shear
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.flux_rose.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.flux_rose
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Data_processing.Meteorological.Wind_processing.wind_rose.html">
+         PyDune.Data_processing.Meteorological.Wind_processing.wind_rose
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.Data_processing.Topography.html">
+     PyDune.Data_processing.Topography
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="PyDune.General.html">
+   PyDune.General
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.General.Cartesian_to_polar.html">
+     PyDune.General.Cartesian_to_polar
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.General.Vector_average.html">
+     PyDune.General.Vector_average
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     PyDune.General.atan2d
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.General.atand.html">
+     PyDune.General.atand
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.General.cosd.html">
+     PyDune.General.cosd
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.General.sind.html">
+     PyDune.General.sind
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.General.tand.html">
+     PyDune.General.tand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="PyDune.Physics.html">
+   PyDune.Physics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="PyDune.Physics.Dune.html">
+     PyDune.Physics.Dune
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+    <label for="toctree-checkbox-7">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.html">
+       PyDune.Physics.Dune.BedInstability_1D
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+      <label for="toctree-checkbox-8">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.complex_pulsation.html">
+         PyDune.Physics.Dune.BedInstability_1D.complex_pulsation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.complexe_wavenumer.html">
+         PyDune.Physics.Dune.BedInstability_1D.complexe_wavenumer
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.spatial_growth_rate.html">
+         PyDune.Physics.Dune.BedInstability_1D.spatial_growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.spatial_wavenumber.html">
+         PyDune.Physics.Dune.BedInstability_1D.spatial_wavenumber
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.temporal_growth_rate.html">
+         PyDune.Physics.Dune.BedInstability_1D.temporal_growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_1D.temporal_pulsation.html">
+         PyDune.Physics.Dune.BedInstability_1D.temporal_pulsation
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.html">
+       PyDune.Physics.Dune.BedInstability_2D
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.Celerity_bidi.html">
+         PyDune.Physics.Dune.BedInstability_2D.Celerity_bidi
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.Get_most_unstable.html">
+         PyDune.Physics.Dune.BedInstability_2D.Get_most_unstable
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.Growth_Rate_bidi.html">
+         PyDune.Physics.Dune.BedInstability_2D.Growth_Rate_bidi
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.temporal_celerity.html">
+         PyDune.Physics.Dune.BedInstability_2D.temporal_celerity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.temporal_celerity_multi.html">
+         PyDune.Physics.Dune.BedInstability_2D.temporal_celerity_multi
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.temporal_growth_rate.html">
+         PyDune.Physics.Dune.BedInstability_2D.temporal_growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.temporal_growth_rate_multi.html">
+         PyDune.Physics.Dune.BedInstability_2D.temporal_growth_rate_multi
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation.html">
+         PyDune.Physics.Dune.BedInstability_2D.temporal_pulsation
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.html">
+       PyDune.Physics.Dune.CourrechDuPont2014
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.Bed_Instability_Orientation.html">
+         PyDune.Physics.Dune.CourrechDuPont2014.Bed_Instability_Orientation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.Elongation_direction.html">
+         PyDune.Physics.Dune.CourrechDuPont2014.Elongation_direction
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.Flux_at_crest.html">
+         PyDune.Physics.Dune.CourrechDuPont2014.Flux_at_crest
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.Growth_rate.html">
+         PyDune.Physics.Dune.CourrechDuPont2014.Growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.Resultant_flux_at_crest.html">
+         PyDune.Physics.Dune.CourrechDuPont2014.Resultant_flux_at_crest
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Dune.CourrechDuPont2014.Resultant_flux_perp_crest_at_crest.html">
+         PyDune.Physics.Dune.CourrechDuPont2014.Resultant_flux_perp_crest_at_crest
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="PyDune.Physics.Hydrodynamics.html">
+     PyDune.Physics.Hydrodynamics
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+    <label for="toctree-checkbox-11">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.html">
+       PyDune.Physics.Hydrodynamics.Fourriere2011
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.P.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.P
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.S.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.S
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.Solve_lin.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.Solve_lin
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.coeffA.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.coeffA
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.coeffB.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.coeffB
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.func.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.func
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.func1.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.func1
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.function_coeff.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.function_coeff
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.mu.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.mu
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.Hydrodynamics.Fourriere2011.mu_prime.html">
+         PyDune.Physics.Hydrodynamics.Fourriere2011.mu_prime
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="PyDune.Physics.SedTransport.html">
+     PyDune.Physics.SedTransport
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="PyDune.Physics.SedTransport.Transport_laws.html">
+       PyDune.Physics.SedTransport.Transport_laws
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+      <label for="toctree-checkbox-14">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.SedTransport.Transport_laws.cubic_transport_law.html">
+         PyDune.Physics.SedTransport.Transport_laws.cubic_transport_law
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.SedTransport.Transport_laws.quadratic_transport_law.html">
+         PyDune.Physics.SedTransport.Transport_laws.quadratic_transport_law
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.Physics.SedTransport.Transport_laws.quartic_transport_law.html">
+         PyDune.Physics.SedTransport.Transport_laws.quartic_transport_law
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.Physics.initiation.html">
+     PyDune.Physics.initiation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="pydune-general-atan2d">
+<h1>PyDune.General.atan2d<a class="headerlink" href="#pydune-general-atan2d" title="Permalink to this headline">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="PyDune.General.atan2d">
+<span class="sig-name descname"><span class="pre">atan2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PyDune/General.html#atan2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyDune.General.atan2d" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<span class="target" id="sphx-glr-backreferences-pydune-general-atan2d"></span></section>
+
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Cyril Gadal.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

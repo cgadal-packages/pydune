@@ -1,9 +1,3 @@
-# @Author: gadal
-# @Date:   2019-05-21T18:44:14+02:00
-# @Email:  gadal@ipgp.fr
-# @Last modified by:   gadal
-# @Last modified time: 2021-03-02T14:23:56+01:00
-
 import cdsapi
 import os
 import numpy as np
@@ -52,7 +46,7 @@ def Getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
     # checking the Nitems for every Nsplit
     Nitems_list = np.array([len(variable_dic['variable']) * (365.25 * len(variable_dic['month'])/12 * len(variable_dic['day'])/31)*len(variable_dic['time']) * len(i)
                             for i in year_list])
-    if (Nitems_list > Nitems_max).any():
+    if (Nitems_list > Nitems_max[dataset]).any():
         Nsplit = Nsplit + 1
         year_list = [list(map(str, j)) for j in np.array_split(dates, Nsplit)]
     #
@@ -94,7 +88,6 @@ def Load_netcdf(files_list):
     #
     Data['time'] = Convert_time('time'.astype(np.float64))
     return Data
-
 
 
 # def Extract_points(points, file_format = 'npy', system_coordinates = 'cartesian'):

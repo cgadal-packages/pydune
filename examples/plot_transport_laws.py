@@ -1,9 +1,3 @@
-# @Author: gadal
-# @Date:   2021-03-02T18:37:53+01:00
-# @Email:  gadal@ipgp.fr
-# @Last modified by:   gadal
-# @Last modified time: 2021-03-03T18:19:08+01:00
-
 r"""
 ===========
 Transport laws
@@ -14,7 +8,9 @@ Create a plot comparing the different transport laws.
 
 import matplotlib.pyplot as plt
 import numpy as np
-from PyDune.Physics.SedTransport import Transport_laws as TL
+from PyDune.physics.sedtransport import transport_laws as TL
+
+
 theta = np.linspace(0, 0.8, 1000)
 theta_d = 0.035
 omega = 8

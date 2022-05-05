@@ -58,7 +58,7 @@ def complex_pulsation(k, A, B):
     Examples
     --------
     >>> import numpy as np
-    >>> k = np.linspace(0, 1, 1000)
+    >>> k = np.linspace(0.001, 1, 1000)
     >>> A, B = 3.5, 2
     >>> omega = complex_pulsation(k, A, B)
 
@@ -98,7 +98,7 @@ def temporal_growth_rate(k, A0, B0, mu, r):
     Examples
     --------
     >>> import numpy as np
-    >>> k = np.linspace(0, 1, 1000)
+    >>> k = np.linspace(0.001, 1, 1000)
     >>> A0, B0, mu, r = 3.5, 2, 0.63, 2
     >>> sigma = temporal_growth_rate(k, A0, B0, mu, r)
 
@@ -141,7 +141,7 @@ def temporal_pulsation(k, A0, B0, mu, r):
     Examples
     --------
     >>> import numpy as np
-    >>> k = np.linspace(0, 1, 1000)
+    >>> k = np.linspace(0.001, 1, 1000)
     >>> A0, B0, mu, r = 3.5, 2, 0.63, 2
     >>> w = temporal_pulsation(k, A0, B0, mu, r)
 
@@ -184,7 +184,7 @@ def temporal_velocity(k, A0, B0, mu, r):
     Examples
     --------
     >>> import numpy as np
-    >>> k = np.linspace(0, 1, 1000)
+    >>> k = np.linspace(0.001, 1, 1000)
     >>> A0, B0, mu, r = 3.5, 2, 0.63, 2
     >>> c = temporal_velocity(k, A0, B0, mu, r)
 
@@ -229,7 +229,7 @@ def complexe_wavenumer(w, A, B):
     Examples
     --------
     >>> import numpy as np
-    >>> w = np.linspace(0, 1, 1000)
+    >>> w = np.linspace(0.001, 1, 1000)
     >>> A, B = 3.5, 2
     >>> kplus, kminus = complexe_wavenumer(w, A, B)
 
@@ -273,7 +273,7 @@ def spatial_growth_rate(w, A0, B0, mu, r):
     Examples
     --------
     >>> import numpy as np
-    >>> w = np.linspace(0, 1, 1000)
+    >>> w = np.linspace(0.001, 1, 1000)
     >>> A0, B0, mu, r = 3.5, 2, 0.63, 2
     >>> sigma_s = spatial_growth_rate(w, A0, B0, mu, r)
 
@@ -316,7 +316,7 @@ def spatial_wavenumber(w, A0, B0, mu, r):
     Examples
     --------
     >>> import numpy as np
-    >>> w = np.linspace(0, 1, 1000)
+    >>> w = np.linspace(0.001, 1, 1000)
     >>> A0, B0, mu, r = 3.5, 2, 0.63, 2
     >>> k = spatial_wavenumber(w, A0, B0, mu, r)
 

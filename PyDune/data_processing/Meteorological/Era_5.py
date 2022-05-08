@@ -1,3 +1,21 @@
+"""
+This module allows to dowload data from the ERA5 and ERA5Land datasets hosted at
+the `Climate Data Store <https://cds.climate.copernicus.eu/#!/home>`_ . Before
+using this module, please read the corresponding documentation
+`here <https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5`_,
+and especially the `part 4 <https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5#HowtodownloadERA5-4-DownloadERA5familydatathroughtheCDSAPI>`_.
+
+Roughly, the steps are:
+
+    - create a CDS account `here <https://cds.climate.copernicus.eu/user/register>`_
+    - install the CDS API, typically using `pip3 install cdsapi`
+    - install the CDS API key corresponding to your account on your computer,
+    following the steps described `here <https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+macOS>`_
+
+..warning:
+    Scarce documentation, please look at the corresponding tutorial in the exemple gallery.
+"""
+
 import cdsapi
 import os
 import numpy as np
@@ -6,12 +24,32 @@ from decimal import Decimal
 from scipy.io import netcdf
 from datetime import datetime, timezone, timedelta
 
-"""
-test
-"""
 
+def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
+    """Short summary.
 
-def Getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
+    Parameters
+    ----------
+    dataset : int
+        dataset in which downloading the data.
+        It can be 'reanalysis-era5-single-levels' or 'reanalysis-era5-land' for now.
+    variable_dic : dic
+        Variable dictionnary to provide as a request.
+    name : type
+        Description of parameter `name`.
+    Nsplit : type
+        Description of parameter `Nsplit` (the default is 1).
+    file : type
+        Description of parameter `file` (the default is 'info.txt').
+    on_grid : type
+        Description of parameter `on_grid` (the default is True).
+
+    Returns
+    -------
+    type
+        Description of returned object.
+
+    """
     Names = {'reanalysis-era5-single-levels': 'ERA5', 'reanalysis-era5-land': 'ERA5Land'}
     Nitems_max = {'reanalysis-era5-single-levels': 120000, 'reanalysis-era5-land': 100000}
     area_ref = [0, 0]
@@ -60,23 +98,11 @@ def Getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
         variable_dic['year'] = years
         c.retrieve(dataset, variable_dic, file_names[-1])
     # Writing informations to spec file
-    Save_spec_to_txt(dataset, variable_dic, file)
+    _save_spec_to_txt(dataset, variable_dic, file)
     return file_names
 
 
-def Save_spec_to_txt(dataset, variable_dic, file):
-    if os.path.isfile(file):
-        print(file + ' already exists')
-    else:
-        with open(file, "w") as f:
-            f.write('dataset: ' + dataset + '\n')
-            f.write('\n')
-            for key in sorted(variable_dic.keys()):
-                f.write(str(key) + ': ' + str(variable_dic[key]) + '\n')
-                f.write('\n')
-
-
-def Load_netcdf(files_list):
+def load_netcdf(files_list):
     Data = {}
     for j, file in enumerate(files_list):
         file_temp = netcdf.NetCDFFile(file, 'r', maskandscale=True)
@@ -86,9 +112,20 @@ def Load_netcdf(files_list):
             elif key not in ['latitude', 'longitude']:
                 Data[key] = np.concatenate((Data[key], file_temp.variables[key][:]), axis=0)
     #
-    Data['time'] = Convert_time('time'.astype(np.float64))
+    Data['time'] = _convert_time('time'.astype(np.float64))
     return Data
 
+
+def _save_spec_to_txt(dataset, variable_dic, file):
+    if os.path.isfile(file):
+        print(file + ' already exists')
+    else:
+        with open(file, "w") as f:
+            f.write('dataset: ' + dataset + '\n')
+            f.write('\n')
+            for key in sorted(variable_dic.keys()):
+                f.write(str(key) + ': ' + str(variable_dic[key]) + '\n')
+                f.write('\n')
 
 # def Extract_points(points, file_format = 'npy', system_coordinates = 'cartesian'):
 #     ######## function to extract specific points and write (u, v) velocity to <format> files
@@ -103,9 +140,9 @@ def Load_netcdf(files_list):
 #         if ((len(points.shape) == 2) & (points.shape[-1] == 2)):
 #             lat_ind = np.argwhere(coords[0] == self.latitude)[0][0]
 #             lon_ind = np.argwhere(coords[1] == self.longitude)[0][0]
-#             indexes = sub2ind(self.Uwind[:-1], lat_ind, lon_ind)
+#             indexes = _sub2ind(self.Uwind[:-1], lat_ind, lon_ind)
 #         else:
-#             lat_ind, lon_ind = ind2sub(self.Uwind[:-1], coords)
+#             lat_ind, lon_ind = _ind2sub(self.Uwind[:-1], coords)
 #             indexes = coords
 #         #
 #         # if for data coordinate system
@@ -125,7 +162,7 @@ def Load_netcdf(files_list):
 ################################################################################
 
 
-def Create_KMZ(name, coordinates):
+def create_KMZ(name, coordinates):
     loc_path = os.path.join(os.path.dirname(__file__), 'src')
     # Destination file
     with open(name + '.kml', 'w') as dest:
@@ -161,28 +198,28 @@ def Create_KMZ(name, coordinates):
 #############################################################################################
 
 
-def format_time(date):
+def _format_time(date):
     return '{:04d}'.format(date[0]) + '-' + '{:02d}'.format(date[1]) + '-' + '{:02d}'.format(date[2])
 
 
-def file_lenght(fname):
+def _file_lenght(fname):
     with open(fname) as f:
         for i, l in enumerate(f):
             pass
     return i + 1
 
 
-def Convert_time(Times):
+def _convert_time(Times):
     atmos_epoch = datetime(1900, 1, 1, 0, 0, tzinfo=timezone.utc)
     # convert array of times in hours from epoch to dates
     return np.array([atmos_epoch + timedelta(hours=i) for i in Times])
 
 
-def sub2ind(array_shape, rows, cols):
+def _sub2ind(array_shape, rows, cols):
     return rows*array_shape[1] + cols
 
 
-def ind2sub(array_shape, ind):
+def _ind2sub(array_shape, ind):
     rows = (ind.astype('int') / array_shape[1])
     cols = (ind.astype('int') % array_shape[1])  # or numpy.mod(ind.astype('int'), array_shape[1])
     return (rows, cols)

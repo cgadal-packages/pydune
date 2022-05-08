@@ -573,11 +573,6 @@ def temporal_celerity_multi(k, alpha, Ax, Ay, Bx, By, r, mu, delta, theta, N, ax
     return np.nansum(Cel, axis=axis)
 
 
-def get_most_unstable(sigma, alpha, k):
-    indexes = np.unravel_index(sigma.argmax(), sigma.shape)
-    return sigma.max(), k[indexes[1]], alpha[indexes[0]]
-
-
 if __name__ == "__main__":
     import doctest
     doctest.testmod()

@@ -13,20 +13,19 @@ Roughly, the steps are:
     following the steps described `here <https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+macOS>`_
 
 ..warning:
-    Scarce documentation, please look at the corresponding tutorial in the exemple gallery.
+    Still experimental, and scarce documentation.
 """
 
 import cdsapi
 import os
 import numpy as np
-from itertools import islice
 from decimal import Decimal
 from scipy.io import netcdf
 from datetime import datetime, timezone, timedelta
 
 
 def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
-    """Short summary.
+    """ This fuction helps to download data from datasets stored in the Climate Data Store.
 
     Parameters
     ----------
@@ -34,20 +33,44 @@ def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
         dataset in which downloading the data.
         It can be 'reanalysis-era5-single-levels' or 'reanalysis-era5-land' for now.
     variable_dic : dic
-        Variable dictionnary to provide as a request.
-    name : type
-        Description of parameter `name`.
-    Nsplit : type
-        Description of parameter `Nsplit` (the default is 1).
-    file : type
-        Description of parameter `file` (the default is 'info.txt').
-    on_grid : type
-        Description of parameter `on_grid` (the default is True).
+        variable dictionnary to provide as a request.
+    name : str
+        name used to label the downloaded files.
+    Nsplit : int
+        number of requests in which the main request is split (the default is 1).
+        If too small, will be corrected automatically.
+    file : str
+        filename under which some information about the request will be saved (the default is 'info.txt').
+    on_grid : bool
+        if True, the required coordinates will be matched with the native grid
+        of the requested dataset. Otherwise, the dataset will be downloaded at
+        the requested coordinates, using the interpolation of the CDS server (the default is True).
 
     Returns
     -------
-    type
-        Description of returned object.
+    file_names : list
+        the list of downloaded file names
+
+    Examples
+    --------
+    >>> month = [i for i in range(1, 13)]
+    >>> day = [i for i in range(1, 32)]
+    >>> time = [i for i in range(0, 24)]
+    >>> year = [i for i in range(1950, 2023)]
+    >>> area = [-16.65, 11.9, -16.66, 11.91]
+    >>> variable_dic = {'format': 'netcdf',
+                    'variable': ['v10'],
+                    'month': month,
+                    'day': day,
+                    'time': time,
+                    'year': year,
+                    'area': area,
+                    'grid': [1.0, 1.0]}
+    >>> a = CDS.Getting_wind_data('reanalysis-era5-land',
+                              variable_dic, 'Angola_coast_v10',
+                              Nsplit=6,
+                              file='info.txt',
+                              on_grid=False)
 
     """
     Names = {'reanalysis-era5-single-levels': 'ERA5', 'reanalysis-era5-land': 'ERA5Land'}
@@ -103,6 +126,20 @@ def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
 
 
 def load_netcdf(files_list):
+    """ This function loads and concatenate (along the time axis) several NETCDF
+    files from a list of filenames.
+
+    Parameters
+    ----------
+    files_list : list
+        the list of downloaded file names.
+
+    Returns
+    -------
+    data : dict
+        a dictionnary containing all data, concatenated along the time axis.
+
+    """
     Data = {}
     for j, file in enumerate(files_list):
         file_temp = netcdf.NetCDFFile(file, 'r', maskandscale=True)
@@ -156,44 +193,6 @@ def _save_spec_to_txt(dataset, variable_dic, file):
 #             np.save('Point_' + str(indexes) + '.npy', )
 #         else:
 #             np.savetxt('Point_' + str(indexes) + '.txt', [self.Uwind[lat_ind, lon_ind, :], self.Vwind[lat_ind, lon_ind, :]])
-
-################################################################################
-# Google earth functions
-################################################################################
-
-
-def create_KMZ(name, coordinates):
-    loc_path = os.path.join(os.path.dirname(__file__), 'src')
-    # Destination file
-    with open(name + '.kml', 'w') as dest:
-        # Writing the first Part
-        with open(os.path.join(loc_path, 'En_tete_era5.kml'), 'r') as entete:
-            for line in islice(entete, 10, None):
-                if line == '	<name>Skeleton_Coast.kmz</name>' + '\n':  # Premiere occurence
-                    line = ' 	<name>' + name + '.kmz</name>' + '\n'
-                elif line == '		<name>Skeleton_Coast</name>' + '\n':  # Second occurence
-                    line = ' 	<name>' + name + '</name>'+'\n'
-                dest.write(line)
-        #
-        # Writing placemarks
-        with open(os.path.join(loc_path, 'placemark.kml'), 'r') as placemark:
-            for i, Coord in enumerate(coordinates):
-                lat, lon = Coord
-                lon = Coord[1]
-                print('lat =', lat)
-                print('lon =', lon)
-                #
-                for line in islice(placemark, 7, None):
-                    if line == '			<name>1</name>' + '\n':
-                        line = '			<name>' + str(i + 1) + '</name>' + '\n'
-                    if line == '				<coordinates>11.25,-17.25,0</coordinates>' + '\n':
-                        line = '				<coordinates>' + lon + ',' + lat + ',0</coordinates>' + '\n'
-                    dest.write(line)
-                placemark.seek(0, 0)
-
-        # Wrtiting closure
-        with open(os.path.join(loc_path, 'bottom_page.kml'), 'r') as bottom:
-            dest.writelines(bottom.readlines()[7:])
 
 #############################################################################################
 

@@ -1,0 +1,23 @@
+
+
+Examples using ``PyDune.data_processing.meteorological.downloadCDS.load_netcdf``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="From wind data to sand fluxes and dune orientations">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+     :alt: From wind data to sand fluxes and dune orientations
+
+     :ref:`sphx_glr_examples_plot_windtofluxtodune.py`
+
+.. raw:: html
+
+    </div>
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_plot_windtofluxtodune.py`

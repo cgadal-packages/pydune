@@ -153,7 +153,7 @@
 <span class="kn">from</span> <span class="nn">xhistogram.core</span> <span class="kn">import</span> <span class="n">histogram</span>
 
 
-<div class="viewcode-block" id="plot_flux_rose"><a class="viewcode-back" href="../../../../_autosummary/PyDune.data_processing.meteorological.wind_plot.plot_flux_rose.html#PyDune.data_processing.meteorological.wind_plot.plot_flux_rose">[docs]</a><span class="k">def</span> <span class="nf">plot_flux_rose</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">distribution</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">withaxe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="plot_flux_rose"><a class="viewcode-back" href="../../../../_autosummary/PyDune.data_processing.meteorological.wind_plot.plot_flux_rose.html#PyDune.data_processing.meteorological.wind_plot.plot_flux_rose">[docs]</a><span class="k">def</span> <span class="nf">plot_flux_rose</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">distribution</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">nsector</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label_flux</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label_angle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">props</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
                    <span class="n">blowfrom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Plot a sand flux angular distribution, or flux rose, on the given axe of the given figure.</span>
@@ -169,10 +169,12 @@
 <span class="sd">        axe of the figure that will be replaced by the flux rose.</span>
 <span class="sd">    fig : matplotlib.figure</span>
 <span class="sd">        figure on which the flux rose is plotted.</span>
-<span class="sd">    nbins : int</span>
+<span class="sd">    nsector : int</span>
 <span class="sd">        number of angular bins for the flux rose (the default is 20).</span>
-<span class="sd">    withaxe : bool</span>
-<span class="sd">        if true, labels the angular axis (the default is False).</span>
+<span class="sd">    label_flux : bool</span>
+<span class="sd">        if True, labels the radial axis (the default is False).</span>
+<span class="sd">    label_angle : bool</span>
+<span class="sd">        if True, label the angles (the default is False).</span>
 <span class="sd">    label : str, None</span>
 <span class="sd">        if provided, labels the flux rose with the given string (the default is None).</span>
 <span class="sd">    props : dict</span>
@@ -191,7 +193,7 @@
 
     <span class="n">PdfQ</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="n">distribution</span><span class="p">)</span>  <span class="c1"># normalization</span>
     <span class="c1"># creating the new pdf with the number of bins</span>
-    <span class="n">Lbin</span> <span class="o">=</span> <span class="mi">360</span><span class="o">/</span><span class="n">nbins</span>
+    <span class="n">Lbin</span> <span class="o">=</span> <span class="mi">360</span><span class="o">/</span><span class="n">nsector</span>
     <span class="n">Bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">Lbin</span><span class="p">)</span>
     <span class="n">Qdat</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">Qangle</span> <span class="o">=</span> <span class="p">[]</span>
@@ -210,11 +212,13 @@
     <span class="c1"># bars = ax.bar(Angle, Intensity, normed=True, opening=1, edgecolor=&#39;k&#39;, nsector = Nsector, bins = Nbin, cmap = cmap)</span>
     <span class="n">Qangle</span> <span class="o">=</span> <span class="p">(</span><span class="mi">90</span> <span class="o">-</span> <span class="n">Qangle</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
     <span class="k">if</span> <span class="n">Qangle</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">_</span> <span class="o">=</span> <span class="n">ax_rose</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">Qangle</span><span class="p">,</span> <span class="n">Qdat</span><span class="p">,</span> <span class="n">nsector</span><span class="o">=</span><span class="n">nbins</span><span class="p">,</span> <span class="n">blowto</span><span class="o">=</span><span class="n">blowfrom</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">ax_rose</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">Qangle</span><span class="p">,</span> <span class="n">Qdat</span><span class="p">,</span> <span class="n">nsector</span><span class="o">=</span><span class="n">nsector</span><span class="p">,</span> <span class="n">blowto</span><span class="o">=</span><span class="n">blowfrom</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_rmin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">ax_rose</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
         <span class="c1"># ax_rose.set_yticklabels([&#39;{:.1f}&#39;.format(float(i.get_text())*precision_flux) for i in ax.get_yticklabels()])</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">withaxe</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">label_angle</span><span class="p">:</span>
+            <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">label_flux</span><span class="p">:</span>
             <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
     <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="n">props</span><span class="p">)</span>
@@ -222,7 +226,7 @@
     <span class="k">return</span> <span class="n">ax_rose</span></div>
 
 
-<div class="viewcode-block" id="plot_wind_rose"><a class="viewcode-back" href="../../../../_autosummary/PyDune.data_processing.meteorological.wind_plot.plot_wind_rose.html#PyDune.data_processing.meteorological.wind_plot.plot_wind_rose">[docs]</a><span class="k">def</span> <span class="nf">plot_wind_rose</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="plot_wind_rose"><a class="viewcode-back" href="../../../../_autosummary/PyDune.data_processing.meteorological.wind_plot.plot_wind_rose.html#PyDune.data_processing.meteorological.wind_plot.plot_wind_rose">[docs]</a><span class="k">def</span> <span class="nf">plot_wind_rose</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">label_angle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">props</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">edgecolor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
                    <span class="n">blowfrom</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -241,6 +245,8 @@
 <span class="sd">        axe of the figure that will be replaced by the flux rose.</span>
 <span class="sd">    fig : matplotlib.figure</span>
 <span class="sd">        figure on which the flux rose is plotted.</span>
+<span class="sd">    label_angle : bool</span>
+<span class="sd">        if True, label the angles (the default is False).</span>
 <span class="sd">    label : str, None</span>
 <span class="sd">        if provided, labels the flux rose with the given string (the default is None).</span>
 <span class="sd">    props : dict</span>
@@ -269,8 +275,9 @@
     <span class="n">ax_rose</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span>
     <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
-    <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
     <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">label_angle</span><span class="p">:</span>
+        <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
     <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
         <span class="n">ax_rose</span><span class="o">.</span><span class="n">set_legend</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

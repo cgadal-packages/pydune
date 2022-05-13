@@ -214,7 +214,7 @@ Growth rate under a bidirectional wind
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.924 seconds)
+   **Total running time of the script:** ( 0 minutes  7.387 seconds)
 
 
 .. _sphx_glr_download_examples_plot_bed_instability_2D.py:

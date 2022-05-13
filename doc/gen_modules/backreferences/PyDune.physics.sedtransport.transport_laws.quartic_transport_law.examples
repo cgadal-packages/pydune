@@ -5,14 +5,14 @@ Examples using ``PyDune.physics.sedtransport.transport_laws.quartic_transport_la
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Create a plot comparing the different transport laws.">
+    <div class="sphx-glr-thumbcontainer" tooltip="From wind data to sand fluxes and dune orientations">
 
 .. only:: html
 
- .. figure:: /examples/images/thumb/sphx_glr_plot_transport_laws_thumb.png
-     :alt: Transport laws
+ .. figure:: /examples/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+     :alt: From wind data to sand fluxes and dune orientations
 
-     :ref:`sphx_glr_examples_plot_transport_laws.py`
+     :ref:`sphx_glr_examples_plot_windtofluxtodune.py`
 
 .. raw:: html
 
@@ -20,4 +20,4 @@ Examples using ``PyDune.physics.sedtransport.transport_laws.quartic_transport_la
 
 .. only:: not html
 
- * :ref:`sphx_glr_examples_plot_transport_laws.py`
+ * :ref:`sphx_glr_examples_plot_windtofluxtodune.py`

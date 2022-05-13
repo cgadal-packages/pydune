@@ -557,9 +557,24 @@
               
               <div class="toc-item">
                 
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
 
 <nav id="bd-toc-nav">
-    
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-using-pydune-data-processing-meteorological-wind-plot-plot-flux-rose">
+   Examples using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     PyDune.data_processing.meteorological.wind_plot.plot_flux_rose
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
 </nav>
               </div>
               
@@ -583,7 +598,7 @@
 <h1>PyDune.data_processing.meteorological.wind_plot.plot_flux_rose<a class="headerlink" href="#pydune-data-processing-meteorological-wind-plot-plot-flux-rose" title="Permalink to this headline">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="PyDune.data_processing.meteorological.wind_plot.plot_flux_rose">
-<span class="sig-name descname"><span class="pre">plot_flux_rose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">withaxe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">props</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'boxstyle':</span> <span class="pre">'round',</span> <span class="pre">'edgecolor':</span> <span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">1),</span> <span class="pre">'facecolor':</span> <span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0.9),</span> <span class="pre">'pad':</span> <span class="pre">0}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blowfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PyDune/data_processing/meteorological/wind_plot.html#plot_flux_rose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyDune.data_processing.meteorological.wind_plot.plot_flux_rose" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_flux_rose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_flux</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">props</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'boxstyle':</span> <span class="pre">'round',</span> <span class="pre">'edgecolor':</span> <span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">1),</span> <span class="pre">'facecolor':</span> <span class="pre">(1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0.9),</span> <span class="pre">'pad':</span> <span class="pre">0}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blowfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PyDune/data_processing/meteorological/wind_plot.html#plot_flux_rose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PyDune.data_processing.meteorological.wind_plot.plot_flux_rose" title="Permalink to this definition">#</a></dt>
 <dd><p>Plot a sand flux angular distribution, or flux rose, on the given axe of the given figure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -593,8 +608,9 @@ where the wind blows to, are anticlockwise and the 0 it a wind blowing to the Ea
 <li><p><strong>distribution</strong> (<em>numpy array</em>) – sand flux angular distribution.</p></li>
 <li><p><strong>ax</strong> (<em>matplotlib.Axes</em>) – axe of the figure that will be replaced by the flux rose.</p></li>
 <li><p><strong>fig</strong> (<em>matplotlib.figure</em>) – figure on which the flux rose is plotted.</p></li>
-<li><p><strong>nbins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – number of angular bins for the flux rose (the default is 20).</p></li>
-<li><p><strong>withaxe</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – if true, labels the angular axis (the default is False).</p></li>
+<li><p><strong>nsector</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – number of angular bins for the flux rose (the default is 20).</p></li>
+<li><p><strong>label_flux</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – if True, labels the radial axis (the default is False).</p></li>
+<li><p><strong>label_angle</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – if True, label the angles (the default is False).</p></li>
 <li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>None</em>) – if provided, labels the flux rose with the given string (the default is None).</p></li>
 <li><p><strong>props</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Bbox properties used around the label (the default is dict(boxstyle=’round’, facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0)).</p></li>
 <li><p><strong>blowfrom</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If blow from, the rose will be <span class="math notranslate nohighlight">\(\pi\)</span>-rotated, to show where the fluxes come from (the default is False).</p></li>
@@ -610,7 +626,16 @@ where the wind blows to, are anticlockwise and the 0 it a wind blowing to the Ea
 </dl>
 </dd></dl>
 
-<span class="target" id="sphx-glr-backreferences-pydune-data-processing-meteorological-wind-plot-plot-flux-rose"></span></section>
+<section id="examples-using-pydune-data-processing-meteorological-wind-plot-plot-flux-rose">
+<span id="sphx-glr-backreferences-pydune-data-processing-meteorological-wind-plot-plot-flux-rose"></span><h2>Examples using <code class="docutils literal notranslate"><span class="pre">PyDune.data_processing.meteorological.wind_plot.plot_flux_rose</span></code><a class="headerlink" href="#examples-using-pydune-data-processing-meteorological-wind-plot-plot-flux-rose" title="Permalink to this headline">#</a></h2>
+<div class="sphx-glr-thumbcontainer" tooltip="From wind data to sand fluxes and dune orientations"><figure class="align-default" id="id1">
+<img alt="From wind data to sand fluxes and dune orientations" src="../_images/sphx_glr_plot_windtofluxtodune_thumb.png" />
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="../examples/plot_windtofluxtodune.html#sphx-glr-examples-plot-windtofluxtodune-py"><span class="std std-ref">From wind data to sand fluxes and dune orientations</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div><div class="sphx-glr-clear"></div></section>
+</section>
 
 
               </div>

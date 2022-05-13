@@ -4,18 +4,10 @@
 
 .. _sphx_glr_examples:
 
-@Author: gadal
-@Date:   2021-03-02T18:54:21+01:00
-@Email:  gadal@ipgp.fr
-@Last modified by:   gadal
-@Last modified time: 2021-03-04T11:27:32+01:00
-
-
-
-This is my gallery
+Tutorials
 ==================
 
-Below is a gallery of examples
+Below is a gallery of examples and tutorials.
 
 
 
@@ -102,6 +94,27 @@ Below is a gallery of examples
    :hidden:
 
    /examples/plot_bed_instability_2D
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="From wind data to sand fluxes and dune orientations">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+     :alt: From wind data to sand fluxes and dune orientations
+
+     :ref:`sphx_glr_examples_plot_windtofluxtodune.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/plot_windtofluxtodune
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

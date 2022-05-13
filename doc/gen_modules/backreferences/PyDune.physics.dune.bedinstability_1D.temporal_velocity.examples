@@ -1,0 +1,23 @@
+
+
+Examples using ``PyDune.physics.dune.bedinstability_1D.temporal_velocity``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Plotting the dispersion relations corresponding to the one-dimensional dune bed instability.">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_plot_bed_instability_1d_thumb.png
+     :alt: Bed Instability 1D
+
+     :ref:`sphx_glr_examples_plot_bed_instability_1d.py`
+
+.. raw:: html
+
+    </div>
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_plot_bed_instability_1d.py`

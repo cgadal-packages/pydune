@@ -139,5 +139,5 @@ def cartesian_to_polar(x, y):
 
     """
     r = np.sqrt(x**2 + y**2)
-    theta = np.arctan2d(y, x) % 360
+    theta = arctan2d(y, x) % 360
     return r, theta

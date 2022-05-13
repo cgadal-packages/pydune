@@ -149,7 +149,7 @@ def load_netcdf(files_list):
             elif key not in ['latitude', 'longitude']:
                 Data[key] = np.concatenate((Data[key], file_temp.variables[key][:]), axis=0)
     #
-    Data['time'] = _convert_time('time'.astype(np.float64))
+    Data['time'] = _convert_time(Data['time'].astype(np.float64))
     return Data
 
 

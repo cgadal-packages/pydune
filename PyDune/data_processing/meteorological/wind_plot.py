@@ -9,7 +9,7 @@ from windrose import WindroseAxes
 from xhistogram.core import histogram
 
 
-def plot_flux_rose(angles, distribution, ax, fig, nbins=20, withaxe=False, label=None,
+def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, label_angle=False, label=None,
                    props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
                    blowfrom=False, **kwargs):
     r"""Plot a sand flux angular distribution, or flux rose, on the given axe of the given figure.
@@ -25,10 +25,12 @@ def plot_flux_rose(angles, distribution, ax, fig, nbins=20, withaxe=False, label
         axe of the figure that will be replaced by the flux rose.
     fig : matplotlib.figure
         figure on which the flux rose is plotted.
-    nbins : int
+    nsector : int
         number of angular bins for the flux rose (the default is 20).
-    withaxe : bool
-        if true, labels the angular axis (the default is False).
+    label_flux : bool
+        if True, labels the radial axis (the default is False).
+    label_angle : bool
+        if True, label the angles (the default is False).
     label : str, None
         if provided, labels the flux rose with the given string (the default is None).
     props : dict
@@ -47,7 +49,7 @@ def plot_flux_rose(angles, distribution, ax, fig, nbins=20, withaxe=False, label
 
     PdfQ = distribution/np.nansum(distribution)  # normalization
     # creating the new pdf with the number of bins
-    Lbin = 360/nbins
+    Lbin = 360/nsector
     Bins = np.arange(0, 360, Lbin)
     Qdat = []
     Qangle = []
@@ -66,11 +68,13 @@ def plot_flux_rose(angles, distribution, ax, fig, nbins=20, withaxe=False, label
     # bars = ax.bar(Angle, Intensity, normed=True, opening=1, edgecolor='k', nsector = Nsector, bins = Nbin, cmap = cmap)
     Qangle = (90 - Qangle) % 360
     if Qangle.size != 0:
-        _ = ax_rose.bar(Qangle, Qdat, nsector=nbins, blowto=blowfrom, **kwargs)
+        _ = ax_rose.bar(Qangle, Qdat, nsector=nsector, blowto=blowfrom, **kwargs)
         ax_rose.set_rmin(0)
         ax_rose.plot(0, 0, '.', color='w', zorder=100, markersize=3)
         # ax_rose.set_yticklabels(['{:.1f}'.format(float(i.get_text())*precision_flux) for i in ax.get_yticklabels()])
-        if not withaxe:
+        if not label_angle:
+            ax_rose.set_xticklabels([])
+        if not label_flux:
             ax_rose.set_yticks([])
     if label is not None:
         fig.text(0.5, 0.05, label, ha='center', va='center', transform=ax.transAxes, bbox=props)
@@ -78,7 +82,7 @@ def plot_flux_rose(angles, distribution, ax, fig, nbins=20, withaxe=False, label
     return ax_rose
 
 
-def plot_wind_rose(theta, U, bins, ax, fig, label=None,
+def plot_wind_rose(theta, U, bins, ax, fig, label_angle=False, label=None,
                    props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
                    blowfrom=False,
                    legend=False, **kwargs):
@@ -97,6 +101,8 @@ def plot_wind_rose(theta, U, bins, ax, fig, label=None,
         axe of the figure that will be replaced by the flux rose.
     fig : matplotlib.figure
         figure on which the flux rose is plotted.
+    label_angle : bool
+        if True, label the angles (the default is False).
     label : str, None
         if provided, labels the flux rose with the given string (the default is None).
     props : dict
@@ -125,8 +131,9 @@ def plot_wind_rose(theta, U, bins, ax, fig, label=None,
     ax_rose.patch.set_alpha(0.6)
     ax_rose.set_axisbelow(True)
     ax_rose.set_yticks([])
-    ax_rose.set_xticklabels([])
     ax_rose.set_yticklabels([])
+    if not label_angle:
+        ax_rose.set_xticklabels([])
     if legend:
         ax_rose.set_legend()
     if label is not None:

@@ -1,0 +1,23 @@
+
+
+Examples using ``PyDune.Data_processing.Meteorological.downloadCDS.Getting_wind_data``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Please find below a typical script allowing to download data from the ERA5 Land dataset.">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_download_ERAdata_thumb.png
+     :alt: Downloading data from the ERA* datasets
+
+     :ref:`sphx_glr_examples_download_ERAdata.py`
+
+.. raw:: html
+
+    </div>
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_download_ERAdata.py`

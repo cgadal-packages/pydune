@@ -4,6 +4,9 @@
 
 A scarce documentation is available here: https://cgadal.github.io/PyDune/
 
+## gunn-dev branch
+
+This is a collaborative development branch, please use the `master` branch when working with PyDune.
 
 ## Install
 

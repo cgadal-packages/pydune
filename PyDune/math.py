@@ -75,6 +75,23 @@ def arctand(x):
     return np.degrees(np.arctan(x))
 
 
+def arcsind(x):
+    """Trigonometric inverse sine using :func:`np.arcsine <numpy.arctan>`, element-wise with an output in degree.
+
+    Parameters
+    ----------
+    x : array_like
+        Input array.
+
+    Returns
+    -------
+    y : array_like
+        The corresponding tangent values. This is a scalar if x is a scalar.
+
+    """
+    return np.degrees(np.arcsin(x))
+
+
 def arctan2d(x1, x2):
     """Element-wise arc tangent of x1/x2 choosing the quadrant correctly using :func:`np.arctan2 <numpy.arctan2>` with an output in degree.
 

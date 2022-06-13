@@ -226,10 +226,3 @@ def make_angular_average(angles, weight, bin_edges=np.linspace(0, 360, 361), axi
     hist[counts == 0] = 1
     counts[counts == 0] = 1
     return hist/counts, bin_centers
-
-    # def Calculate_Fluxes(Ustar, transport_law, intermittency=False, **kwargs):
-    #     if not intermittency:
-    #         return transport_law(Ustar, **kwargs)
-    #     else:
-    #         print('intermittency not implemented yet. Using continuous transport loaw instead')
-    #         return transport_law(Ustar, **kwargs)

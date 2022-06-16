@@ -18,13 +18,13 @@
 .. _sphx_glr_examples_plot_transport_laws.py:
 
 
-===========
+==============
 Transport laws
-===========
+==============
 
 Create a plot comparing the different transport laws.
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-28
+.. GENERATED FROM PYTHON SOURCE LINES 9-29
 
 
 
@@ -53,7 +53,7 @@ Create a plot comparing the different transport laws.
     plt.figure()
     plt.plot(theta, TL.quadratic_transport_law(theta, theta_d, omega), label='quadratic transport law')
     plt.plot(theta, TL.cubic_transport_law(theta, theta_d, omega), label='cubic transport law')
-    plt.plot(theta, TL.quartic_transport_law(theta, theta_d), label='cubic transport law')
+    plt.plot(theta, TL.quartic_transport_law(theta, theta_d), label='quartic transport law')
     plt.xlabel(r'Shield number, $\theta$')
     plt.ylabel('Non dimensional saturated flux')
     plt.legend()
@@ -63,7 +63,7 @@ Create a plot comparing the different transport laws.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.227 seconds)
+   **Total running time of the script:** ( 0 minutes  0.190 seconds)
 
 
 .. _sphx_glr_download_examples_plot_transport_laws.py:

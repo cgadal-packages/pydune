@@ -71,4 +71,4 @@ plt.show()
 Alpha_E = elongation_direction(angles, angular_PDF)
 Alpha_BI = bed_instability_orientation(angles, angular_PDF)
 
-print(r'$\alpha_{{\textup{{E}}}}={: .0f}~ ^ {{\circ}}$, $\alpha_{{\textup{{BI}}}}={: .0f}~ ^ {{\circ}}$'.format(Alpha_E, Alpha_BI))
+print(r'Elongation direction: {: .0f} [deg], Bed instability crest orientation: {: .0f} [deg]'.format(Alpha_E, Alpha_BI))

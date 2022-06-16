@@ -16,6 +16,7 @@ PyDune.math
       :template: custom-function-template.rst
       :nosignatures:
    
+      arcsind
       arctan2d
       arctand
       cartesian_to_polar

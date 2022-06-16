@@ -135,7 +135,7 @@ Spatial bed instability
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.267 seconds)
+   **Total running time of the script:** ( 0 minutes  0.268 seconds)
 
 
 .. _sphx_glr_download_examples_plot_bed_instability_1d.py:

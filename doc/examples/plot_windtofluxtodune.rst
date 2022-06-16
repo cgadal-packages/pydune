@@ -143,7 +143,7 @@ We then compute the two possible dune orientations:
     Alpha_E = elongation_direction(angles, angular_PDF)
     Alpha_BI = bed_instability_orientation(angles, angular_PDF)
 
-    print(r'$\alpha_{{\textup{{E}}}}={: .0f}~ ^ {{\circ}}$, $\alpha_{{\textup{{BI}}}}={: .0f}~ ^ {{\circ}}$'.format(Alpha_E, Alpha_BI))
+    print(r'Elongation direction: {: .0f} [deg], Bed instability crest orientation: {: .0f} [deg]'.format(Alpha_E, Alpha_BI))
 
 
 
@@ -154,7 +154,7 @@ We then compute the two possible dune orientations:
 
  .. code-block:: none
 
-    $\alpha_{\textup{E}}= 75~ ^ {\circ}$, $\alpha_{\textup{BI}}= 78~ ^ {\circ}$
+    Elongation direction:  75 [deg], Bed instability crest orientation:  78 [deg]
 
 
 
@@ -162,7 +162,7 @@ We then compute the two possible dune orientations:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.899 seconds)
+   **Total running time of the script:** ( 0 minutes  1.069 seconds)
 
 
 .. _sphx_glr_download_examples_plot_windtofluxtodune.py:

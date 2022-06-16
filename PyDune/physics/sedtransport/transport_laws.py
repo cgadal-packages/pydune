@@ -33,7 +33,8 @@ def quadratic_transport_law(theta, theta_d, omega):
 
     References
     --------
-    [1] Durán, O., Claudin, P., & Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,
+    .. line-block::
+        [1] Durán, O., Claudin, P., & Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,
     dynamical mechanisms and scaling laws. Aeolian Research, 3(3), 243-270.
 
     """
@@ -66,8 +67,9 @@ def cubic_transport_law(theta, theta_d, omega):
     >>> qsat = cubic_transport_law(theta, theta_d, omega)
 
     References
-    --------
-    [1] Durán, O., Claudin, P., & Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,
+    ----------
+    .. line-block::
+        [1] Durán, O., Claudin, P., & Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,
     dynamical mechanisms and scaling laws. Aeolian Research, 3(3), 243-270.
 
     """
@@ -104,8 +106,9 @@ def quartic_transport_law(theta, theta_d, Kappa=0.4, mu=0.63, cm=1.7):
     >>> qsat = quartic_transport_law(theta, theta_d)
 
     References
-    --------
-    [1] Pähtz, T., & Durán, O. (2020). Unification of aeolian and fluvial sediment transport rate from granular physics. Physical review letters, 124(16), 168001.
+    ----------
+    .. line-block::
+        [1] Pähtz, T., & Durán, O. (2020). Unification of aeolian and fluvial sediment transport rate from granular physics. Physical review letters, 124(16), 168001.
 
     """
     return np.piecewise(theta, [theta > theta_d, theta <= theta_d],

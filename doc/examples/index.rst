@@ -115,6 +115,27 @@ Below is a gallery of examples and tutorials.
    :hidden:
 
    /examples/plot_windtofluxtodune
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show exemples using the PyDune.physics.turbulent_flow.flow_solver.solve_tu...">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_plot_turbulent_flow_sinusoidal_bottom_thumb.png
+     :alt: Properties of a turbulent flow on a sinusoidal bottom
+
+     :ref:`sphx_glr_examples_plot_turbulent_flow_sinusoidal_bottom.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/plot_turbulent_flow_sinusoidal_bottom
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

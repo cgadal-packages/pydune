@@ -18,7 +18,8 @@ In the following, all quantities are made non dimensional:
 
 References
 ----------
-[1] Gadal, C., Narteau, C., Ewing, R. C., Gunn, A., Jerolmack, D., Andreotti, B., & Claudin, P. (2020).
+.. line-block::
+    [1] Gadal, C., Narteau, C., Ewing, R. C., Gunn, A., Jerolmack, D., Andreotti, B., & Claudin, P. (2020).
 Spatial and temporal development of incipient dunes. Geophysical Research Letters, 47(16), e2020GL088919.
 """
 

@@ -177,7 +177,8 @@
 
 <span class="sd">    References</span>
 <span class="sd">    --------</span>
-<span class="sd">    [1] Durán, O., Claudin, P., &amp; Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,</span>
+<span class="sd">    .. line-block::</span>
+<span class="sd">        [1] Durán, O., Claudin, P., &amp; Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,</span>
 <span class="sd">    dynamical mechanisms and scaling laws. Aeolian Research, 3(3), 243-270.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -210,8 +211,9 @@
 <span class="sd">    &gt;&gt;&gt; qsat = cubic_transport_law(theta, theta_d, omega)</span>
 
 <span class="sd">    References</span>
-<span class="sd">    --------</span>
-<span class="sd">    [1] Durán, O., Claudin, P., &amp; Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. line-block::</span>
+<span class="sd">        [1] Durán, O., Claudin, P., &amp; Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,</span>
 <span class="sd">    dynamical mechanisms and scaling laws. Aeolian Research, 3(3), 243-270.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -248,8 +250,9 @@
 <span class="sd">    &gt;&gt;&gt; qsat = quartic_transport_law(theta, theta_d)</span>
 
 <span class="sd">    References</span>
-<span class="sd">    --------</span>
-<span class="sd">    [1] Pähtz, T., &amp; Durán, O. (2020). Unification of aeolian and fluvial sediment transport rate from granular physics. Physical review letters, 124(16), 168001.</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. line-block::</span>
+<span class="sd">        [1] Pähtz, T., &amp; Durán, O. (2020). Unification of aeolian and fluvial sediment transport rate from granular physics. Physical review letters, 124(16), 168001.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="p">[</span><span class="n">theta</span> <span class="o">&gt;</span> <span class="n">theta_d</span><span class="p">,</span> <span class="n">theta</span> <span class="o">&lt;=</span> <span class="n">theta_d</span><span class="p">],</span>

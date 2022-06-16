@@ -4,17 +4,24 @@ Properties of a turbulent flow on a sinusoidal bottom
 =====================================================
 
 In this tutorial, we show exemples using the
-:func:`solve_turbulent_flow <PyDune.turbulent_flow.solve_turbulent_flow>` solver.
+:func:`solve_turbulent_flow <PyDune.physics.turbulent_flow.flow_solver.solve_turbulent_flow>` solver.
 
 In particular, we focus on the calculation of the basal shear stress induced by
 a turbulent flow on a sinusoidal bottom, which is usefull for the sediment bed
 morphodynamics, in various flow configurations:
 
-    - 1D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed)
-    - 1D, turbulent flow capped by a free surface (typically river configuration)
-    - 1D, turbulent flow capped by a stratified flow (typically atmopshere configuration)
-    - 2D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed)
+    - '1D_unbounded': 1D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed) [1, 2]
+    - '1D_freesurface': 1D, turbulent flow capped by a free surface (typically river configuration) [1, 2]
+    - '1D_freeatmosphere': 1D, turbulent flow capped by a stratified flow (typically atmopshere configuration) [3]
+    - '2D_unbounded': 2D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed) [1, 2, 3]
 
+For details on the flow theoretical modelling, please refer to the references below:
+
+.. line-block::
+    [1] Fourrière, A. (2009). Morphodynamique des rivières: Sélection de la largeur, rides et dunes (Doctoral dissertation, Université Paris-Diderot-Paris VII).
+    [2] Fourriere, A., Claudin, P., & Andreotti, B. (2010). Bedforms in a turbulent stream: formation of ripples by primary linear instability and of dunes by nonlinear pattern coarsening. Journal of Fluid Mechanics, 649, 287-328.
+    [3] Andreotti, B., Fourriere, A., Ould-Kaddour, F., Murray, B., & Claudin, P. (2009). Giant aeolian dune size determined by the average depth of the atmospheric boundary layer. Nature, 457(7233), 1120-1123.
+    [4] Andreotti, B., Claudin, P., Devauchelle, O., Durán, O., & Fourrière, A. (2012). Bedforms in a turbulent stream: ripples, chevrons and antidunes. Journal of Fluid Mechanics, 690, 94-128.
 """
 import sys
 sys.path.append('../')
@@ -26,9 +33,10 @@ from PyDune.physics.turbulent_flow import (solve_turbulent_flow, mu, mu_prime,
 
 # %%
 # One-dimensional case -- unbounded regime
-# ====================================================
+# ========================================
 #
-# ### Basal shear stress coefficients
+# Basal shear stress coefficients
+# -------------------------------
 
 model = '1D_unbounded'
 
@@ -57,7 +65,8 @@ plt.legend()
 plt.show()
 
 # %%
-# ### Vertical profiles
+# Vertical profiles
+# -----------------
 
 eta = np.logspace(np.log10(1e-6), np.log10(0.95*eta_H), 1000)
 eta_0 = 1e-4
@@ -81,7 +90,8 @@ for i, (ax, sol, label) in enumerate(zip(axarr.flatten(), solution, labels)):
 plt.show()
 
 # %%
-# ### streamlines
+# streamlines
+# -----------
 
 # topography parameters
 k_xi = 0.35
@@ -111,10 +121,11 @@ ax.set_ylabel('$k z$')
 plt.show()
 
 # %%
-# One-dimensional case -- interaction fiwth the free surface
+# One-dimensional case -- interaction with the free surface
 # ==========================================================
 #
-# ### Dependency of the basal shear stress coefficients on the water height
+# Dependency of the basal shear stress coefficients on the water height
+# ---------------------------------------------------------------------
 
 eta_H_vals = np.logspace(-2, 2, 100)
 Froudes = np.array([0.01, 0.1, 0.8, None])
@@ -156,7 +167,8 @@ plt.show()
 # One-dimensional case -- interaction with the free surface topped by a stratified free atmosphere
 # ================================================================================================
 #
-# ### Dependency of the basal shear stress coefficients on the bottom perturbation orientation
+# Dependency of the basal shear stress coefficients on the bottom perturbation orientation
+# ----------------------------------------------------------------------------------------
 
 
 model = '1D_freeatmosphere'
@@ -189,10 +201,11 @@ plt.legend()
 plt.show()
 
 # %%
-# Andreotti et al. 2011 results
+# Two-dimensional case -- unbounded regime
 # ====================================================
 #
-# ### Dependency of the basal shear stress coefficients on the bottom perturbation orientation
+# Dependency of the basal shear stress coefficients on the bottom perturbation orientation
+# ----------------------------------------------------------------------------------------
 
 model = '2D_unbounded'
 

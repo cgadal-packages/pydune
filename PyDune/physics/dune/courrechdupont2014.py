@@ -5,7 +5,8 @@ Dune growth mechanism theory developped by Courrech du Pont et al. 2014.
 
 References
 ----------
-[1] Courrech du Pont, S., Narteau, C., & Gao, X. (2014). Two modes for dune orientation. Geology, 42(9), 743-746.
+.. line-block::
+    [1] Courrech du Pont, S., Narteau, C., & Gao, X. (2014). Two modes for dune orientation. Geology, 42(9), 743-746.
 """
 
 import numpy as np

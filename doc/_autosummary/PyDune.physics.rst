@@ -27,6 +27,6 @@ PyDune.physics
    :recursive:
 
    PyDune.physics.dune
-   PyDune.physics.hydrodynamics
    PyDune.physics.sedtransport
+   PyDune.physics.turbulent_flow
 

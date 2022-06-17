@@ -180,16 +180,6 @@
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.make_angular_PDF.html">
-         PyDune.data_processing.meteorological.wind_plot.make_angular_PDF
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.make_angular_average.html">
-         PyDune.data_processing.meteorological.wind_plot.make_angular_average
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.plot_flux_rose.html">
          PyDune.data_processing.meteorological.wind_plot.plot_flux_rose
         </a>
@@ -253,6 +243,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="PyDune.math.cosd.html">
      PyDune.math.cosd
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.math.make_angular_PDF.html">
+     PyDune.math.make_angular_PDF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.math.make_angular_average.html">
+     PyDune.math.make_angular_average
     </a>
    </li>
    <li class="toctree-l2">
@@ -397,8 +397,8 @@
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.bed_instability_orientation.html">
-         PyDune.physics.dune.courrechdupont2014.bed_instability_orientation
+        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.MGBNT_orientation.html">
+         PyDune.physics.dune.courrechdupont2014.MGBNT_orientation
         </a>
        </li>
        <li class="toctree-l4">
@@ -414,6 +414,11 @@
        <li class="toctree-l4">
         <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.growth_rate.html">
          PyDune.physics.dune.courrechdupont2014.growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest.html">
+         PyDune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest
         </a>
        </li>
        <li class="toctree-l4">
@@ -669,9 +674,9 @@
 <p>Dune flat bed instability taking into account two spatial direction (x and y), under unidirectional, bidirectional and multidirectional wind regimes. Here, only the temporal instability is derived,
 following Gadal et al. 2019.</p>
 <div class="math notranslate nohighlight">
-\[q_{\rm sat}/Q_{*} = Q\left[1 - (u_{\rm th}/u_{*})^{2}\right],\]</div>
-<p>where <span class="math notranslate nohighlight">\(Q_{*}\)</span> is a characteristic sand flux, <span class="math notranslate nohighlight">\(u_{*}\)</span> the wind shear velocity and <cite>u_{rm th}</cite> the threshold velocity for sediment transport.</p>
-<p>In the following, all quantities are made non dimensional:</p>
+\[q_{\rm sat}/Q_{*} = \omega \left[1 - (u_{\rm th}/u_{*})^{2}\right],\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q_{*}\)</span> is a characteristic sand flux, <span class="math notranslate nohighlight">\(\omega\)</span> a dimensional constant, <span class="math notranslate nohighlight">\(u_{*}\)</span> the wind shear velocity and <cite>u_{rm th}</cite> the threshold velocity for sediment transport.</p>
+<p>In the following, all quantities are made non-dimensional:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>length scales by the saturation length <span class="math notranslate nohighlight">\(L_{\rm sat}\)</span>.</p></li>

@@ -1,0 +1,42 @@
+
+
+Examples using ``PyDune.physics.dune.courrechdupont2014.MGBNT_orientation``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we show how the calculation of the elonagtion direction and MGBNT orientation ...">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_plot_dune_orientations_thumb.png
+     :alt: Selection of dune orientation
+
+     :ref:`sphx_glr_examples_plot_dune_orientations.py`
+
+.. raw:: html
+
+    </div>
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_plot_dune_orientations.py`
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show on the use PyDune functions to go from wind data, to the calculation ...">
+
+.. only:: html
+
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+     :alt: From wind data to sand fluxes and dune orientations
+
+     :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`
+
+.. raw:: html
+
+    </div>
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`

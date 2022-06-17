@@ -119,6 +119,41 @@ def resultant_flux_perp_crest_at_crest(alpha, theta, Q0, gamma=1.6, axis=-1):
     return RDP*(cosd(alpha_squeezed + 90)*cosd(RDD) + sind(alpha_squeezed + 90)*sind(RDD))
 
 
+def resultant_flux_aligned_crest_at_crest(alpha, theta, Q0, gamma=1.6, axis=-1):
+    r"""Compute the component of the resultant flux (i.e vectorial average) at the crest aligned with the dune crest.
+
+    Parameters
+    ----------
+    alpha : scalar, numpy array
+        dune orientation :math:`\alpha`.
+    theta : scalar, numpy array
+        flux orientation :math:`\theta` in degrees.
+    Q0 : scalar, numpy array
+        flux at the bottom of the dune :math:`Q_{0}`.
+    gamma : scalar, numpy array
+        flux-up ratio :math:`\gamma` (the default is 1.6).
+    axis : int
+        axis over wich the average is done (the default is -1).
+
+    Returns
+    -------
+    scalar, numpy array
+        component of the resultant flux (i.e vectorial average) at the crest perpendicular to the dune crest.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> alpha = 10
+    >>> theta = np.random.random((1000,))*360
+    >>> Q0 = np.random.random((1000,))*50
+    >>> Qcrest_perp = resultant_flux_perp_crest_at_crest(alpha, theta, Q0)
+
+    """
+    RDD, RDP = resultant_flux_at_crest(alpha, theta, Q0, gamma=gamma, axis=axis)
+    alpha_squeezed = np.squeeze(alpha, axis=axis)
+    return RDP*(cosd(alpha_squeezed)*cosd(RDD) + sind(alpha_squeezed)*sind(RDD))
+
+
 def elongation_direction(theta, Q0, gamma=1.6, alpha_bins=np.linspace(0, 360, 361),
                          axis=-1, **kwargs):
     r"""Calculate the elongation direction following the model of Courrech du Pont et al. 2014.
@@ -214,8 +249,9 @@ def growth_rate(alpha, theta, Q0, gamma=1.6, axis=-1, capture_rate=1):
     return np.squeeze(np.sum(CR*Q0*(np.abs(sind(theta - alpha)) + gamma*sind(theta-alpha)**2), axis=axis))
 
 
-def bed_instability_orientation(theta, Q0, gamma=1.6, alpha_bins=np.linspace(0, 360, 361), **kwargs):
-    r"""Calculate the dune orientation growing from the flat bed instability following the model of Courrech du Pont et al. 2014.
+def MGBNT_orientation(theta, Q0, gamma=1.6, alpha_bins=np.linspace(0, 360, 361), **kwargs):
+    r"""Calculate the dune orientation growing from the 'maximum gross bedform normal-transport' rule
+    following the model of Courrech du Pont et al. 2014, also called in the later 'bed instability'.
 
     Parameters
     ----------

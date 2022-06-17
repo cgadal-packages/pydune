@@ -4,23 +4,23 @@
 
 .. _sphx_glr_examples:
 
-Tutorials
-==================
+Examples
+=========
 
-Below is a gallery of examples and tutorials.
+Below is a gallery of examples demonstrating the use of several functions of PyDune.
 
 
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Create a plot comparing the different transport laws.">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we show how the calculation of the elonagtion direction and MGBNT orientation ...">
 
 .. only:: html
 
- .. figure:: /examples/images/thumb/sphx_glr_plot_transport_laws_thumb.png
-     :alt: Transport laws
+ .. figure:: /examples/images/thumb/sphx_glr_plot_dune_orientations_thumb.png
+     :alt: Selection of dune orientation
 
-     :ref:`sphx_glr_examples_plot_transport_laws.py`
+     :ref:`sphx_glr_examples_plot_dune_orientations.py`
 
 .. raw:: html
 
@@ -30,28 +30,7 @@ Below is a gallery of examples and tutorials.
 .. toctree::
    :hidden:
 
-   /examples/plot_transport_laws
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Please find below a typical script allowing to download data from the ERA5 Land dataset.">
-
-.. only:: html
-
- .. figure:: /examples/images/thumb/sphx_glr_download_ERAdata_thumb.png
-     :alt: Downloading data from the ERA* datasets
-
-     :ref:`sphx_glr_examples_download_ERAdata.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/download_ERAdata
+   /examples/plot_dune_orientations
 
 .. raw:: html
 
@@ -97,27 +76,6 @@ Below is a gallery of examples and tutorials.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="From wind data to sand fluxes and dune orientations">
-
-.. only:: html
-
- .. figure:: /examples/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
-     :alt: From wind data to sand fluxes and dune orientations
-
-     :ref:`sphx_glr_examples_plot_windtofluxtodune.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /examples/plot_windtofluxtodune
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show exemples using the PyDune.physics.turbulent_flow.flow_solver.solve_tu...">
 
 .. only:: html
@@ -136,6 +94,83 @@ Below is a gallery of examples and tutorials.
    :hidden:
 
    /examples/plot_turbulent_flow_sinusoidal_bottom
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_examples_tutorials:
+
+Tutorials
+=========
+
+Below is a gallery of longer tutorials using several functions of PyDune.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Please find below a typical script allowing to download data from the ERA5 Land dataset.">
+
+.. only:: html
+
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_download_ERAdata_thumb.png
+     :alt: Downloading data from the ERA* datasets
+
+     :ref:`sphx_glr_examples_tutorials_download_ERAdata.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/tutorials/download_ERAdata
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Fitting the different transport laws to the laboratory data of:">
+
+.. only:: html
+
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_transport_laws_thumb.png
+     :alt: Fitting transport laws
+
+     :ref:`sphx_glr_examples_tutorials_plot_transport_laws.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/tutorials/plot_transport_laws
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show on the use PyDune functions to go from wind data, to the calculation ...">
+
+.. only:: html
+
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+     :alt: From wind data to sand fluxes and dune orientations
+
+     :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/tutorials/plot_windtofluxtodune
 .. raw:: html
 
     <div class="sphx-glr-clear"></div>

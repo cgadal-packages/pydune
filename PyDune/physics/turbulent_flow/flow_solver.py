@@ -2,21 +2,23 @@ r"""
 In this module, the function :func:`solve_turbulent_flow <PyDune.physics.turbulent_flow.flow_solver.solve_turbulent_flow>`
 solve  the turbulent flow on a sinusoidal bottom in different configurations:
 
-    - '1D_unbounded': 1D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed) [1, 2]
-    - '1D_freesurface': 1D, turbulent flow capped by a free surface (typically river configuration) [1, 2]
-    - '1D_freeatmosphere': 1D, turbulent flow capped by a stratified flow (typically atmopshere configuration) [3]
-    - '2D_unbounded': 2D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed) [1, 2, 3]
+    * '1D_unbounded': 1D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed) [1, 2]
+    * '1D_freesurface': 1D, turbulent flow capped by a free surface (typically river configuration) [1, 2]
+    * '1D_freeatmosphere': 1D, turbulent flow capped by a stratified flow (typically atmopshere configuration) [3]
+    * '2D_unbounded': 2D, unbounded turbulent flow (in practice capped by a rigid lid, that should be put far from the bed) [1, 2, 3]
 
 For details on the flow theoretical modelling, please refer to the references below.
 
 
 References
 ----------
+
 .. line-block::
     [1] Fourrière, A. (2009). Morphodynamique des rivières: Sélection de la largeur, rides et dunes (Doctoral dissertation, Université Paris-Diderot-Paris VII).
     [2] Fourriere, A., Claudin, P., & Andreotti, B. (2010). Bedforms in a turbulent stream: formation of ripples by primary linear instability and of dunes by nonlinear pattern coarsening. Journal of Fluid Mechanics, 649, 287-328.
     [3] Andreotti, B., Fourriere, A., Ould-Kaddour, F., Murray, B., & Claudin, P. (2009). Giant aeolian dune size determined by the average depth of the atmospheric boundary layer. Nature, 457(7233), 1120-1123.
     [4] Andreotti, B., Claudin, P., Devauchelle, O., Durán, O., & Fourrière, A. (2012). Bedforms in a turbulent stream: ripples, chevrons and antidunes. Journal of Fluid Mechanics, 690, 94-128.
+
 """
 
 import PyDune.physics.turbulent_flow.fourriere2010_unbounded as fourriere2010_unbounded
@@ -42,10 +44,10 @@ def solve_turbulent_flow(model, parameters, Kappa=0.4, max_z=None,
     parameters : dict
         Dictionnary containing the physical parameters necessary for solving each
         models. For each model, the list of parameters the dictionnary must contain is:
-            - 1D_unbounded: 'eta_0', 'eta_H'
-            - 1D_freesurface: 'eta_0', 'eta_H', 'Fr'
-            - 1D_freeatmosphere: 'eta_0', 'eta_H', 'eta_B', 'Fr'
-            - 2D_unbounded: 'eta_0', 'eta_H', 'Fr', 'alpha'
+            * 1D_unbounded: 'eta_0', 'eta_H'
+            * 1D_freesurface: 'eta_0', 'eta_H', 'Fr'
+            * 1D_freeatmosphere: 'eta_0', 'eta_H', 'eta_B', 'Fr'
+            * 2D_unbounded: 'eta_0', 'eta_H', 'Fr', 'alpha'
     Kappa : float, optional
         Von Karmàn constant (the default is 0.4).
     max_z : float, optional
@@ -69,13 +71,12 @@ def solve_turbulent_flow(model, parameters, Kappa=0.4, max_z=None,
         function calculating the solution by taking as argument values of the vertical coordinate
         :math:`\eta = k z` (float, array_like). It is built from seleveral
         :class:`ODE_solution <scipy.integrate.OdeSolution>`. See corresponding
-        documentation for more information about the interpolation algorithm.
-
-        if model is '1D_freeatmosphere', return also a function calculating the
+        documentation for more information about the interpolation algorithm. If
+        `model` is '1D_freeatmosphere', return also a function calculating the
         streamfunction if the 1D_freeatmosphere (above eta_H). Its arguments are, in this order:
-            - vertical coordinate :math:`\eta = k z`, numpy array
-            - the horizontal coordinate :math:`\eta = k x`, numpy array,
-            - aspect ratio the bottom perturbation :math:`\eta = k \xi` (float)
+            * vertical coordinate :math:`\eta = k z`, numpy array
+            * the horizontal coordinate :math:`\eta = k x`, numpy array,
+            * aspect ratio the bottom perturbation :math:`\eta = k \xi` (float)
 
 
     References

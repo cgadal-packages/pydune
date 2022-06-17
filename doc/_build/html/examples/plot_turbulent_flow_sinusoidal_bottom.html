@@ -36,8 +36,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PyDune" href="../_autosummary/PyDune.html" />
-    <link rel="prev" title="From wind data to sand fluxes and dune orientations" href="plot_windtofluxtodune.html" />
+    <link rel="next" title="Downloading data from the ERA* datasets" href="tutorials/download_ERAdata.html" />
+    <link rel="prev" title="Bed Instability 2D – Gadal et al. 2019" href="plot_bed_instability_2D.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -122,15 +122,8 @@
   <div class="bd-toc-item active">
     <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="plot_transport_laws.html">
-   Transport laws
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="download_ERAdata.html">
-   Downloading data from the ERA* datasets
+  <a class="reference internal" href="plot_dune_orientations.html">
+   Selection of dune orientation
   </a>
  </li>
 </ul>
@@ -148,17 +141,31 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="plot_windtofluxtodune.html">
-   From wind data to sand fluxes and dune orientations
-  </a>
- </li>
-</ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Properties of a turbulent flow on a sinusoidal bottom
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorials/download_ERAdata.html">
+   Downloading data from the ERA* datasets
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorials/plot_transport_laws.html">
+   Fitting transport laws
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorials/plot_windtofluxtodune.html">
+   From wind data to sand fluxes and dune orientations
   </a>
  </li>
 </ul>
@@ -207,8 +214,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#one-dimensional-case-interaction-fiwth-the-free-surface">
-   One-dimensional case – interaction fiwth the free surface
+  <a class="reference internal nav-link" href="#one-dimensional-case-interaction-with-the-free-surface">
+   One-dimensional case – interaction with the free surface
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -231,8 +238,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#andreotti-et-al-2011-results">
-   Andreotti et al. 2011 results
+  <a class="reference internal nav-link" href="#two-dimensional-case-unbounded-regime">
+   Two-dimensional case – unbounded regime
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -393,8 +400,8 @@ morphodynamics, in various flow configurations:</p>
 </div>
 <img src="../_images/sphx_glr_plot_turbulent_flow_sinusoidal_bottom_003.png" srcset="../_images/sphx_glr_plot_turbulent_flow_sinusoidal_bottom_003.png" alt="plot turbulent flow sinusoidal bottom" class = "sphx-glr-single-img"/></section>
 </section>
-<section id="one-dimensional-case-interaction-fiwth-the-free-surface">
-<h2>One-dimensional case – interaction fiwth the free surface<a class="headerlink" href="#one-dimensional-case-interaction-fiwth-the-free-surface" title="Permalink to this headline">#</a></h2>
+<section id="one-dimensional-case-interaction-with-the-free-surface">
+<h2>One-dimensional case – interaction with the free surface<a class="headerlink" href="#one-dimensional-case-interaction-with-the-free-surface" title="Permalink to this headline">#</a></h2>
 <section id="dependency-of-the-basal-shear-stress-coefficients-on-the-water-height">
 <h3>Dependency of the basal shear stress coefficients on the water height<a class="headerlink" href="#dependency-of-the-basal-shear-stress-coefficients-on-the-water-height" title="Permalink to this headline">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">eta_H_vals</span></a> <span class="o">=</span> <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html#numpy.logspace" title="numpy.logspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">logspace</span></a><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -472,8 +479,8 @@ morphodynamics, in various flow configurations:</p>
 </div>
 <img src="../_images/sphx_glr_plot_turbulent_flow_sinusoidal_bottom_005.png" srcset="../_images/sphx_glr_plot_turbulent_flow_sinusoidal_bottom_005.png" alt="plot turbulent flow sinusoidal bottom" class = "sphx-glr-single-img"/></section>
 </section>
-<section id="andreotti-et-al-2011-results">
-<h2>Andreotti et al. 2011 results<a class="headerlink" href="#andreotti-et-al-2011-results" title="Permalink to this headline">#</a></h2>
+<section id="two-dimensional-case-unbounded-regime">
+<h2>Two-dimensional case – unbounded regime<a class="headerlink" href="#two-dimensional-case-unbounded-regime" title="Permalink to this headline">#</a></h2>
 <section id="id1">
 <h3>Dependency of the basal shear stress coefficients on the bottom perturbation orientation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">model</span></a> <span class="o">=</span> <span class="s1">&#39;2D_unbounded&#39;</span>
@@ -524,7 +531,7 @@ morphodynamics, in various flow configurations:</p>
   warn(&quot;`rtol` is too low, setting to {}&quot;.format(100 * EPS))
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  42.067 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 3 minutes  5.698 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-plot-turbulent-flow-sinusoidal-bottom-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/bb3e1f05781dad2d0ab9b3491ef3e0be/plot_turbulent_flow_sinusoidal_bottom.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_turbulent_flow_sinusoidal_bottom.py</span></code></a></p>

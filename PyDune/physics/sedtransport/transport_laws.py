@@ -32,7 +32,7 @@ def quadratic_transport_law(theta, theta_d, omega):
     >>> qsat = quadratic_transport_law(theta, theta_d, omega)
 
     References
-    --------
+    ----------
     .. line-block::
         [1] Durán, O., Claudin, P., & Andreotti, B. (2011). On aeolian transport: Grain-scale interactions,
     dynamical mechanisms and scaling laws. Aeolian Research, 3(3), 243-270.

@@ -179,16 +179,6 @@
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.make_angular_PDF.html">
-         PyDune.data_processing.meteorological.wind_plot.make_angular_PDF
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.make_angular_average.html">
-         PyDune.data_processing.meteorological.wind_plot.make_angular_average
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.plot_flux_rose.html">
          PyDune.data_processing.meteorological.wind_plot.plot_flux_rose
         </a>
@@ -252,6 +242,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="PyDune.math.cosd.html">
      PyDune.math.cosd
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.math.make_angular_PDF.html">
+     PyDune.math.make_angular_PDF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.math.make_angular_average.html">
+     PyDune.math.make_angular_average
     </a>
    </li>
    <li class="toctree-l2">
@@ -396,8 +396,8 @@
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.bed_instability_orientation.html">
-         PyDune.physics.dune.courrechdupont2014.bed_instability_orientation
+        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.MGBNT_orientation.html">
+         PyDune.physics.dune.courrechdupont2014.MGBNT_orientation
         </a>
        </li>
        <li class="toctree-l4">
@@ -413,6 +413,11 @@
        <li class="toctree-l4">
         <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.growth_rate.html">
          PyDune.physics.dune.courrechdupont2014.growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest.html">
+         PyDune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest
         </a>
        </li>
        <li class="toctree-l4">
@@ -671,14 +676,12 @@ using this module, please read the corresponding documentation
 <a href="#id2"><span class="problematic" id="id3">`here &lt;https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5`_</span></a>,
 and especially the <a class="reference external" href="https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5#HowtodownloadERA5-4-DownloadERA5familydatathroughtheCDSAPI">part 4</a>.</p>
 <p>Roughly, the steps are:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>create a CDS account <a class="reference external" href="https://cds.climate.copernicus.eu/user/register">here</a></p></li>
-<li><p>install the CDS API, typically using <cite>pip3 install cdsapi</cite></p></li>
-<li><p>install the CDS API key corresponding to your account on your computer,</p></li>
-</ul>
-<p>following the steps described <a class="reference external" href="https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+macOS">here</a></p>
-</div></blockquote>
+<div class="line-block">
+<div class="line">- create a CDS account <a class="reference external" href="https://cds.climate.copernicus.eu/user/register">here</a></div>
+<div class="line">- install the CDS API, typically using <cite>pip3 install cdsapi</cite></div>
+<div class="line">- install the CDS API key corresponding to your account on your computer,</div>
+<div class="line">following the steps described <a class="reference external" href="https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+macOS">here</a></div>
+</div>
 <dl class="simple">
 <dt>..warning:</dt><dd><p>Still experimental, and scarce documentation.</p>
 </dd>

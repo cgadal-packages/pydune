@@ -17,8 +17,6 @@ PyDune.data\_processing.meteorological.wind\_plot
       :nosignatures:
    
       create_KMZ
-      make_angular_PDF
-      make_angular_average
       plot_flux_rose
       plot_wind_rose
       shear_to_velocity

@@ -5,18 +5,14 @@
 
 Computation times
 =================
-**02:42.258** total execution time for **examples** files:
+**03:14.223** total execution time for **examples** files:
 
 +------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_turbulent_flow_sinusoidal_bottom.py` (``plot_turbulent_flow_sinusoidal_bottom.py``) | 02:42.067 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_turbulent_flow_sinusoidal_bottom.py` (``plot_turbulent_flow_sinusoidal_bottom.py``) | 03:05.698 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_transport_laws.py` (``plot_transport_laws.py``)                                     | 00:00.190 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_bed_instability_2D.py` (``plot_bed_instability_2D.py``)                             | 00:07.906 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_download_ERAdata.py` (``download_ERAdata.py``)                                           | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_bed_instability_1d.py` (``plot_bed_instability_1d.py``)                             | 00:00.393 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_bed_instability_1d.py` (``plot_bed_instability_1d.py``)                             | 00:00.000 | 0.0 MB |
-+------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_bed_instability_2D.py` (``plot_bed_instability_2D.py``)                             | 00:00.000 | 0.0 MB |
-+------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_plot_windtofluxtodune.py` (``plot_windtofluxtodune.py``)                                 | 00:00.000 | 0.0 MB |
+| :ref:`sphx_glr_examples_plot_dune_orientations.py` (``plot_dune_orientations.py``)                               | 00:00.226 | 0.0 MB |
 +------------------------------------------------------------------------------------------------------------------+-----------+--------+

@@ -11,7 +11,7 @@ Welcome to PyDune's documentation!
     :caption: Contents:
 
     Home page <self>
-    Examples <examples/index.rst>
+    Examples and Tutorials <examples/index.rst>
     API reference <_autosummary/PyDune>
 
 

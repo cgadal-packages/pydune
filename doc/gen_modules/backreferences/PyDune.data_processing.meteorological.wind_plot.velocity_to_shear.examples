@@ -5,14 +5,14 @@ Examples using ``PyDune.data_processing.meteorological.wind_plot.velocity_to_she
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="From wind data to sand fluxes and dune orientations">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show on the use PyDune functions to go from wind data, to the calculation ...">
 
 .. only:: html
 
- .. figure:: /examples/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
      :alt: From wind data to sand fluxes and dune orientations
 
-     :ref:`sphx_glr_examples_plot_windtofluxtodune.py`
+     :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`
 
 .. raw:: html
 
@@ -20,4 +20,4 @@ Examples using ``PyDune.data_processing.meteorological.wind_plot.velocity_to_she
 
 .. only:: not html
 
- * :ref:`sphx_glr_examples_plot_windtofluxtodune.py`
+ * :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`

@@ -121,7 +121,7 @@ ax.set_ylabel('$k z$')
 plt.show()
 
 # %%
-# One-dimensional case -- interaction fiwth the free surface
+# One-dimensional case -- interaction with the free surface
 # ==========================================================
 #
 # Dependency of the basal shear stress coefficients on the water height
@@ -201,7 +201,7 @@ plt.legend()
 plt.show()
 
 # %%
-# Andreotti et al. 2011 results
+# Two-dimensional case -- unbounded regime
 # ====================================================
 #
 # Dependency of the basal shear stress coefficients on the bottom perturbation orientation

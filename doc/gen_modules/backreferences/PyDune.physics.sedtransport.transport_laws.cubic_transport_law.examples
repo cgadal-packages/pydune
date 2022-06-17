@@ -5,14 +5,14 @@ Examples using ``PyDune.physics.sedtransport.transport_laws.cubic_transport_law`
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Create a plot comparing the different transport laws.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Fitting the different transport laws to the laboratory data of:">
 
 .. only:: html
 
- .. figure:: /examples/images/thumb/sphx_glr_plot_transport_laws_thumb.png
-     :alt: Transport laws
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_transport_laws_thumb.png
+     :alt: Fitting transport laws
 
-     :ref:`sphx_glr_examples_plot_transport_laws.py`
+     :ref:`sphx_glr_examples_tutorials_plot_transport_laws.py`
 
 .. raw:: html
 
@@ -20,4 +20,4 @@ Examples using ``PyDune.physics.sedtransport.transport_laws.cubic_transport_law`
 
 .. only:: not html
 
- * :ref:`sphx_glr_examples_plot_transport_laws.py`
+ * :ref:`sphx_glr_examples_tutorials_plot_transport_laws.py`

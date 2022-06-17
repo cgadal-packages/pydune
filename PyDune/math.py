@@ -3,6 +3,7 @@ Mathematical functions used in all submodules.
 """
 
 import numpy as np
+from xhistogram.core import histogram
 
 # #### Trigo functions in degree #
 
@@ -158,3 +159,60 @@ def cartesian_to_polar(x, y):
     r = np.sqrt(x**2 + y**2)
     theta = arctan2d(y, x) % 360
     return r, theta
+
+
+def make_angular_PDF(angles, weight, bin_edges=np.linspace(0, 360, 361), axis=-1):
+    """Calculate the angular PDF (normalized) from input arrays.
+
+    Parameters
+    ----------
+    angles : np.array
+        array of angles.
+    weight : np.array
+        array of weights. Its dimensions must match those of angles.
+    bin_edges : np.array
+        array containing the bins used to calculate the distribution (the default is np.linspace(0, 360, 361)).
+    axis : int
+        axis of the input aray along which the distribution is calculated (the default is -1).
+
+    Returns
+    -------
+    hist: np.array
+        array containing the distribution.
+    bin_centers: np.array
+        array containing the bin centers of the distribution.
+
+    """
+    hist, _ = histogram(angles, bins=bin_edges, density=1, weights=weight, axis=axis)
+    bin_centers = bin_edges[1:] - (bin_edges[1] - bin_edges[0])/2
+    return hist, bin_centers
+
+
+def make_angular_average(angles, weight, bin_edges=np.linspace(0, 360, 361), axis=-1):
+    """Calculate the average by angle bins from input arrays.
+
+    Parameters
+    ----------
+    angles : np.array
+        array of angles.
+    weight : np.array
+        array of weights. Its dimensions must match those of angles.
+    bin_edges : np.array
+        array containing the bins used to calculate the distribution (the default is np.linspace(0, 360, 361)).
+    axis : int
+        axis of the input aray along which the distribution is calculated (the default is -1).
+
+    Returns
+    -------
+    hist: np.array
+        array containing the averages.
+    bin_centers: np.array
+        array containing the bin centers.
+
+    """
+    hist, _ = histogram(angles, bins=bin_edges, weights=weight, axis=axis)
+    counts, _ = histogram(angles, bins=bin_edges, axis=axis)
+    bin_centers = np.array([np.mean(bin_edges[i:i+2]) for i in range(bin_edges.size - 1)])
+    hist[counts == 0] = 1
+    counts[counts == 0] = 1
+    return hist/counts, bin_centers

@@ -9,10 +9,10 @@ Examples using ``PyDune.Data_processing.Meteorological.downloadCDS.Getting_wind_
 
 .. only:: html
 
- .. figure:: /examples/images/thumb/sphx_glr_download_ERAdata_thumb.png
+ .. figure:: /examples/tutorials/images/thumb/sphx_glr_download_ERAdata_thumb.png
      :alt: Downloading data from the ERA* datasets
 
-     :ref:`sphx_glr_examples_download_ERAdata.py`
+     :ref:`sphx_glr_examples_tutorials_download_ERAdata.py`
 
 .. raw:: html
 
@@ -20,4 +20,4 @@ Examples using ``PyDune.Data_processing.Meteorological.downloadCDS.Getting_wind_
 
 .. only:: not html
 
- * :ref:`sphx_glr_examples_download_ERAdata.py`
+ * :ref:`sphx_glr_examples_tutorials_download_ERAdata.py`

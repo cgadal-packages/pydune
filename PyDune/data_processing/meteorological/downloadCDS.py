@@ -7,6 +7,7 @@ and especially the `part 4 <https://confluence.ecmwf.int/display/CKB/How+to+down
 
 Roughly, the steps are:
 
+.. line-block::
     - create a CDS account `here <https://cds.climate.copernicus.eu/user/register>`_
     - install the CDS API, typically using `pip3 install cdsapi`
     - install the CDS API key corresponding to your account on your computer,

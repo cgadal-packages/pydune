@@ -21,6 +21,8 @@ PyDune.math
       arctand
       cartesian_to_polar
       cosd
+      make_angular_PDF
+      make_angular_average
       sind
       tand
       vector_average

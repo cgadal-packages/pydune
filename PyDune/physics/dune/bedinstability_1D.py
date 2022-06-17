@@ -6,12 +6,13 @@ This theory is developped assuming a quadratic transport law of the form
 
 .. math::
 
-    q_{\rm sat}/Q_{*} = Q\left[1 - (u_{\rm th}/u_{*})^{2}\right],
+    q_{\rm sat}/Q_{*} = \omega \left[1 - (u_{\rm th}/u_{*})^{2}\right],
 
-where :math:`Q_{*}` is a characteristic sand flux, :math:`u_{*}` the wind shear velocity and `u_{\rm th}` the threshold velocity for sediment transport.
+where :math:`Q_{*}` is a characteristic sand flux, :math:`\omega` a dimensional constant, :math:`u_{*}` the wind shear velocity and `u_{\rm th}` the threshold velocity for sediment transport.
 
 In the following, all quantities are made non dimensional:
 
+.. line-block::
     - length scales by the saturation length :math:`L_{\rm sat}`.
     - time scales by :math:`L_{\rm sat}^{2}/Q_{*}`.
 
@@ -50,7 +51,7 @@ def complex_pulsation(k, A, B):
         complex pulsation.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
         - length scales by the saturation length :math:`L_{\rm sat}`.
@@ -90,7 +91,7 @@ def temporal_growth_rate(k, A0, B0, mu, r):
         temporal dune growth rate :math:`\sigma`.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
         - length scales by the saturation length :math:`L_{\rm sat}`.
@@ -133,7 +134,7 @@ def temporal_pulsation(k, A0, B0, mu, r):
         temporal dune pulsation :math:`\omega_{\rm r}`.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
         - length scales by the saturation length :math:`L_{\rm sat}`.
@@ -176,7 +177,7 @@ def temporal_velocity(k, A0, B0, mu, r):
         temporal dune elocity :math:`c`.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
         - length scales by the saturation length :math:`L_{\rm sat}`.
@@ -221,7 +222,7 @@ def complexe_wavenumer(w, A, B):
         :math:`k_{-}` branch.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
         - length scales by the saturation length :math:`L_{\rm sat}`.
@@ -265,7 +266,7 @@ def spatial_growth_rate(w, A0, B0, mu, r):
         spatial dune growth rate :math:`\sigma_{\rm s}`.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
         - length scales by the saturation length :math:`L_{\rm sat}`.
@@ -308,7 +309,7 @@ def spatial_wavenumber(w, A0, B0, mu, r):
         Spatial dune wavenumber :math:`k` calculated elementwise.
 
     Notes
-    --------
+    -----
     Note that all quantities are made non dimensional:
 
     - length scales by the saturation length :math:`L_{\rm sat}`.

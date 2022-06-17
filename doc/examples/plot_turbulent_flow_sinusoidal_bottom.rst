@@ -215,7 +215,7 @@ streamlines
 
 .. GENERATED FROM PYTHON SOURCE LINES 124-129
 
-One-dimensional case -- interaction fiwth the free surface
+One-dimensional case -- interaction with the free surface
 ==========================================================
 
 Dependency of the basal shear stress coefficients on the water height
@@ -331,7 +331,7 @@ Dependency of the basal shear stress coefficients on the bottom perturbation ori
 
 .. GENERATED FROM PYTHON SOURCE LINES 204-209
 
-Andreotti et al. 2011 results
+Two-dimensional case -- unbounded regime
 ====================================================
 
 Dependency of the basal shear stress coefficients on the bottom perturbation orientation
@@ -407,7 +407,7 @@ Dependency of the basal shear stress coefficients on the bottom perturbation ori
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  42.067 seconds)
+   **Total running time of the script:** ( 3 minutes  5.698 seconds)
 
 
 .. _sphx_glr_download_examples_plot_turbulent_flow_sinusoidal_bottom.py:

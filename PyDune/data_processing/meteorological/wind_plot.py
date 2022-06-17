@@ -6,7 +6,6 @@ import os
 import numpy as np
 from itertools import islice
 from windrose import WindroseAxes
-from xhistogram.core import histogram
 
 
 def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, label_angle=False, label=None,
@@ -211,18 +210,3 @@ def velocity_to_shear(U, z, z_0=1e-3, Kappa=0.4):
 
 def shear_to_velocity(Ustar, z, z_0=1e-3, Kappa=0.4):
     return Ustar*np.log(z/z_0)/Kappa
-
-
-def make_angular_PDF(angles, weight, bin_edges=np.linspace(0, 360, 361), axis=-1):
-    hist, _ = histogram(angles, bins=bin_edges, density=1, weights=weight, axis=axis)
-    bin_centers = bin_edges[1:] - (bin_edges[1] - bin_edges[0])/2
-    return hist, bin_centers
-
-
-def make_angular_average(angles, weight, bin_edges=np.linspace(0, 360, 361), axis=-1):
-    hist, _ = histogram(angles, bins=bin_edges, weights=weight, axis=axis)
-    counts, _ = histogram(angles, bins=bin_edges, axis=axis)
-    bin_centers = np.array([np.mean(bin_edges[i:i+2]) for i in range(bin_edges.size - 1)])
-    hist[counts == 0] = 1
-    counts[counts == 0] = 1
-    return hist/counts, bin_centers

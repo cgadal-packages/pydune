@@ -4,12 +4,12 @@ following Gadal et al. 2019.
 
 .. math::
 
-    q_{\rm sat}/Q_{*} = Q\left[1 - (u_{\rm th}/u_{*})^{2}\right],
+    q_{\rm sat}/Q_{*} = \omega \left[1 - (u_{\rm th}/u_{*})^{2}\right],
 
-where :math:`Q_{*}` is a characteristic sand flux, :math:`u_{*}` the wind shear velocity and `u_{\rm th}` the threshold velocity for sediment transport.
+where :math:`Q_{*}` is a characteristic sand flux, :math:`\omega` a dimensional constant, :math:`u_{*}` the wind shear velocity and `u_{\rm th}` the threshold velocity for sediment transport.
 
 
-In the following, all quantities are made non dimensional:
+In the following, all quantities are made non-dimensional:
 
     - length scales by the saturation length :math:`L_{\rm sat}`.
     - time scales by :math:`L_{\rm sat}^{2}/Q_{*}`.

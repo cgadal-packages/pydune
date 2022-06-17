@@ -180,16 +180,6 @@
         </a>
        </li>
        <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.make_angular_PDF.html">
-         PyDune.data_processing.meteorological.wind_plot.make_angular_PDF
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.make_angular_average.html">
-         PyDune.data_processing.meteorological.wind_plot.make_angular_average
-        </a>
-       </li>
-       <li class="toctree-l4">
         <a class="reference internal" href="PyDune.data_processing.meteorological.wind_plot.plot_flux_rose.html">
          PyDune.data_processing.meteorological.wind_plot.plot_flux_rose
         </a>
@@ -253,6 +243,16 @@
    <li class="toctree-l2">
     <a class="reference internal" href="PyDune.math.cosd.html">
      PyDune.math.cosd
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.math.make_angular_PDF.html">
+     PyDune.math.make_angular_PDF
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="PyDune.math.make_angular_average.html">
+     PyDune.math.make_angular_average
     </a>
    </li>
    <li class="toctree-l2">
@@ -397,8 +397,8 @@
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.bed_instability_orientation.html">
-         PyDune.physics.dune.courrechdupont2014.bed_instability_orientation
+        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.MGBNT_orientation.html">
+         PyDune.physics.dune.courrechdupont2014.MGBNT_orientation
         </a>
        </li>
        <li class="toctree-l4">
@@ -414,6 +414,11 @@
        <li class="toctree-l4">
         <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.growth_rate.html">
          PyDune.physics.dune.courrechdupont2014.growth_rate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="PyDune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest.html">
+         PyDune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest
         </a>
        </li>
        <li class="toctree-l4">
@@ -713,8 +718,8 @@ More information can be found in the documentation of
 <dd class="field-even"><p><p><strong>solution</strong> – function calculating the solution by taking as argument values of the vertical coordinate
 <span class="math notranslate nohighlight">\(\eta = k z\)</span> (float, array_like). It is built from seleveral
 <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.OdeSolution.html#scipy.integrate.OdeSolution" title="(in SciPy v1.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ODE_solution</span></code></a>. See corresponding
-documentation for more information about the interpolation algorithm.</p>
-<p>if model is ‘1D_freeatmosphere’, return also a function calculating the
+documentation for more information about the interpolation algorithm. If
+<cite>model</cite> is ‘1D_freeatmosphere’, return also a function calculating the
 streamfunction if the 1D_freeatmosphere (above eta_H). Its arguments are, in this order:</p>
 <blockquote>
 <div><ul class="simple">

@@ -7,7 +7,7 @@ from PyDune.math import cosd, sind
 # Geometrical model for the scaling of the coefficient as the function of the orientation of the bottom perturbation
 
 
-def Ax(alpha, A0):
+def Ax_geo(alpha, A0):
     r"""Calculate the hydrodynamic coefficient :math:`\mathcal{A}_{x}` using the geometrical model:
 
     .. math::
@@ -29,7 +29,7 @@ def Ax(alpha, A0):
     return A0*cosd(alpha)**2
 
 
-def Ay(alpha, A0):
+def Ay_geo(alpha, A0):
     r"""Calculate the hydrodynamic coefficient :math:`\mathcal{A}_{y}` using the geometrical model:
 
     .. math::
@@ -51,7 +51,7 @@ def Ay(alpha, A0):
     return A0*cosd(alpha)*sind(alpha)/2
 
 
-def Bx(alpha, B0):
+def Bx_geo(alpha, B0):
     r"""Calculate the hydrodynamic coefficient :math:`\mathcal{B}_{x}` using the geometrical model:
 
     .. math::
@@ -73,7 +73,7 @@ def Bx(alpha, B0):
     return B0*cosd(alpha)**2
 
 
-def By(alpha, B0):
+def By_geo(alpha, B0):
     r"""Calculate the hydrodynamic coefficient :math:`\mathcal{B}_{y}` using the geometrical model:
 
     .. math::
@@ -127,8 +127,8 @@ def _basal_shear_uni(x, y, alpha, A0, B0, AR):
 
     """
 
-    Taux = np.real(+ (1 + (Ax(alpha, A0) + 1j*Bx(alpha, B0))*AR*np.exp(1j*(cosd(alpha)*x + sind(alpha)*y))))
-    Tauy = np.real(+ (Ay(alpha, A0) + 1j*By(alpha, B0))*AR*np.exp(1j*(cosd(alpha)*x + sind(alpha)*y)))
+    Taux = np.real(+ (1 + (Ax_geo(alpha, A0) + 1j*Bx_geo(alpha, B0))*AR*np.exp(1j*(cosd(alpha)*x + sind(alpha)*y))))
+    Tauy = np.real(+ (Ay_geo(alpha, A0) + 1j*By_geo(alpha, B0))*AR*np.exp(1j*(cosd(alpha)*x + sind(alpha)*y)))
     return Taux, Tauy
 
 

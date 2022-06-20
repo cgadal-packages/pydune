@@ -23,11 +23,11 @@ from PyDune.math import (cartesian_to_polar, tand, make_angular_PDF,
 #
 # We first load the data, and caculate the shear velocity using the law of the wall:
 #
-data = load_netcdf(['../src/ERA5LAND_winddata.nc'])
+data = load_netcdf(['../src/ERA5Land2020to2021_Taklamacan.netcdf'])
 z_ERA = 10  # height of wind data in the dataset, [m]
 #
 velocity, orientation = cartesian_to_polar(data['u10'][:, 0, 0], data['v10'][:, 0, 0])
-shear_velocity = velocity_to_shear(velocity, 10)
+shear_velocity = velocity_to_shear(velocity, z_ERA)
 
 # figure
 bins_shear = [0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35]
@@ -75,6 +75,14 @@ DP = np.mean(sand_flux)  # Drift potential, [m2/day]
 # Resultant drift direction [deg.] / Resultant drift potential, [m2/day]
 RDD, RDP = vector_average(orientation, sand_flux)
 
+print(r"""
+     - DP =  {: .1f} [m2/day]
+     - RDP = {: .1f} [m2/day]
+     - RDP/DP = {: .2f}
+     - RDD = {: .0f} [deg.]
+
+""".format(DP, RDP, RDP/DP, RDD % 360))
+
 # figure
 bins_flux = [0, 0.3, 0.6, 0.9, 1.2, 1.5]
 fig, axarr = plt.subplots(1, 2, constrained_layout=True)
@@ -97,21 +105,29 @@ plt.show()
 
 from PyDune.physics.dune.bedinstability_2D import (temporal_celerity_multi,
                                                    temporal_growth_rate_multi)
-from PyDune.physics.turbulent_flow import Ax, Bx, Ay, By
+from PyDune.physics.turbulent_flow import Ax_geo, Bx_geo, Ay_geo, By_geo, A0_approx, B0_approx
 
 # parameters
-k = np.linspace(0.001, 1, 300)  # range of explored wavelengths, non-dimensional
+k = np.linspace(0.001, 0.6, 300)  # range of explored wavelengths, non-dimensional
 alpha = np.linspace(0, 180, 181)  # range of explored orientations, non-dimensional
 mu = tand(35)  # friction coefficient
 delta = 0  # diffusion coefficient
+z0 = 1e-3  # hydrodynamic roughness
+
+
+def Ax(k, alpha): return Ax_geo(alpha, A0_approx(k*z0))
+def Bx(k, alpha): return Bx_geo(alpha, B0_approx(k*z0))
+def Ay(k, alpha): return Ay_geo(alpha, A0_approx(k*z0))
+def By(k, alpha): return By_geo(alpha, A0_approx(k*z0))
+
 
 # threshold shear velocity [m/s]
 shear_velocity_th = np.sqrt(shield_th_quartic/(rho_f/((rho_g - rho_f)*g*grain_diameters)))
 # average velocity ratio by angle bin
 r, _ = make_angular_average(orientation, shear_velocity/shear_velocity_th)
 # characteristic average velocity ratio by angle bin (just when its always the threshold)
-r_char, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
-                                 shear_velocity[shear_velocity > shear_velocity_th]/shear_velocity_th)
+r_car, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
+                                shear_velocity[shear_velocity > shear_velocity_th]/shear_velocity_th)
 
 # dimensional constants
 Lsat = 2.2*((rho_g - rho_f)/rho_f)*grain_diameters  # saturation length [m]
@@ -120,7 +136,9 @@ Q_car = DP*angular_PDF/(1 - 1/r**2)  # Characteristic flux of the instability (w
 
 # Calculation of the growth rate
 sigma = temporal_growth_rate_multi(k[None, :, None], alpha[:, None, None], Ax, Ay,
-                                   Bx, By, r_char, mu, delta, angles, Q_car, axis=-1)
+                                   Bx, By, r_car, mu, delta, angles[None, None, :],
+                                   Q_car[None, None, :], axis=-1)
+
 
 # Properties of the most unstable mode (dimensional)
 i_amax, i_kmax = np.unravel_index(sigma.argmax(), sigma.shape)
@@ -153,4 +171,8 @@ from PyDune.physics.dune.courrechdupont2014 import elongation_direction, MGBNT_o
 Alpha_E = elongation_direction(angles, angular_PDF)
 Alpha_BI = MGBNT_orientation(angles, angular_PDF)
 
-print(r'Elongation direction: {: .0f} [deg], MGBNT crest orientation: {: .0f} [deg]'.format(Alpha_E, Alpha_BI))
+print(r""" The properties of the mature dunes are:
+     - Elongation direction: {: .0f} [deg]
+     - MGBNT crest orientation: {: .0f} [deg]
+
+""".format(Alpha_E, Alpha_BI))

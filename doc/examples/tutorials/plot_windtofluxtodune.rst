@@ -59,11 +59,11 @@ We first load the data, and caculate the shear velocity using the law of the wal
 
 .. code-block:: default
 
-    data = load_netcdf(['../src/ERA5LAND_winddata.nc'])
+    data = load_netcdf(['../src/ERA5Land2020to2021_Taklamacan.netcdf'])
     z_ERA = 10  # height of wind data in the dataset, [m]
     #
     velocity, orientation = cartesian_to_polar(data['u10'][:, 0, 0], data['v10'][:, 0, 0])
-    shear_velocity = velocity_to_shear(velocity, 10)
+    shear_velocity = velocity_to_shear(velocity, z_ERA)
 
     # figure
     bins_shear = [0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35]
@@ -100,7 +100,7 @@ Calculating the sand fluxes
 
 We then calculate sand fluxes using the quartic law:
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-90
+.. GENERATED FROM PYTHON SOURCE LINES 53-98
 
 .. code-block:: default
 
@@ -129,6 +129,14 @@ We then calculate sand fluxes using the quartic law:
     # Resultant drift direction [deg.] / Resultant drift potential, [m2/day]
     RDD, RDP = vector_average(orientation, sand_flux)
 
+    print(r"""
+         - DP =  {: .1f} [m2/day]
+         - RDP = {: .1f} [m2/day]
+         - RDP/DP = {: .2f}
+         - RDD = {: .0f} [deg.]
+
+    """.format(DP, RDP, RDP/DP, RDD % 360))
+
     # figure
     bins_flux = [0, 0.3, 0.6, 0.9, 1.2, 1.5]
     fig, axarr = plt.subplots(1, 2, constrained_layout=True)
@@ -150,10 +158,24 @@ We then calculate sand fluxes using the quartic law:
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+         - DP =   2.2 [m2/day]
+         - RDP =  0.7 [m2/day]
+         - RDP/DP =  0.32
+         - RDD =  219 [deg.]
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-97
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 99-105
 
 Properties of incipient dunes
 =============================
@@ -162,28 +184,36 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
 
 [1] Gadal, C., Narteau, C., Du Pont, S. C., Rozier, O., & Claudin, P. (2019). Incipient bedforms in a bidirectional wind regime. Journal of Fluid Mechanics, 862, 490-516.
 
-.. GENERATED FROM PYTHON SOURCE LINES 97-142
+.. GENERATED FROM PYTHON SOURCE LINES 105-160
 
 .. code-block:: default
 
 
     from PyDune.physics.dune.bedinstability_2D import (temporal_celerity_multi,
                                                        temporal_growth_rate_multi)
-    from PyDune.physics.turbulent_flow import Ax, Bx, Ay, By
+    from PyDune.physics.turbulent_flow import Ax_geo, Bx_geo, Ay_geo, By_geo, A0_approx, B0_approx
 
     # parameters
-    k = np.linspace(0.001, 1, 300)  # range of explored wavelengths, non-dimensional
+    k = np.linspace(0.001, 0.6, 300)  # range of explored wavelengths, non-dimensional
     alpha = np.linspace(0, 180, 181)  # range of explored orientations, non-dimensional
     mu = tand(35)  # friction coefficient
     delta = 0  # diffusion coefficient
+    z0 = 1e-3  # hydrodynamic roughness
+
+
+    def Ax(k, alpha): return Ax_geo(alpha, A0_approx(k*z0))
+    def Bx(k, alpha): return Bx_geo(alpha, B0_approx(k*z0))
+    def Ay(k, alpha): return Ay_geo(alpha, A0_approx(k*z0))
+    def By(k, alpha): return By_geo(alpha, A0_approx(k*z0))
+
 
     # threshold shear velocity [m/s]
     shear_velocity_th = np.sqrt(shield_th_quartic/(rho_f/((rho_g - rho_f)*g*grain_diameters)))
     # average velocity ratio by angle bin
     r, _ = make_angular_average(orientation, shear_velocity/shear_velocity_th)
     # characteristic average velocity ratio by angle bin (just when its always the threshold)
-    r_char, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
-                                     shear_velocity[shear_velocity > shear_velocity_th]/shear_velocity_th)
+    r_car, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
+                                    shear_velocity[shear_velocity > shear_velocity_th]/shear_velocity_th)
 
     # dimensional constants
     Lsat = 2.2*((rho_g - rho_f)/rho_f)*grain_diameters  # saturation length [m]
@@ -192,7 +222,9 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
 
     # Calculation of the growth rate
     sigma = temporal_growth_rate_multi(k[None, :, None], alpha[:, None, None], Ax, Ay,
-                                       Bx, By, r_char, mu, delta, angles, Q_car, axis=-1)
+                                       Bx, By, r_car, mu, delta, angles[None, None, :],
+                                       Q_car[None, None, :], axis=-1)
+
 
     # Properties of the most unstable mode (dimensional)
     i_amax, i_kmax = np.unravel_index(sigma.argmax(), sigma.shape)
@@ -222,18 +254,18 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
  .. code-block:: none
 
      The properties of the most unstable mode are:
-         - orientation: 60 [deg.]
-         - wavenumber :9.5e-01  [/m]
-         - wavelength : 6.6e+00 [m]
-         - growth rate :  1.0e+01 [/day]
-         - migration velocity: -3.3e+01 [m/day]
+         - orientation: 134 [deg.]
+         - wavenumber :5.7e-01  [/m]
+         - wavelength : 1.1e+01 [m]
+         - growth rate :  5.5e-01 [/day]
+         - migration velocity: 6.7e+00 [m/day]
 
 
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 143-149
+.. GENERATED FROM PYTHON SOURCE LINES 161-167
 
 Properties of mature dunes
 ==========================
@@ -242,7 +274,7 @@ We then compute the two possible mature dune orientations using the model of Cou
 
 [1] Courrech du Pont, S., Narteau, C., & Gao, X. (2014). Two modes for dune orientation. Geology, 42(9), 743-746.
 
-.. GENERATED FROM PYTHON SOURCE LINES 149-157
+.. GENERATED FROM PYTHON SOURCE LINES 167-179
 
 .. code-block:: default
 
@@ -253,7 +285,11 @@ We then compute the two possible mature dune orientations using the model of Cou
     Alpha_E = elongation_direction(angles, angular_PDF)
     Alpha_BI = MGBNT_orientation(angles, angular_PDF)
 
-    print(r'Elongation direction: {: .0f} [deg], MGBNT crest orientation: {: .0f} [deg]'.format(Alpha_E, Alpha_BI))
+    print(r""" The properties of the mature dunes are:
+         - Elongation direction: {: .0f} [deg]
+         - MGBNT crest orientation: {: .0f} [deg]
+
+    """.format(Alpha_E, Alpha_BI))
 
 
 
@@ -264,7 +300,11 @@ We then compute the two possible mature dune orientations using the model of Cou
 
  .. code-block:: none
 
-    Elongation direction:  75 [deg], MGBNT crest orientation:  78 [deg]
+     The properties of the mature dunes are:
+         - Elongation direction:  224 [deg]
+         - MGBNT crest orientation:  109 [deg]
+
+
 
 
 
@@ -272,7 +312,7 @@ We then compute the two possible mature dune orientations using the model of Cou
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.152 seconds)
+   **Total running time of the script:** ( 0 minutes  5.130 seconds)
 
 
 .. _sphx_glr_download_examples_tutorials_plot_windtofluxtodune.py:

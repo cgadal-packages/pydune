@@ -5,25 +5,6 @@ Examples using ``PyDune.physics.sedtransport.transport_laws.quartic_transport_la
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Fitting the different transport laws to the laboratory data of:">
-
-.. only:: html
-
- .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_transport_laws_thumb.png
-     :alt: Fitting transport laws
-
-     :ref:`sphx_glr_examples_tutorials_plot_transport_laws.py`
-
-.. raw:: html
-
-    </div>
-
-.. only:: not html
-
- * :ref:`sphx_glr_examples_tutorials_plot_transport_laws.py`
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show on the use PyDune functions to go from wind data, to the calculation ...">
 
 .. only:: html

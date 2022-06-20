@@ -1,4 +1,4 @@
-PyDune.physics.turbulent\_flow.geometrical\_model
+﻿PyDune.physics.turbulent\_flow.geometrical\_model
 =================================================
 
 .. automodule:: PyDune.physics.turbulent_flow.geometrical_model
@@ -16,10 +16,10 @@ PyDune.physics.turbulent\_flow.geometrical\_model
       :template: custom-function-template.rst
       :nosignatures:
    
-      Ax
-      Ay
-      Bx
-      By
+      Ax_geo
+      Ay_geo
+      Bx_geo
+      By_geo
       basal_shear
    
    

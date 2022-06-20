@@ -5,25 +5,6 @@ Examples using ``PyDune.physics.dune.courrechdupont2014.elongation_direction``
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we show how the calculation of the elonagtion direction and MGBNT orientation ...">
-
-.. only:: html
-
- .. figure:: /examples/images/thumb/sphx_glr_plot_dune_orientations_thumb.png
-     :alt: Selection of dune orientation
-
-     :ref:`sphx_glr_examples_plot_dune_orientations.py`
-
-.. raw:: html
-
-    </div>
-
-.. only:: not html
-
- * :ref:`sphx_glr_examples_plot_dune_orientations.py`
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show on the use PyDune functions to go from wind data, to the calculation ...">
 
 .. only:: html

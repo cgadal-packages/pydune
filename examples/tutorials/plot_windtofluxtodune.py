@@ -109,7 +109,7 @@ from PyDune.physics.turbulent_flow import Ax_geo, Bx_geo, Ay_geo, By_geo, A0_app
 
 # parameters
 k = np.linspace(0.001, 0.6, 300)  # range of explored wavelengths, non-dimensional
-alpha = np.linspace(0, 180, 181)  # range of explored orientations, non-dimensional
+alpha = np.linspace(-90, 90, 181)  # range of explored orientations, non-dimensional
 mu = tand(35)  # friction coefficient
 delta = 0  # diffusion coefficient
 z0 = 1e-3  # hydrodynamic roughness
@@ -124,7 +124,8 @@ def By(k, alpha): return By_geo(alpha, A0_approx(k*z0))
 # threshold shear velocity [m/s]
 shear_velocity_th = np.sqrt(shield_th_quartic/(rho_f/((rho_g - rho_f)*g*grain_diameters)))
 # average velocity ratio by angle bin
-r, _ = make_angular_average(orientation, shear_velocity/shear_velocity_th)
+r, _ = make_angular_average(orientation, np.where(shear_velocity > shear_velocity_th,
+                                                  shear_velocity/shear_velocity_th, 1))
 # characteristic average velocity ratio by angle bin (just when its always the threshold)
 r_car, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
                                 shear_velocity[shear_velocity > shear_velocity_th]/shear_velocity_th)
@@ -132,7 +133,7 @@ r_car, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
 # dimensional constants
 Lsat = 2.2*((rho_g - rho_f)/rho_f)*grain_diameters  # saturation length [m]
 Q_car = DP*angular_PDF/(1 - 1/r**2)  # Characteristic flux of the instability (without threshold), [m2/day]
-
+Q_car[np.isnan(Q_car)] = 0
 
 # Calculation of the growth rate
 sigma = temporal_growth_rate_multi(k[None, :, None], alpha[:, None, None], Ax, Ay,
@@ -145,8 +146,15 @@ i_amax, i_kmax = np.unravel_index(sigma.argmax(), sigma.shape)
 sigma_max = sigma.max()/Lsat**2
 alpha_max = alpha[i_amax]
 k_max = k[i_kmax]/Lsat
-c_max = Lsat*temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r, mu,
+c_max = Lsat*temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r_car, mu,
                                      delta, angles, Q_car, axis=-1)
+
+fig, ax = plt.subplots(1, 1, constrained_layout=True)
+ax.contourf(k, alpha, sigma/Lsat**2, levels=200)
+ax.plot(k[i_kmax], alpha[i_amax], 'k.')
+ax.set_xlabel('None dimensional wavenumber, $k$')
+ax.set_ylabel(r'Orientation, $\alpha$ [deg.]')
+plt.show()
 
 print(r""" The properties of the most unstable mode are:
      - orientation: {:.0f} [deg.]
@@ -155,7 +163,7 @@ print(r""" The properties of the most unstable mode are:
      - growth rate :  {:.1e} [/day]
      - migration velocity: {:.1e} [m/day]
 
-""".format(alpha_max, k_max, 2*np.pi/k_max, sigma_max, c_max))
+""".format(alpha_max + 90, k_max, 2*np.pi/k_max, sigma_max, c_max))
 
 # %%
 # Properties of mature dunes

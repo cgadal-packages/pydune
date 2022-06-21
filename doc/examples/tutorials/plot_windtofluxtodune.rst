@@ -184,7 +184,7 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
 
 [1] Gadal, C., Narteau, C., Du Pont, S. C., Rozier, O., & Claudin, P. (2019). Incipient bedforms in a bidirectional wind regime. Journal of Fluid Mechanics, 862, 490-516.
 
-.. GENERATED FROM PYTHON SOURCE LINES 105-160
+.. GENERATED FROM PYTHON SOURCE LINES 105-168
 
 .. code-block:: default
 
@@ -195,7 +195,7 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
 
     # parameters
     k = np.linspace(0.001, 0.6, 300)  # range of explored wavelengths, non-dimensional
-    alpha = np.linspace(0, 180, 181)  # range of explored orientations, non-dimensional
+    alpha = np.linspace(-90, 90, 181)  # range of explored orientations, non-dimensional
     mu = tand(35)  # friction coefficient
     delta = 0  # diffusion coefficient
     z0 = 1e-3  # hydrodynamic roughness
@@ -210,7 +210,8 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
     # threshold shear velocity [m/s]
     shear_velocity_th = np.sqrt(shield_th_quartic/(rho_f/((rho_g - rho_f)*g*grain_diameters)))
     # average velocity ratio by angle bin
-    r, _ = make_angular_average(orientation, shear_velocity/shear_velocity_th)
+    r, _ = make_angular_average(orientation, np.where(shear_velocity > shear_velocity_th,
+                                                      shear_velocity/shear_velocity_th, 1))
     # characteristic average velocity ratio by angle bin (just when its always the threshold)
     r_car, _ = make_angular_average(orientation[shear_velocity > shear_velocity_th],
                                     shear_velocity[shear_velocity > shear_velocity_th]/shear_velocity_th)
@@ -218,7 +219,7 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
     # dimensional constants
     Lsat = 2.2*((rho_g - rho_f)/rho_f)*grain_diameters  # saturation length [m]
     Q_car = DP*angular_PDF/(1 - 1/r**2)  # Characteristic flux of the instability (without threshold), [m2/day]
-
+    Q_car[np.isnan(Q_car)] = 0
 
     # Calculation of the growth rate
     sigma = temporal_growth_rate_multi(k[None, :, None], alpha[:, None, None], Ax, Ay,
@@ -231,8 +232,15 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
     sigma_max = sigma.max()/Lsat**2
     alpha_max = alpha[i_amax]
     k_max = k[i_kmax]/Lsat
-    c_max = Lsat*temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r, mu,
+    c_max = Lsat*temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r_car, mu,
                                          delta, angles, Q_car, axis=-1)
+
+    fig, ax = plt.subplots(1, 1, constrained_layout=True)
+    ax.contourf(k, alpha, sigma, levels=200)
+    ax.plot(k[i_kmax], alpha[i_amax], 'k.')
+    ax.set_xlabel('None dimensional wavenumber, $k$')
+    ax.set_ylabel(r'Orientation, $\alpha$ [deg.]')
+    plt.show()
 
     print(r""" The properties of the most unstable mode are:
          - orientation: {:.0f} [deg.]
@@ -241,10 +249,15 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
          - growth rate :  {:.1e} [/day]
          - migration velocity: {:.1e} [m/day]
 
-    """.format(alpha_max, k_max, 2*np.pi/k_max, sigma_max, c_max))
+    """.format(alpha_max + 90, k_max, 2*np.pi/k_max, sigma_max, c_max))
 
 
 
+
+.. image-sg:: /examples/tutorials/images/sphx_glr_plot_windtofluxtodune_003.png
+   :alt: plot windtofluxtodune
+   :srcset: /examples/tutorials/images/sphx_glr_plot_windtofluxtodune_003.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -253,19 +266,21 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
 
  .. code-block:: none
 
+    /home/cyril/Documents/Work/Research/PythonLib_perso/PyDune/examples/tutorials/plot_windtofluxtodune.py:135: RuntimeWarning: invalid value encountered in true_divide
+      Q_car = DP*angular_PDF/(1 - 1/r**2)  # Characteristic flux of the instability (without threshold), [m2/day]
      The properties of the most unstable mode are:
-         - orientation: 134 [deg.]
-         - wavenumber :5.7e-01  [/m]
-         - wavelength : 1.1e+01 [m]
-         - growth rate :  5.5e-01 [/day]
-         - migration velocity: 6.7e+00 [m/day]
+         - orientation: 113 [deg.]
+         - wavenumber :2.7e-01  [/m]
+         - wavelength : 2.3e+01 [m]
+         - growth rate :  1.2e-01 [/day]
+         - migration velocity: -2.0e+00 [m/day]
 
 
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 161-167
+.. GENERATED FROM PYTHON SOURCE LINES 169-175
 
 Properties of mature dunes
 ==========================
@@ -274,7 +289,7 @@ We then compute the two possible mature dune orientations using the model of Cou
 
 [1] Courrech du Pont, S., Narteau, C., & Gao, X. (2014). Two modes for dune orientation. Geology, 42(9), 743-746.
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-179
+.. GENERATED FROM PYTHON SOURCE LINES 175-187
 
 .. code-block:: default
 
@@ -312,7 +327,7 @@ We then compute the two possible mature dune orientations using the model of Cou
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.130 seconds)
+   **Total running time of the script:** ( 0 minutes  5.223 seconds)
 
 
 .. _sphx_glr_download_examples_tutorials_plot_windtofluxtodune.py:

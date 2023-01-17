@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PyDune.data_processing.topography.downloadGlobalOpenTopo &#8212; PyDune  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pydata-custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/PyDune/data_processing/topography/downloadGlobalOpenTopo';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <img src="../../../../_static/logo-light.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../../../_static/logo-dark.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../index.html">
+                        Home page
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../examples/index.html">
+                        Examples and Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../_autosummary/PyDune.html">
+                        API reference
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../index.html">
+                        Home page
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../examples/index.html">
+                        Examples and Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../../_autosummary/PyDune.html">
+                        API reference
+                      </a>
+                    </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <h1>Source code for PyDune.data_processing.topography.downloadGlobalOpenTopo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module allows to dowload data from global topography datasets hosted at</span>
+<span class="sd">`OpenTopography &lt;https://opentopography.org/&gt;`_ . Before</span>
+<span class="sd">using this module, please read the corresponding documentation</span>
+<span class="sd">`here &lt;https://portal.opentopography.org/apidocs/#/Public/getGlobalDem&gt;`_,</span>
+<span class="sd">and the data sources `here &lt;https://portal.opentopography.org/dataCatalog?group=global&gt;`_.</span>
+
+<span class="sd">Roughly, the steps are:</span>
+
+<span class="sd">    - create an OpenTopography account `here &lt;https://portal.opentopography.org/newUser&gt;`_</span>
+<span class="sd">    - once logged in go to &#39;MyOpenTopo&#39;, then in the &#39;My Account&#39; tab go to &#39;myOpenTopo Authorizations and API Key&#39;</span>
+<span class="sd">    - click &#39;Request API Key&#39; and declare the string as your API_Key variable in Python</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">osgeo</span> <span class="kn">import</span> <span class="n">gdal</span>
+
+
+<div class="viewcode-block" id="getting_topography_data"><a class="viewcode-back" href="../../../../_autosummary/PyDune.data_processing.topography.downloadGlobalOpenTopo.getting_topography_data.html#PyDune.data_processing.topography.downloadGlobalOpenTopo.getting_topography_data">[docs]</a><span class="k">def</span> <span class="nf">getting_topography_data</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="s1">&#39;./&#39;</span><span class="p">,</span> <span class="n">demtype</span><span class="o">=</span><span class="s1">&#39;AW3D30&#39;</span><span class="p">,</span> <span class="n">API_Key</span><span class="o">=</span><span class="s1">&#39;demoapikeyot2022&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This fuction downloads a GeoTiff from OpenTopography of a region of interest in a public global topography dataset.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bounds : tuple</span>
+<span class="sd">        the bounding values for a rectangle where topography data. format is south, north, east, west.</span>
+<span class="sd">    directory : str</span>
+<span class="sd">        the directory where the GeoTiff should be saved (default value is the current directory).</span>
+<span class="sd">    demtype : str</span>
+<span class="sd">        the global dataset used. options are &#39;SRTMGL3&#39;,&#39;SRTMGL1&#39;,&#39;SRTMGL1_E&#39;,&#39;AW3D30&#39;,&#39;AW3D30_E&#39;,&#39;SRTM15Plus&#39;,&#39;NASADEM&#39;,&#39;COP30&#39;,&#39;COP90&#39; (default value is &#39;AW3D30&#39;)</span>
+<span class="sd">    API_Key : str</span>
+<span class="sd">        the user API key for OpenTopography which can be found in the MyOpenTopo portal (default value is the demonstration key for 2022 which may expire &#39;demoapikeyot2022&#39;)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fname : str</span>
+<span class="sd">        the downloaded file name including the full path</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; south,north,east,west = 21.25,21.35,54.45,54.55</span>
+<span class="sd">    &gt;&gt;&gt; bounds = (south,north,east,west)</span>
+<span class="sd">    &gt;&gt;&gt; loc = GlobalOT.getting_topography_data(bounds,demtype=&#39;SRTMGL3&#39;)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">south</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">west</span> <span class="o">=</span> <span class="n">bounds</span>
+    <span class="k">if</span> <span class="n">east</span> <span class="o">&gt;=</span> <span class="n">west</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;east bound must be strictly less than west bound&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">south</span> <span class="o">&gt;=</span> <span class="n">north</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;south bound must be strictly less than north bound&#39;</span><span class="p">)</span>
+
+    <span class="n">demtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SRTMGL3&#39;</span><span class="p">,</span> <span class="s1">&#39;SRTMGL1&#39;</span><span class="p">,</span> <span class="s1">&#39;SRTMGL1_E&#39;</span><span class="p">,</span> <span class="s1">&#39;AW3D30&#39;</span><span class="p">,</span> <span class="s1">&#39;AW3D30_E&#39;</span><span class="p">,</span> <span class="s1">&#39;SRTM15Plus&#39;</span><span class="p">,</span> <span class="s1">&#39;NASADEM&#39;</span><span class="p">,</span> <span class="s1">&#39;COP30&#39;</span><span class="p">,</span> <span class="s1">&#39;COP90&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">demtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">demtypes</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;demtype must be one of the following:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">demtypes</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;directory must exist&#39;</span><span class="p">)</span>
+
+    <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;OpenTopo_</span><span class="si">%s</span><span class="s1">_S</span><span class="si">%s</span><span class="s1">_N</span><span class="si">%s</span><span class="s1">_E</span><span class="si">%s</span><span class="s1">_W</span><span class="si">%s</span><span class="s1">.tif&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">demtype</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">west</span><span class="p">)</span>
+    <span class="n">apiurl</span> <span class="o">=</span> <span class="s1">&#39;https://portal.opentopography.org/API/globaldem?demtype=</span><span class="si">%s</span><span class="s1">&amp;south=</span><span class="si">%s</span><span class="s1">&amp;north=</span><span class="si">%s</span><span class="s1">&amp;west=</span><span class="si">%s</span><span class="s1">&amp;east=</span><span class="si">%s</span><span class="s1">&amp;outputFormat=GTiff&amp;API_Key=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">demtype</span><span class="p">,</span> <span class="n">south</span><span class="p">,</span> <span class="n">north</span><span class="p">,</span> <span class="n">east</span><span class="p">,</span> <span class="n">west</span><span class="p">,</span> <span class="n">API_Key</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">apiurl</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">directory</span><span class="o">+</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Topography successfully downloaded.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Bad request to OpenTopography. Could be due to size; try decreasing bounds.&#39;</span>
+    <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Unauthorized access to OpenTopography. Could be API Key.&#39;</span>
+    <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Internal Error with OpenTopography.&#39;</span>
+    <span class="k">return</span> <span class="n">directory</span><span class="o">+</span><span class="n">fname</span></div>
+
+
+<div class="viewcode-block" id="load_xyz_geotiff"><a class="viewcode-back" href="../../../../_autosummary/PyDune.data_processing.topography.downloadGlobalOpenTopo.load_xyz_geotiff.html#PyDune.data_processing.topography.downloadGlobalOpenTopo.load_xyz_geotiff">[docs]</a><span class="k">def</span> <span class="nf">load_xyz_geotiff</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; This fuction loads a GeoTiff of topography data and returns coordinate arrays (x,y) and the elevation array (z).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fname : str</span>
+<span class="sd">        the path to the GeoTiff file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x : numpy array</span>
+<span class="sd">        the 1-d east-west coordinate array, is in the native units from the GeoTiff</span>
+<span class="sd">    y : numpy array</span>
+<span class="sd">        the 1-d south-north coordinate array, is in the native units from the GeoTiff</span>
+<span class="sd">    z : numpy array</span>
+<span class="sd">        the 2-d elevation array, origin is southeast corner, is in the native units from the GeoTiff</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">gdal</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="n">band</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">band</span><span class="o">.</span><span class="n">ReadAsArray</span><span class="p">())</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">RasterXSize</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">RasterYSize</span>
+    <span class="n">gt</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">GetGeoTransform</span><span class="p">()</span>
+    <span class="n">minx</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">miny</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">width</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">height</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">maxx</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">width</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">height</span><span class="o">*</span><span class="n">gt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">maxy</span> <span class="o">=</span> <span class="n">gt</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">minx</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">miny</span><span class="p">,</span> <span class="n">maxy</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span></div>
+</pre></div>
+
+            </article>
+            
+            
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2021, Cyril Gadal.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="theme-version">
+    Built with the
+    <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">
+        PyData Sphinx Theme
+    </a>
+    0.12.0.
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>

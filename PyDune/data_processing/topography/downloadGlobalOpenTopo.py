@@ -1,8 +1,8 @@
 """
 This module allows to dowload data from global topography datasets hosted at
-`OpenTopography <https://opentopography.org/`_ . Before
+`OpenTopography <https://opentopography.org/>`_ . Before
 using this module, please read the corresponding documentation
-`here <https://portal.opentopography.org/apidocs/#/Public/getGlobalDem`_,
+`here <https://portal.opentopography.org/apidocs/#/Public/getGlobalDem>`_,
 and the data sources `here <https://portal.opentopography.org/dataCatalog?group=global>`_.
 
 Roughly, the steps are:
@@ -12,12 +12,13 @@ Roughly, the steps are:
     - click 'Request API Key' and declare the string as your API_Key variable in Python
 
 """
-import requests
 import os
-import gdal
+import requests
 import numpy as np
+from osgeo import gdal
 
-def getting_topography_data(bounds,directory='./',demtype='AW3D30',API_Key='demoapikeyot2022'):
+
+def getting_topography_data(bounds, directory='./', demtype='AW3D30', API_Key='demoapikeyot2022'):
     """ This fuction downloads a GeoTiff from OpenTopography of a region of interest in a public global topography dataset.
 
     Parameters
@@ -43,22 +44,22 @@ def getting_topography_data(bounds,directory='./',demtype='AW3D30',API_Key='demo
     >>> loc = GlobalOT.getting_topography_data(bounds,demtype='SRTMGL3')
 
     """
-    south,north,east,west = bounds
-    if east>=west:
+    south, north, east, west = bounds
+    if east >= west:
         raise ValueError('east bound must be strictly less than west bound')
-    if south>=north:
+    if south >= north:
         raise ValueError('south bound must be strictly less than north bound')
 
-    demtypes = ['SRTMGL3','SRTMGL1','SRTMGL1_E','AW3D30','AW3D30_E','SRTM15Plus','NASADEM','COP30','COP90']
+    demtypes = ['SRTMGL3', 'SRTMGL1', 'SRTMGL1_E', 'AW3D30', 'AW3D30_E', 'SRTM15Plus', 'NASADEM', 'COP30', 'COP90']
     if demtype not in demtypes:
         raise ValueError('demtype must be one of the following:\n'+'\n'.join(demtypes))
-        
+
     if not os.path.isdir(directory):
         raise ValueError('directory must exist')
-        
-    fname = 'OpenTopo_%s_S%s_N%s_E%s_W%s.tif'%(demtype,south,north,east,west)
-    apiurl = 'https://portal.opentopography.org/API/globaldem?demtype=%s&south=%s&north=%s&west=%s&east=%s&outputFormat=GTiff&API_Key=%s'%(demtype,south,north,east,west,API_Key)
-    r = requests.get(apiurl,stream=True)
+
+    fname = 'OpenTopo_%s_S%s_N%s_E%s_W%s.tif' % (demtype, south, north, east, west)
+    apiurl = 'https://portal.opentopography.org/API/globaldem?demtype=%s&south=%s&north=%s&west=%s&east=%s&outputFormat=GTiff&API_Key=%s' % (demtype, south, north, east, west, API_Key)
+    r = requests.get(apiurl, stream=True)
     if r.status_code == 200:
         with open(directory+fname, 'wb') as f:
             f.write(r.content)
@@ -70,6 +71,7 @@ def getting_topography_data(bounds,directory='./',demtype='AW3D30',API_Key='demo
     elif r.status_code == 500:
         return 'Internal Error with OpenTopography.'
     return directory+fname
+
 
 def load_xyz_geotiff(fname):
     """ This fuction loads a GeoTiff of topography data and returns coordinate arrays (x,y) and the elevation array (z).
@@ -84,7 +86,7 @@ def load_xyz_geotiff(fname):
     x : numpy array
         the 1-d east-west coordinate array, is in the native units from the GeoTiff
     y : numpy array
-        the 1-d south-north coordinate array, is in the native units from the GeoTiff        
+        the 1-d south-north coordinate array, is in the native units from the GeoTiff
     z : numpy array
         the 2-d elevation array, origin is southeast corner, is in the native units from the GeoTiff
     """
@@ -98,6 +100,6 @@ def load_xyz_geotiff(fname):
     miny = gt[3] + width*gt[4] + height*gt[5]
     maxx = gt[0] + width*gt[1] + height*gt[2]
     maxy = gt[3]
-    x = np.linspace(minx,maxx,width)
-    y = np.linspace(miny,maxy,height)
-    return x,y,z
+    x = np.linspace(minx, maxx, width)
+    y = np.linspace(miny, maxy, height)
+    return x, y, z

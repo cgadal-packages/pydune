@@ -160,8 +160,6 @@ We then calculate sand fluxes using the quartic law:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
@@ -236,7 +234,7 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
                                          delta, angles, Q_car, axis=-1)
 
     fig, ax = plt.subplots(1, 1, constrained_layout=True)
-    ax.contourf(k, alpha, sigma, levels=200)
+    ax.contourf(k, alpha, sigma/Lsat**2, levels=200)
     ax.plot(k[i_kmax], alpha[i_amax], 'k.')
     ax.set_xlabel('None dimensional wavenumber, $k$')
     ax.set_ylabel(r'Orientation, $\alpha$ [deg.]')
@@ -262,11 +260,9 @@ We compute the propoerties of incipient dunes (in the linear regime) using the m
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
-    /home/cyril/Documents/Work/Research/PythonLib_perso/PyDune/examples/tutorials/plot_windtofluxtodune.py:135: RuntimeWarning: invalid value encountered in true_divide
+    /home/cyril/Documents/Work/Research/PythonLib_perso/PyDune/examples/tutorials/plot_windtofluxtodune.py:135: RuntimeWarning: invalid value encountered in divide
       Q_car = DP*angular_PDF/(1 - 1/r**2)  # Characteristic flux of the instability (without threshold), [m2/day]
      The properties of the most unstable mode are:
          - orientation: 113 [deg.]
@@ -311,8 +307,6 @@ We then compute the two possible mature dune orientations using the model of Cou
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
      The properties of the mature dunes are:
@@ -327,28 +321,23 @@ We then compute the two possible mature dune orientations using the model of Cou
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.223 seconds)
+   **Total running time of the script:** ( 0 minutes  4.756 seconds)
 
 
 .. _sphx_glr_download_examples_tutorials_plot_windtofluxtodune.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: plot_windtofluxtodune.py <plot_windtofluxtodune.py>`
 
-     :download:`Download Python source code: plot_windtofluxtodune.py <plot_windtofluxtodune.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_windtofluxtodune.ipynb <plot_windtofluxtodune.ipynb>`
+      :download:`Download Jupyter notebook: plot_windtofluxtodune.ipynb <plot_windtofluxtodune.ipynb>`
 
 
 .. only:: html

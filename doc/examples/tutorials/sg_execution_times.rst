@@ -5,10 +5,10 @@
 
 Computation times
 =================
-**00:05.223** total execution time for **examples_tutorials** files:
+**00:04.756** total execution time for **examples_tutorials** files:
 
 +--------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py` (``plot_windtofluxtodune.py``) | 00:05.223 | 0.0 MB |
+| :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py` (``plot_windtofluxtodune.py``) | 00:04.756 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+
 | :ref:`sphx_glr_examples_tutorials_download_ERAdata.py` (``download_ERAdata.py``)           | 00:00.000 | 0.0 MB |
 +--------------------------------------------------------------------------------------------+-----------+--------+

@@ -6,7 +6,7 @@ Downloading data from the ERA* datasets
 Please find below a typical script allowing to download data from the ERA5 Land dataset.
 """
 
-from PyDune.Data_processing.Meteorological import downloadCDS as CDS
+from PyDune.data_processing.meteorological import downloadCDS as CDS
 
 month = [i for i in range(1, 13)]
 day = [i for i in range(1, 32)]

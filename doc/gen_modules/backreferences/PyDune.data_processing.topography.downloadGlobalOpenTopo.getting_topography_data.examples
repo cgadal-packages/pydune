@@ -1,0 +1,39 @@
+
+
+Examples using ``PyDune.data_processing.topography.downloadGlobalOpenTopo.getting_topography_data``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. start-sphx-glr-thumbnails
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Please find below a typical script allowing to download SRTM Global 3-arcsecond data from OpenT...">
+
+.. only:: html
+
+  .. image:: /examples/images/thumb/sphx_glr_download_OpenTopodata_thumb.png
+    :alt: Downloading topography data from OpenTopography
+
+  :ref:`sphx_glr_examples_download_OpenTopodata.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Downloading topography data from OpenTopography</div>
+    </div>
+
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_download_OpenTopodata.py`
+
+.. raw:: html
+
+    </div>
+

@@ -3,21 +3,37 @@
 Examples using ``PyDune.physics.turbulent_flow.A0_approx``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
+.. start-sphx-glr-thumbnails
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show on the use PyDune functions to go from wind data, to the calculation ...">
 
 .. only:: html
 
- .. figure:: /examples/tutorials/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
-     :alt: From wind data to sand fluxes and dune orientations
+  .. image:: /examples/tutorials/images/thumb/sphx_glr_plot_windtofluxtodune_thumb.png
+    :alt: From wind data to sand fluxes and dune orientations
 
-     :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`
+  :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">From wind data to sand fluxes and dune orientations</div>
+    </div>
+
+
+.. only:: not html
+
+ * :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`
 
 .. raw:: html
 
     </div>
 
-.. only:: not html
-
- * :ref:`sphx_glr_examples_tutorials_plot_windtofluxtodune.py`

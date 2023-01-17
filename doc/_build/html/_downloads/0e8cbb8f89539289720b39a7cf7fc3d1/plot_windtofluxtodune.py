@@ -150,7 +150,7 @@ c_max = Lsat*temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r_ca
                                      delta, angles, Q_car, axis=-1)
 
 fig, ax = plt.subplots(1, 1, constrained_layout=True)
-ax.contourf(k, alpha, sigma, levels=200)
+ax.contourf(k, alpha, sigma/Lsat**2, levels=200)
 ax.plot(k[i_kmax], alpha[i_amax], 'k.')
 ax.set_xlabel('None dimensional wavenumber, $k$')
 ax.set_ylabel(r'Orientation, $\alpha$ [deg.]')

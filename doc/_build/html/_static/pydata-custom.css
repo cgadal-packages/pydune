@@ -8,3 +8,10 @@ h1 { margin-bottom: 40px; }
 
 /*No line underneath summary table headings (clashes with line above first member)*/
 p.rubric { border-bottom: 0px; }
+
+/*Fit to maxwidth*/
+
+.bd-content {
+  flex-grow: 1;
+  max-width: 100%;
+}

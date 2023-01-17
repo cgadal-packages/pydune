@@ -29,7 +29,7 @@ Please find below a typical script allowing to download data from the ERA5 Land 
 .. code-block:: default
 
 
-    from PyDune.Data_processing.Meteorological import downloadCDS as CDS
+    from PyDune.data_processing.meteorological import downloadCDS as CDS
 
     month = [i for i in range(1, 13)]
     day = [i for i in range(1, 32)]
@@ -60,23 +60,18 @@ Please find below a typical script allowing to download data from the ERA5 Land 
 
 .. _sphx_glr_download_examples_tutorials_download_ERAdata.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: download_ERAdata.py <download_ERAdata.py>`
 
-     :download:`Download Python source code: download_ERAdata.py <download_ERAdata.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: download_ERAdata.ipynb <download_ERAdata.ipynb>`
+      :download:`Download Jupyter notebook: download_ERAdata.ipynb <download_ERAdata.ipynb>`
 
 
 .. only:: html

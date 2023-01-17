@@ -98,7 +98,11 @@ sphinx_gallery_conf = {
 
 # Pydata theme
 html_theme = "pydata_sphinx_theme"
-html_theme_options = {"show_prev_next": False}
+html_theme_options = {"show_prev_next": False,
+                      "logo": {
+                          "text": "PyDune",
+                          }
+                      }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

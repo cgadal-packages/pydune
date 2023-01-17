@@ -7,7 +7,6 @@ import numpy as np
 from itertools import islice
 from windrose import WindroseAxes
 
-
 def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, label_angle=False, label=None,
                    props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
                    blowfrom=False, **kwargs):
@@ -140,6 +139,91 @@ def plot_wind_rose(theta, U, bins, ax, fig, label_angle=False, label=None,
     ax.remove()
     return ax_rose
 
+def netcdf_to_flux_rose(file,ax,fig,
+                        netcdflonlatinds=(0,0),
+                        z=10,z_0=1e-3,
+                        rho_g=2.65e3,rho_f=1,g=9.81,d=180e-6,
+                        shield_th=0.0035,Kappa=0.4, mu=0.63, cm=1.7,
+                        bin_edges=np.linspace(0, 360, 361),
+                        nsector=20,label_flux=False,label_angle=False,label=None,
+                        props=dict(boxstyle='round',facecolor=(1, 1, 1, 0.9),edgecolor=(1, 1, 1, 1), pad=0),blowfrom=False,
+                        **kwargs):
+    
+    """ This function loads and concatenate (along the time axis) several NETCDF
+    files from a list of filenames, calcuates the sand flux from a location in the 
+    NETCDF wind data using the quartic_transport_law, and plots a sand flux angular 
+    distribution on the given axe of the given figure.
+
+    Parameters
+    ----------
+    files_list : list
+        the list of downloaded file names.
+    ax : matplotlib.Axes
+        axe of the figure that will be replaced by the flux rose.
+    fig : matplotlib.figure
+        figure on which the flux rose is plotted.
+    netcdflonlatinds : tuple
+        the longitude and latatitude indicies of the netcdf file the flux rose should be calculated for. (default is (0,0)).
+    z : scalar, numpy array
+        elevation of the wind velocity (the default is 10). units: m.
+    z_0 : scalar, numpy array
+        roughness length of surface (the default is 10^-3). units: m.
+    rho_g : scalar, numpy array
+        density of sediment (the default is 2650). units: kg/m^3.
+    rho_f : scalar, numpy array
+        density of fluid (the default is 1). units: kg/m^3.
+    g : scalar, numpy array
+        gravity acceleration (the default is 9.81). units: m/s^2.
+    d : scalar, numpy array
+        sediment grain diameter (the default is 180*10^-6). units: m.
+    shield_th : scalar, numpy array
+        threshold shields number for transport initiation (the default is 0.0035). units: dimensionless.
+    Kappa : scalar, numpy array
+        von Kármán constant (the default is 0.4). units: dimensionless.
+    mu : scalar, numpy array
+        friction coefficient (the default is 0.63). units: dimensionless.
+    cm : scalar, numpy array
+        transport law coefficient (the default is 1.7). units: dimensionless.
+    bin_edges : numpy array
+        edges of the bins for finding the angular distribution of flux (the default is np.linspace(0, 360, 361)). units: degrees.
+    nsector : int
+        number of angular bins for the flux rose (the default is 20).
+    label_flux : bool
+        if True, labels the radial axis (the default is False).
+    label_angle : bool
+        if True, label the angles (the default is False).
+    label : str, None
+        if provided, labels the flux rose with the given string (the default is None).
+    props : dict
+        Bbox properties used around the label (the default is dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0)).
+    blowfrom : bool
+        If blow from, the rose will be :math:`\pi`-rotated, to show where the fluxes come from (the default is False).
+    **kwargs : other kwargs
+        any other parameter supported by :func:`windrose.WindroseAxes.bar <windrose.WindroseAxes>`
+
+    Returns
+    -------
+    WindroseAxes
+        return the axe on which the wind rose is plotted. Can be used for further modifications.
+
+    """
+    
+    from PyDune.data_processing.meteorological.downloadCDS import load_netcdf
+    from PyDune.math import cartesian_to_polar
+    from PyDune.physics.sedtransport.transport_laws import quartic_transport_law
+
+    data = load_netcdf([file])
+    velocity,orientation = cartesian_to_polar(data['u10'][:,netcdflonlatinds[0],netcdflonlatinds[1]],
+                                              data['v10'][:,netcdflonlatinds[0],netcdflonlatinds[1]])
+    shear_velocity = velocity_to_shear(velocity,z,z_0,Kappa)
+    Q = np.sqrt((rho_g-rho_f*g*d)/rho_f)*d
+    shield = (rho_f/((rho_g-rho_f)*g*d))*shear_velocity**2
+    sand_flux = Q*quartic_transport_law(shield,shield_th,Kappa,mu,cm)
+    angular_PDF,angles = make_angular_PDF(orientation,sand_flux,bin_edges)
+    ax_rose = plot_flux_rose(angles,angular_PDF,ax,fig,
+                             nsector,label_flux,label_angle,label,props,blowfrom,
+                             **kwargs)
+    return ax_rose
 
 ################################################################################
 # Google earth functions

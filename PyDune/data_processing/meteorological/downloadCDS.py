@@ -2,7 +2,7 @@
 This module allows to dowload data from the ERA5 and ERA5Land datasets hosted at
 the `Climate Data Store <https://cds.climate.copernicus.eu/#!/home>`_ . Before
 using this module, please read the corresponding documentation
-`here <https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5`_,
+`here <https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5>`_,
 and especially the `part 4 <https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5#HowtodownloadERA5-4-DownloadERA5familydatathroughtheCDSAPI>`_.
 
 Roughly, the steps are:
@@ -25,7 +25,7 @@ from scipy.io import netcdf
 from datetime import datetime, timezone, timedelta
 
 
-def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
+def getting_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
     """ This fuction helps to download data from datasets stored in the Climate Data Store.
 
     Parameters
@@ -75,7 +75,7 @@ def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
 
     """
     Names = {'reanalysis-era5-single-levels': 'ERA5', 'reanalysis-era5-land': 'ERA5Land'}
-    Nitems_max = {'reanalysis-era5-single-levels': 120000, 'reanalysis-era5-land': 100000}
+    Nitems_max = {'reanalysis-era5-single-levels': 120000, 'reanalysis-era5-land': 1000}
     area_ref = [0, 0]
     #
     if Nsplit < 1:
@@ -85,7 +85,6 @@ def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
     if Nitems/Nsplit > Nitems_max[dataset]:
         Nsplit = round(Nitems/Nitems_max[dataset]) + 1
         print('Request too large. Setting Nsplit =', Nsplit)
-
     # Defining years for data, either from dic variable
     dates = np.array([int(i) for i in variable_dic['year']])
 
@@ -112,10 +111,15 @@ def getting_wind_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on
         Nsplit = Nsplit + 1
         year_list = [list(map(str, j)) for j in np.array_split(dates, Nsplit)]
     #
+    # filtering year_list
+    year_list = [i for i in year_list if len(i) > 0]
     # Launching requests by year bins
     file_names = []
     for years in year_list:
-        string = years[0] + 'to' + years[-1]
+        if len(years) > 0:
+            string = years[0] + 'to' + years[-1]
+        else:
+            string = years[0]
         print(string)
         file_names.append(Names[dataset] + string + '_' + name + '.' + variable_dic['format'])
         c = cdsapi.Client()

@@ -6,6 +6,7 @@ import os
 import numpy as np
 from itertools import islice
 from windrose import WindroseAxes
+from PyDune.math import make_angular_PDF
 
 def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, label_angle=False, label=None,
                    props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
@@ -156,8 +157,8 @@ def netcdf_to_flux_rose(file,ax,fig,
 
     Parameters
     ----------
-    files_list : list
-        the list of downloaded file names.
+    files_list : list, str
+        file name or list of downloaded file names.
     ax : matplotlib.Axes
         axe of the figure that will be replaced by the flux rose.
     fig : matplotlib.figure
@@ -212,7 +213,10 @@ def netcdf_to_flux_rose(file,ax,fig,
     from PyDune.math import cartesian_to_polar
     from PyDune.physics.sedtransport.transport_laws import quartic_transport_law
 
-    data = load_netcdf([file])
+    if type(file) is str:
+        data = load_netcdf([file])
+    elif type(file) is list:
+        data = load_netcdf(file)
     velocity,orientation = cartesian_to_polar(data['u10'][:,netcdflonlatinds[0],netcdflonlatinds[1]],
                                               data['v10'][:,netcdflonlatinds[0],netcdflonlatinds[1]])
     shear_velocity = velocity_to_shear(velocity,z,z_0,Kappa)

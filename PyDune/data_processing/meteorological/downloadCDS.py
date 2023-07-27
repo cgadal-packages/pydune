@@ -85,8 +85,6 @@ def getting_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid
     if Nitems/Nsplit > Nitems_max[dataset]:
         Nsplit = round(Nitems/Nitems_max[dataset]) + 1
         print('Request too large. Setting Nsplit =', Nsplit)
-    # Defining years for data, either from dic variable
-    dates = np.array([int(i) for i in variable_dic['year']])
 
     # Puting the required area on the ERA5 grid
     area_wanted = variable_dic['area']
@@ -155,6 +153,11 @@ def load_netcdf(files_list):
                 Data[key] = np.concatenate((Data[key], file_temp.variables[key][:]), axis=0)
     #
     Data['time'] = _convert_time(Data['time'].astype(np.float64))
+    # ## sort with respect to time
+    sortedtime_inds = Data['time'].argsort()
+    for key in Data.keys():
+        if key not in ['latitude', 'longitude']:
+            Data[key] = Data[key][sortedtime_inds, ...]
     return Data
 
 

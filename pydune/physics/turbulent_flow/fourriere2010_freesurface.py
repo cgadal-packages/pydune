@@ -1,7 +1,7 @@
 import numpy as np
-from PyDune.math import tand, arcsind
+from pydune.math import tand, arcsind
 from scipy.integrate import solve_ivp
-from PyDune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
+from pydune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
 
 
 # ##################### Solving linear system

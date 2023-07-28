@@ -10,7 +10,7 @@ References
 """
 
 import numpy as np
-from PyDune.math import vector_average, cosd, sind
+from pydune.math import vector_average, cosd, sind
 
 
 def flux_at_crest(alpha, theta, Q0, gamma=1.6):

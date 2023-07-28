@@ -5,7 +5,7 @@ Linear theory of a turbulent flow over a sinusoidal bottom:
 
 import numpy as np
 from scipy.integrate import solve_ivp
-from PyDune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
+from pydune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
 
 
 # %%

@@ -14,7 +14,7 @@ Fitting the different transport laws to the laboratory data of:
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-from PyDune.physics.sedtransport import transport_laws as TL
+from pydune.physics import (quadratic_transport_law, cubic_transport_law, quartic_transport_law)
 
 # Loading the different data
 Data_creyssel09 = np.load('../src/Data_creyssel09.npy',
@@ -32,7 +32,7 @@ Q_err = np.concatenate([np.abs(Datasets[dataset]['Q_adi'] - Datasets[dataset]['Q
                         for dataset in sorted(Datasets.keys())])
 
 # ### transport laws used
-laws = [TL.quadratic_transport_law, TL.cubic_transport_law, TL.quartic_transport_law]
+laws = [quadratic_transport_law, cubic_transport_law, quartic_transport_law]
 labels = ['quadratic transport law', 'cubic transport law', 'quartic transport law']
 p0_s = [[0.01, 6], [0.02, 4], [0.02]]  # initial guesses to help fit convergence
 

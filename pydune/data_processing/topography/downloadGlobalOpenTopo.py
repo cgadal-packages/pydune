@@ -18,7 +18,7 @@ import numpy as np
 from osgeo import gdal
 
 
-def getting_topography_data(bounds, directory='./', demtype='AW3D30', API_Key='demoapikeyot2022'):
+def getting_GOT_topography_data(bounds, directory='./', demtype='AW3D30', API_Key='demoapikeyot2022'):
     """ This fuction downloads a GeoTiff from OpenTopography of a region of interest in a public global topography dataset.
 
     Parameters

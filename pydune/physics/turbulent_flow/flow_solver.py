@@ -21,10 +21,10 @@ References
 
 """
 
-import PyDune.physics.turbulent_flow.fourriere2010_unbounded as fourriere2010_unbounded
-import PyDune.physics.turbulent_flow.fourriere2010_freesurface as fourriere2010_freesurface
-import PyDune.physics.turbulent_flow.andreotti2009 as andreotti2009
-import PyDune.physics.turbulent_flow.andreotti2011_unbounded as andreotti2011_unbounded
+import pydune.physics.turbulent_flow.fourriere2010_unbounded as fourriere2010_unbounded
+import pydune.physics.turbulent_flow.fourriere2010_freesurface as fourriere2010_freesurface
+import pydune.physics.turbulent_flow.andreotti2009 as andreotti2009
+import pydune.physics.turbulent_flow.andreotti2011_unbounded as andreotti2011_unbounded
 
 
 def solve_turbulent_flow(model, parameters, Kappa=0.4, max_z=None,

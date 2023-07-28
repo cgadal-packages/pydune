@@ -3,18 +3,15 @@ r"""
 From wind data to sand fluxes and dune orientations
 ===================================================
 
-In this tutorial, we show on the use PyDune functions to go from wind data,
+In this tutorial, we show on the use pydune functions to go from wind data,
 to the calculation of sand fluxes, and then to dune properties.
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
-from PyDune.data_processing.meteorological.downloadCDS import load_netcdf
-from PyDune.data_processing.meteorological.wind_plot import (velocity_to_shear,
-                                                             plot_flux_rose,
-                                                             plot_wind_rose)
-
-from PyDune.math import (cartesian_to_polar, tand, make_angular_PDF,
+from pydune.data_processing import load_netcdf
+from pydune.data_processing import (velocity_to_shear, plot_flux_rose, plot_wind_rose)
+from pydune.math import (cartesian_to_polar, tand, make_angular_PDF,
                          make_angular_average, vector_average)
 
 # %%
@@ -51,7 +48,7 @@ plt.show()
 #
 # We then calculate sand fluxes using the quartic law:
 
-from PyDune.physics.sedtransport.transport_laws import quartic_transport_law
+from pydune.physics import quartic_transport_law
 
 # # Parameters
 sectoday = 24*3600
@@ -103,9 +100,8 @@ plt.show()
 #
 # [1] Gadal, C., Narteau, C., Du Pont, S. C., Rozier, O., & Claudin, P. (2019). Incipient bedforms in a bidirectional wind regime. Journal of Fluid Mechanics, 862, 490-516.
 
-from PyDune.physics.dune.bedinstability_2D import (temporal_celerity_multi,
-                                                   temporal_growth_rate_multi)
-from PyDune.physics.turbulent_flow import Ax_geo, Bx_geo, Ay_geo, By_geo, A0_approx, B0_approx
+from pydune.physics import bedinstability_2D as BI2D
+from pydune.physics import Ax_geo, Bx_geo, Ay_geo, By_geo, A0_approx, B0_approx
 
 # parameters
 k = np.linspace(0.001, 0.6, 300)  # range of explored wavelengths, non-dimensional
@@ -136,7 +132,7 @@ Q_car = DP*angular_PDF/(1 - 1/r**2)  # Characteristic flux of the instability (w
 Q_car[np.isnan(Q_car)] = 0
 
 # Calculation of the growth rate
-sigma = temporal_growth_rate_multi(k[None, :, None], alpha[:, None, None], Ax, Ay,
+sigma = BI2D.temporal_growth_rate_multi(k[None, :, None], alpha[:, None, None], Ax, Ay,
                                    Bx, By, r_car, mu, delta, angles[None, None, :],
                                    Q_car[None, None, :], axis=-1)
 
@@ -146,7 +142,7 @@ i_amax, i_kmax = np.unravel_index(sigma.argmax(), sigma.shape)
 sigma_max = sigma.max()/Lsat**2
 alpha_max = alpha[i_amax]
 k_max = k[i_kmax]/Lsat
-c_max = Lsat*temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r_car, mu,
+c_max = Lsat*BI2D.temporal_celerity_multi(Lsat*k_max, alpha_max, Ax, Ay, Bx, By, r_car, mu,
                                      delta, angles, Q_car, axis=-1)
 
 fig, ax = plt.subplots(1, 1, constrained_layout=True)
@@ -173,7 +169,7 @@ print(r""" The properties of the most unstable mode are:
 #
 # [1] Courrech du Pont, S., Narteau, C., & Gao, X. (2014). Two modes for dune orientation. Geology, 42(9), 743-746.
 
-from PyDune.physics.dune.courrechdupont2014 import elongation_direction, MGBNT_orientation
+from pydune.physics.dune.courrechdupont2014 import elongation_direction, MGBNT_orientation
 
 
 Alpha_E = elongation_direction(angles, angular_PDF)

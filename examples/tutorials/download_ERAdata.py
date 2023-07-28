@@ -6,7 +6,7 @@ Downloading data from the ERA* datasets
 Please find below a typical script allowing to download data from the ERA5 Land dataset.
 """
 
-from PyDune.data_processing.meteorological import downloadCDS as CDS
+from pydune.data_processing import getting_CDSdata
 
 month = [i for i in range(1, 2)]
 day = [i for i in range(1, 20)]
@@ -22,7 +22,7 @@ variable_dic = {'format': 'netcdf',
                 'year': year,
                 'area': area}
 
-a = CDS.getting_data('reanalysis-era5-single-levels',
+a = getting_CDSdata('reanalysis-era5-single-levels',
                      variable_dic, 'Angola_coast_v10',
                      Nsplit=1,
                      file='info.txt',

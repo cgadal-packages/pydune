@@ -1,7 +1,7 @@
 import numpy as np
-from PyDune.math import cosd, sind
+from pydune.math import cosd, sind
 from scipy.integrate import solve_ivp
-from PyDune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
+from pydune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
 
 # ##################### Solving linear system
 

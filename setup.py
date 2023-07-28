@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
-setup(name="PyDune",
+setup(name="pydune",
       packages=find_packages(),
       python_requires='>=3',
       install_requires=[
         "numpy", "matplotlib", "cdsapi", "scipy", "datetime",
         "windrose", "xhistogram", "requests", "gdal"],
-      url='https://cgadal.github.io/PyDune/',
+      url='https://cgadal.github.io/pydune/',
       author='Cyril Gadal',
       license='Apache-2.0',
-      version='0.1',
+      version='0.2',
       zip_safe=False,
       )

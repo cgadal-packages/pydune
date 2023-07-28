@@ -6,7 +6,7 @@ import os
 import numpy as np
 from itertools import islice
 from windrose import WindroseAxes
-from PyDune.math import make_angular_PDF
+from pydune.math import make_angular_PDF
 
 def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, label_angle=False, label=None,
                    props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),

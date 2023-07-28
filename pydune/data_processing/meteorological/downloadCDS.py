@@ -25,7 +25,7 @@ from scipy.io import netcdf
 from datetime import datetime, timezone, timedelta
 
 
-def getting_data(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
+def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
     """ This fuction helps to download data from datasets stored in the Climate Data Store.
 
     Parameters

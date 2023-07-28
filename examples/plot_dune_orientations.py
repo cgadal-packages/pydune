@@ -11,7 +11,7 @@ orientation are selected in the model of COurrech du Pont et al 2014.
 
 import numpy as np
 import matplotlib.pyplot as plt
-from PyDune.physics.dune import courrechdupont2014 as CDP
+from pydune.physics import courrechdupont2014 as CDP
 
 
 theta = np.array([0, 120])

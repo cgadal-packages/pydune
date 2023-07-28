@@ -12,8 +12,8 @@ Gadal, C., Narteau, C., Du Pont, S. C., Rozier, O., & Claudin, P. (2019). Incipi
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba
-from PyDune.math import tand, cosd, sind
-from PyDune.physics.dune import bedinstability_2D as BI
+from pydune.math import tand, cosd, sind
+from pydune.physics import bedinstability_2D as BI
 
 # %%
 # Celerity and growth rate under a unidirectional wind

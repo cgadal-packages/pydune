@@ -1,5 +1,5 @@
 import numpy as np
-from PyDune.math import cosd, sind
+from pydune.math import cosd, sind
 
 # %%
 # Geometrical model

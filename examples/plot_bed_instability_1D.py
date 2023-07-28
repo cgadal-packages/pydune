@@ -8,7 +8,7 @@ Plotting the dispersion relations corresponding to the one-dimensional dune bed 
 
 import numpy as np
 import matplotlib.pyplot as plt
-from PyDune.physics.dune import bedinstability_1D as BI
+from pydune.physics import bedinstability_1D as BI
 
 
 # %%

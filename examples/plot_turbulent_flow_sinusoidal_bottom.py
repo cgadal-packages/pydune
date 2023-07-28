@@ -23,13 +23,10 @@ For details on the flow theoretical modelling, please refer to the references be
     [3] Andreotti, B., Fourriere, A., Ould-Kaddour, F., Murray, B., & Claudin, P. (2009). Giant aeolian dune size determined by the average depth of the atmospheric boundary layer. Nature, 457(7233), 1120-1123.
     [4] Andreotti, B., Claudin, P., Devauchelle, O., Durán, O., & Fourrière, A. (2012). Bedforms in a turbulent stream: ripples, chevrons and antidunes. Journal of Fluid Mechanics, 690, 94-128.
 """
-import sys
-sys.path.append('../')
-
-import numpy as np
 import matplotlib.pyplot as plt
-from PyDune.physics.turbulent_flow import (solve_turbulent_flow, mu, mu_prime,
-                                           Ax, Ay, Bx, By)
+import numpy as np
+
+from pydune.physics import Ax_geo, Ay_geo, Bx_geo, By_geo, mu, mu_prime, solve_turbulent_flow
 
 # %%
 # One-dimensional case -- unbounded regime
@@ -72,7 +69,8 @@ eta = np.logspace(np.log10(1e-6), np.log10(0.95*eta_H), 1000)
 eta_0 = 1e-4
 parameters = {'eta_H': eta_H, 'eta_0': eta_0}
 
-solution_function = solve_turbulent_flow(model, parameters, atol=1e-14, rtol=1e-14)
+solution_function = solve_turbulent_flow(
+    model, parameters, atol=1e-14, rtol=1e-14)
 solution = solution_function(eta)
 
 labels = [r'$\~U$', r'$\~W$', r'$\~St$', r'$\~Sn$']
@@ -151,7 +149,8 @@ for i, eta_H in enumerate(eta_H_vals):
 # Figure
 fig, axarr = plt.subplots(1, 2, constrained_layout=True, sharex=True)
 for j, Fr in enumerate(Froudes):
-    axarr[0].plot(eta_H_vals, coeffs[0, :, j], label=str(Fr) if Fr is not None else 'unbounded')
+    axarr[0].plot(eta_H_vals, coeffs[0, :, j], label=str(Fr)
+                  if Fr is not None else 'unbounded')
     axarr[1].plot(eta_H_vals, coeffs[1, :, j])
 #
 for ax in axarr:
@@ -217,7 +216,8 @@ eta = 0
 coeffs = np.zeros((4, alpha_vals.size))
 for i, alpha in enumerate(alpha_vals):
     parameters = {'eta_H': eta_H, 'eta_0': eta_0, 'alpha': alpha}
-    solution_function = solve_turbulent_flow(model, parameters, rtol=1e-15, atol=1e-15)
+    solution_function = solve_turbulent_flow(
+        model, parameters, rtol=1e-15, atol=1e-15)
     solution = solution_function(eta)
     #
     Ax_m, Bx_m = np.real(solution[3]), np.imag(solution[3])
@@ -227,17 +227,17 @@ for i, alpha in enumerate(alpha_vals):
 
 fig, axarr = plt.subplots(1, 2, constrained_layout=True, sharex=True)
 a,  = axarr[0].plot(alpha_vals, coeffs[0, :], label='$A_{x}$')
-axarr[0].plot(alpha_vals, Ax(alpha_vals, coeffs[0, 0]),
+axarr[0].plot(alpha_vals, Ax_geo(alpha_vals, coeffs[0, 0]),
               color=a.get_color(), ls='--', label=r'$A_{x}(0)\cos(\alpha)^{2}$')
 b, = axarr[0].plot(alpha_vals, coeffs[1, :], label='$B_{x}$')
-axarr[0].plot(alpha_vals, Bx(alpha_vals, coeffs[1, 0]),
+axarr[0].plot(alpha_vals, Bx_geo(alpha_vals, coeffs[1, 0]),
               color=b.get_color(), ls='--', label=r'$B_{x}(0)\cos(\alpha)^{2}$')
 #
 a, = axarr[1].plot(alpha_vals, coeffs[2, :], label='$A_{y}$')
-axarr[1].plot(alpha_vals, Ay(alpha_vals, coeffs[0, 0]),
+axarr[1].plot(alpha_vals, Ay_geo(alpha_vals, coeffs[0, 0]),
               color=a.get_color(), ls='--',  label=r'0.5$A_{x}(0)\cos(\alpha)\sin(\alpha)$')
 b, = axarr[1].plot(alpha_vals, coeffs[3, :], label='$B_{y}$')
-axarr[1].plot(alpha_vals, By(alpha_vals, coeffs[1, 0]),
+axarr[1].plot(alpha_vals, By_geo(alpha_vals, coeffs[1, 0]),
               color=a.get_color(), ls='--', label=r'0.5$B_{x}(0)\cos(\alpha)\sin(\alpha)$')
 
 axarr[0].set_ylabel('Hydrodynamic coefficients')

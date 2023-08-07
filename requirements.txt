@@ -1,0 +1,8 @@
+sphinx
+sphinx-gallery
+sphinx-autodoc-typehints
+pydata_sphinx_theme
+numpydoc
+
+numpy 
+matplotlib

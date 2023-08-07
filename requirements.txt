@@ -6,3 +6,12 @@ numpydoc
 
 numpy 
 matplotlib
+numpy 
+matplotlib
+cdsapi
+scipy
+datetime
+windrose
+xhistogram
+requests
+gdal

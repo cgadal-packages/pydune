@@ -6,8 +6,6 @@ numpydoc
 
 numpy 
 matplotlib
-numpy 
-matplotlib
 cdsapi
 scipy
 datetime

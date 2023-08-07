@@ -14,4 +14,3 @@ datetime
 windrose
 xhistogram
 requests
-gdal

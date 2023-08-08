@@ -20,9 +20,9 @@ Roughly, the steps are:
 import cdsapi
 import os
 import numpy as np
-from decimal import Decimal
-from scipy.io import netcdf
-from datetime import datetime, timezone, timedelta
+import decimal as dc
+import scipy.io as scio
+import datetime as dt
 
 
 def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
@@ -74,8 +74,10 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_g
                               on_grid=False)
 
     """
-    Names = {'reanalysis-era5-single-levels': 'ERA5', 'reanalysis-era5-land': 'ERA5Land'}
-    Nitems_max = {'reanalysis-era5-single-levels': 120000, 'reanalysis-era5-land': 1000}
+    Names = {'reanalysis-era5-single-levels': 'ERA5',
+             'reanalysis-era5-land': 'ERA5Land'}
+    Nitems_max = {'reanalysis-era5-single-levels': 120000,
+                  'reanalysis-era5-land': 1000}
     area_ref = [0, 0]
     #
     if Nsplit < 1:
@@ -89,10 +91,14 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_g
     # Puting the required area on the ERA5 grid
     area_wanted = variable_dic['area']
     if on_grid:
-        area_wanted[0] = area_wanted[0] - float(Decimal(str(area_wanted[0] - area_ref[0])) % Decimal(str(variable_dic['grid'])))
-        area_wanted[1] = area_wanted[1] - float(Decimal(str(area_wanted[1] - area_ref[1])) % Decimal(str(variable_dic['grid'])))
-        area_wanted[2] = area_wanted[2] - float(Decimal(str(area_wanted[2] - area_ref[0])) % Decimal(str(variable_dic['grid'])))
-        area_wanted[3] = area_wanted[3] - float(Decimal(str(area_wanted[3] - area_ref[1])) % Decimal(str(variable_dic['grid'])))
+        area_wanted[0] = area_wanted[0] - float(dc.Decimal(
+            str(area_wanted[0] - area_ref[0])) % dc.Decimal(str(variable_dic['grid'])))
+        area_wanted[1] = area_wanted[1] - float(dc.Decimal(
+            str(area_wanted[1] - area_ref[1])) % dc.Decimal(str(variable_dic['grid'])))
+        area_wanted[2] = area_wanted[2] - float(dc.Decimal(
+            str(area_wanted[2] - area_ref[0])) % dc.Decimal(str(variable_dic['grid'])))
+        area_wanted[3] = area_wanted[3] - float(dc.Decimal(
+            str(area_wanted[3] - area_ref[1])) % dc.Decimal(str(variable_dic['grid'])))
         #
         variable_dic['area'] = area_wanted
 
@@ -119,7 +125,8 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_g
         else:
             string = years[0]
         print(string)
-        file_names.append(Names[dataset] + string + '_' + name + '.' + variable_dic['format'])
+        file_names.append(Names[dataset] + string +
+                          '_' + name + '.' + variable_dic['format'])
         c = cdsapi.Client()
         variable_dic['year'] = years
         c.retrieve(dataset, variable_dic, file_names[-1])
@@ -145,12 +152,13 @@ def load_netcdf(files_list):
     """
     Data = {}
     for j, file in enumerate(files_list):
-        file_temp = netcdf.NetCDFFile(file, 'r', maskandscale=True)
+        file_temp = scio.netcdf.NetCDFFile(file, 'r', maskandscale=True)
         for key in file_temp.variables.keys():
             if key not in Data.keys():
                 Data[key] = file_temp.variables[key][:]
             elif key not in ['latitude', 'longitude']:
-                Data[key] = np.concatenate((Data[key], file_temp.variables[key][:]), axis=0)
+                Data[key] = np.concatenate(
+                    (Data[key], file_temp.variables[key][:]), axis=0)
     #
     Data['time'] = _convert_time(Data['time'].astype(np.float64))
     # ## sort with respect to time
@@ -217,9 +225,9 @@ def _file_lenght(fname):
 
 
 def _convert_time(Times):
-    atmos_epoch = datetime(1900, 1, 1, 0, 0, tzinfo=timezone.utc)
+    atmos_epoch = dt.datetime(1900, 1, 1, 0, 0, tzinfo=dt.timezone.utc)
     # convert array of times in hours from epoch to dates
-    return np.array([atmos_epoch + timedelta(hours=i) for i in Times])
+    return np.array([atmos_epoch + dt.timedelta(hours=i) for i in Times])
 
 
 def _sub2ind(array_shape, rows, cols):
@@ -228,5 +236,6 @@ def _sub2ind(array_shape, rows, cols):
 
 def _ind2sub(array_shape, ind):
     rows = (ind.astype('int') / array_shape[1])
-    cols = (ind.astype('int') % array_shape[1])  # or numpy.mod(ind.astype('int'), array_shape[1])
+    # or numpy.mod(ind.astype('int'), array_shape[1])
+    cols = (ind.astype('int') % array_shape[1])
     return (rows, cols)

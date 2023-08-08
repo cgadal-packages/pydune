@@ -4,12 +4,14 @@ Module containing functions related to the processing and ploting of wind/sandfl
 
 import os
 import numpy as np
-from itertools import islice
-from windrose import WindroseAxes
+import itertools as it
+import windrose as wd
 from pydune.math import make_angular_PDF
 
+
 def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, label_angle=False, label=None,
-                   props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
+                   props=dict(boxstyle='round', facecolor=(
+                       1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
                    blowfrom=False, **kwargs):
     r"""Plot a sand flux angular distribution, or flux rose, on the given axe of the given figure.
 
@@ -55,19 +57,21 @@ def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, 
     precision_flux = 0.001
 
     for n in range(len(Bins)):
-        ind = np.argwhere((angles >= Bins[n] - Lbin/2) & (angles < Bins[n] + Lbin/2))
+        ind = np.argwhere(
+            (angles >= Bins[n] - Lbin/2) & (angles < Bins[n] + Lbin/2))
         integral = int(np.nansum(PdfQ[ind])/precision_flux)
         for i in range(integral):
             Qangle.append(Bins[n])
             Qdat.append(1)
     Qangle = np.array(Qangle)
     # #### making the plot
-    ax_rose = WindroseAxes.from_ax(fig=fig)
+    ax_rose = wd.WindroseAxes.from_ax(fig=fig)
     ax_rose.set_position(ax.get_position(), which='both')
     # bars = ax.bar(Angle, Intensity, normed=True, opening=1, edgecolor='k', nsector = Nsector, bins = Nbin, cmap = cmap)
     Qangle = (90 - Qangle) % 360
     if Qangle.size != 0:
-        _ = ax_rose.bar(Qangle, Qdat, nsector=nsector, blowto=blowfrom, **kwargs)
+        _ = ax_rose.bar(Qangle, Qdat, nsector=nsector,
+                        blowto=blowfrom, **kwargs)
         ax_rose.set_rmin(0)
         ax_rose.plot(0, 0, '.', color='w', zorder=100, markersize=3)
         # ax_rose.set_yticklabels(['{:.1f}'.format(float(i.get_text())*precision_flux) for i in ax.get_yticklabels()])
@@ -76,13 +80,15 @@ def plot_flux_rose(angles, distribution, ax, fig, nsector=20, label_flux=False, 
         if not label_flux:
             ax_rose.set_yticks([])
     if label is not None:
-        fig.text(0.5, 0.05, label, ha='center', va='center', transform=ax.transAxes, bbox=props)
+        fig.text(0.5, 0.05, label, ha='center', va='center',
+                 transform=ax.transAxes, bbox=props)
     ax.remove()
     return ax_rose
 
 
 def plot_wind_rose(theta, U, bins, ax, fig, label_angle=False, label=None,
-                   props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
+                   props=dict(boxstyle='round', facecolor=(
+                       1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0),
                    blowfrom=False,
                    legend=False, **kwargs):
     r"""Plot a wind rose on the given axe of the given figure.
@@ -120,7 +126,7 @@ def plot_wind_rose(theta, U, bins, ax, fig, label_angle=False, label=None,
 
     """
 
-    ax_rose = WindroseAxes.from_ax(fig=fig)
+    ax_rose = wd.WindroseAxes.from_ax(fig=fig)
     ax_rose.set_position(ax.get_position(), which='both')
     Angle = (90 - theta) % 360
     # ax_rose.bar(Angle, U, bins=bins, normed=True,  blowto=blowfrom, zorder=20, opening=1, edgecolor=None,
@@ -136,20 +142,21 @@ def plot_wind_rose(theta, U, bins, ax, fig, label_angle=False, label=None,
     if legend:
         ax_rose.set_legend()
     if label is not None:
-        fig.text(0.5, 0.05, label, ha='center', va='center', transform=ax.transAxes, bbox=props)
+        fig.text(0.5, 0.05, label, ha='center', va='center',
+                 transform=ax.transAxes, bbox=props)
     ax.remove()
     return ax_rose
 
-def netcdf_to_flux_rose(file,ax,fig,
-                        netcdflonlatinds=(0,0),
-                        z=10,z_0=1e-3,
-                        rho_g=2.65e3,rho_f=1,g=9.81,d=180e-6,
-                        shield_th=0.0035,Kappa=0.4, mu=0.63, cm=1.7,
+
+def netcdf_to_flux_rose(file, ax, fig,
+                        netcdflonlatinds=(0, 0),
+                        z=10, z_0=1e-3,
+                        rho_g=2.65e3, rho_f=1, g=9.81, d=180e-6,
+                        shield_th=0.0035, Kappa=0.4, mu=0.63, cm=1.7,
                         bin_edges=np.linspace(0, 360, 361),
-                        nsector=20,label_flux=False,label_angle=False,label=None,
-                        props=dict(boxstyle='round',facecolor=(1, 1, 1, 0.9),edgecolor=(1, 1, 1, 1), pad=0),blowfrom=False,
+                        nsector=20, label_flux=False, label_angle=False, label=None,
+                        props=dict(boxstyle='round', facecolor=(1, 1, 1, 0.9), edgecolor=(1, 1, 1, 1), pad=0), blowfrom=False,
                         **kwargs):
-    
     """ This function loads and concatenate (along the time axis) several NETCDF
     files from a list of filenames, calcuates the sand flux from a location in the 
     NETCDF wind data using the quartic_transport_law, and plots a sand flux angular 
@@ -208,7 +215,7 @@ def netcdf_to_flux_rose(file,ax,fig,
         return the axe on which the wind rose is plotted. Can be used for further modifications.
 
     """
-    
+
     from PyDune.data_processing.meteorological.downloadCDS import load_netcdf
     from PyDune.math import cartesian_to_polar
     from PyDune.physics.sedtransport.transport_laws import quartic_transport_law
@@ -217,15 +224,15 @@ def netcdf_to_flux_rose(file,ax,fig,
         data = load_netcdf([file])
     elif type(file) is list:
         data = load_netcdf(file)
-    velocity,orientation = cartesian_to_polar(data['u10'][:,netcdflonlatinds[0],netcdflonlatinds[1]],
-                                              data['v10'][:,netcdflonlatinds[0],netcdflonlatinds[1]])
-    shear_velocity = velocity_to_shear(velocity,z,z_0,Kappa)
+    velocity, orientation = cartesian_to_polar(data['u10'][:, netcdflonlatinds[0], netcdflonlatinds[1]],
+                                               data['v10'][:, netcdflonlatinds[0], netcdflonlatinds[1]])
+    shear_velocity = velocity_to_shear(velocity, z, z_0, Kappa)
     Q = np.sqrt((rho_g-rho_f*g*d)/rho_f)*d
     shield = (rho_f/((rho_g-rho_f)*g*d))*shear_velocity**2
-    sand_flux = Q*quartic_transport_law(shield,shield_th,Kappa,mu,cm)
-    angular_PDF,angles = make_angular_PDF(orientation,sand_flux,bin_edges)
-    ax_rose = plot_flux_rose(angles,angular_PDF,ax,fig,
-                             nsector,label_flux,label_angle,label,props,blowfrom,
+    sand_flux = Q*quartic_transport_law(shield, shield_th, Kappa, mu, cm)
+    angular_PDF, angles = make_angular_PDF(orientation, sand_flux, bin_edges)
+    ax_rose = plot_flux_rose(angles, angular_PDF, ax, fig,
+                             nsector, label_flux, label_angle, label, props, blowfrom,
                              **kwargs)
     return ax_rose
 
@@ -256,7 +263,7 @@ def create_KMZ(name, coordinates):
     with open(name + '.kml', 'w') as dest:
         # Writing the first Part
         with open(os.path.join(loc_path, 'En_tete_era5.kml'), 'r') as entete:
-            for line in islice(entete, 10, None):
+            for line in it.islice(entete, 10, None):
                 if line == '	<name>Skeleton_Coast.kmz</name>' + '\n':  # Premiere occurence
                     line = ' 	<name>' + name + '.kmz</name>' + '\n'
                 elif line == '		<name>Skeleton_Coast</name>' + '\n':  # Second occurence

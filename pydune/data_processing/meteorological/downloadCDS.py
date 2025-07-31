@@ -20,22 +20,145 @@ Roughly, the steps are:
 import datetime as dt
 import decimal as dc
 import os
+import time
 
 import cdsapi
 import numpy as np
 import scipy.io as scio
 
+SHORT_NAMES = {
+    "reanalysis-era5-single-levels": "ERA5",
+    "reanalysis-era5-pressure-levels": "ERA5_PLEVELS",
+    "reanalysis-era5-land": "ERA5Land",
+}
+NITEMS_MAX = {
+    "reanalysis-era5-single-levels": 121000,
+    "reanalysis-era5-land": 12000,
+    "reanalysis-era5-pressure-levels": 60000,
+}
+AREA_REF = [0, 0]
 
-def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file="info.txt", on_grid=True):
-    """ This fuction helps to download data from datasets stored in the Climate Data Store.
+
+def _compute_item_number(variable_dic):
+    return (
+        len(variable_dic["variable"])
+        * (365.25 * len(variable_dic["month"]) / 12 * len(variable_dic["day"]) / 31)
+        * len(variable_dic["time"])
+        * len(variable_dic["year"])
+    )
+
+
+def _compute_area_ongrid(variable_dic):
+    area_wanted = [
+        variable_dic["area"][i]
+        - float(dc.Decimal(str(variable_dic["area"][i] - AREA_REF[i % 2])) % dc.Decimal(str(variable_dic["grid"])))
+        for i in range(4)
+    ]
+    return area_wanted
+
+
+def _launch_requests_onebyone(variable_dic, year_list, dataset, name):
+    client = cdsapi.Client()
+    file_names = []
+    for years in year_list:
+        variable_dic["year"] = years
+        key = f"{years[0]}to{years[-1]}" if len(years) > 1 else years[0]
+        print(key)
+        filename = f"{SHORT_NAMES[dataset]}{key}_{name}.{variable_dic['data_format']}"
+        client.retrieve(dataset, variable_dic).download(filename)
+        #
+        file_names.append(filename)
+    return file_names
+
+
+def build_rqst_status(requests):
+    return {key: rqst.reply["state"] for key, rqst in requests.items()}
+
+
+def check_rqst(requests):
+    states = build_rqst_status(requests)
+    status_array = np.array(list(states.values()))
+    finished = (status_array == "completed") | (status_array == "failed")
+    return not np.all(finished)
+
+
+def print_request_status(requests):
+    line = f"---- Request Status {time.ctime()} ----"
+    print(line)
+    for key, rqst in requests.items():
+        state = rqst.reply["state"]
+        print(f"    {key}: {state}")
+        if state == "failed":
+            print("     Message: %s", rqst.reply["error"].get("message"))
+            print("     Reason:  %s", rqst.reply["error"].get("reason"))
+    print("".join(["-" for i in range(len(line))]) + "\n")
+
+
+def _launch_allrequests_directly(variable_dic, year_list, dataset, name, dt_check=30, dt_print=120):
+    """
+    Launches multiple CDS API requests and downloads results once all are completed.
+
+    Parameters:
+        variable_dic (dict): CDS API variable dictionary.
+        year_list (list): List of lists of years (e.g., [["2020"], ["2021", "2022"]]).
+        dataset (str): Dataset name for the CDS API.
+        name (str): Custom name for output files.
+        dt_check (int): Interval (in seconds) to check request status.
+        dt_print (int): Interval (in seconds) to print status updates.
+    """
+
+    client = cdsapi.Client(wait_until_complete=False)
+    requests = {}
+
+    # ### launch all requests directly on the sever without waiting for them to complete
+    for years in year_list:
+        variable_dic["year"] = years
+        string = f"{years[0]}to{years[-1]}" if len(years) > 1 else years[0]
+        print(string)
+        requests[string] = client.retrieve(dataset, variable_dic)
+
+    # ### check periodically if the request is finished or not
+    last_print_time = time.time()
+    while check_rqst(requests):
+        time.sleep(dt_check)
+        for key, rqst in requests.items():
+            rqst.update()
+
+        current_time = time.time()
+        if dt_print and current_time - last_print_time >= dt_print:
+            print_request_status(requests)
+            last_print_time = current_time
+    print("All requests completed.")
+    # ### once everything is finished, download all files
+    file_names = []
+    for key, rqst in requests.items():
+        filename = f"{SHORT_NAMES[dataset]}{key}_{name}.{variable_dic['data_format']}"
+        print(f"Downloading: {filename}")
+        rqst.download(filename)
+        file_names.append(filename)
+    return file_names
+
+
+def getting_CDSdata(
+    dataset,
+    variable_dic,
+    name,
+    Nsplit=1,
+    file="info.txt",
+    on_grid=False,
+    all_requests_directly=True,
+    dt_check=30,
+    dt_print=120,
+):
+    """This fuction helps to download data from datasets stored in the Climate Data Store.
          It splits data per integer year and then merge the data back together. This is sufficient at the moment
-         as for most dataset, you can download a whole year of a single variable.
+         as for most dataset you can download a whole year of a single variable.
 
     Parameters
     ----------
     dataset : int
         dataset in which downloading the data.
-        It can be 'reanalysis-era5-single-levels' or 'reanalysis-era5-land' for now.
+        It can be 'reanalysis-era5-single-levels', 'reanalysis-era5-land' or "reanalysis-era5-pressure-levels" for now.
     variable_dic : dic
         variable dictionnary to provide as a request.
     name : str
@@ -48,7 +171,14 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file="info.txt", on_g
     on_grid : bool
         if True, the required coordinates will be matched with the native grid
         of the requested dataset. Otherwise, the dataset will be downloaded at
-        the requested coordinates, using the interpolation of the CDS server (the default is True).
+        the requested coordinates, using the interpolation of the CDS server (the default is False).
+    all_requests_directly : bool
+        if True, all requests are sent at once, and then status is checked periodically every `dt_check` until completion,
+        and then all files are downloaded. If False, requests are processed and downloaded one by one (the default is True).
+    dt_check : float
+        seconds between every status check when `all_requests_directly` is True. (the default is 30)
+    dt_print : float
+        seconds between every status print when `all_requests_directly` is True. (the default is 120)
 
     Returns
     -------
@@ -77,72 +207,53 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file="info.txt", on_g
                               on_grid=False)
 
     """
-    Names = {"reanalysis-era5-single-levels": "ERA5",
-             "reanalysis-era5-land": "ERA5Land"}
-    Nitems_max = {"reanalysis-era5-single-levels": 121000,
-                  "reanalysis-era5-land": 12000,
-                  "reanalysis-era5-pressure-levels": 60000}
-    area_ref = [0, 0]
     #
-    if Nsplit < 1:
-        Nsplit = 1
-    Nitems = len(variable_dic["variable"]) * (365.25 * len(variable_dic["month"])/12 * len(variable_dic["day"])/31) \
-        * len(variable_dic["time"]) * len(variable_dic["year"])
-    if Nitems/Nsplit > Nitems_max[dataset]:
-        Nsplit = round(Nitems/Nitems_max[dataset]) + 1
+    Nsplit = max(Nsplit, 1)
+    Nitems = _compute_item_number(variable_dic)
+    if Nitems / Nsplit > NITEMS_MAX[dataset]:
+        Nsplit = round(Nitems / NITEMS_MAX[dataset]) + 1
         print("Request too large. Setting Nsplit =", Nsplit)
-
+    #
     # Puting the required area on the ERA5 grid
-    area_wanted = variable_dic["area"]
     if on_grid:
-        area_wanted[0] = area_wanted[0] - float(dc.Decimal(
-            str(area_wanted[0] - area_ref[0])) % dc.Decimal(str(variable_dic["grid"])))
-        area_wanted[1] = area_wanted[1] - float(dc.Decimal(
-            str(area_wanted[1] - area_ref[1])) % dc.Decimal(str(variable_dic["grid"])))
-        area_wanted[2] = area_wanted[2] - float(dc.Decimal(
-            str(area_wanted[2] - area_ref[0])) % dc.Decimal(str(variable_dic["grid"])))
-        area_wanted[3] = area_wanted[3] - float(dc.Decimal(
-            str(area_wanted[3] - area_ref[1])) % dc.Decimal(str(variable_dic["grid"])))
-        #
-        variable_dic["area"] = area_wanted
-
-    print("Area is :", area_wanted)
+        variable_dic["area"] = _compute_area_ongrid(variable_dic)
+        print("Area has been modified to be on native grid.")
+    print("Area is :", variable_dic["area"])
     #
     # Spliting request
     dates = np.array([int(i) for i in variable_dic["year"]])
     year_list = [list(map(str, j)) for j in np.array_split(dates, Nsplit)]
     #
     # checking the Nitems for every Nsplit
-    Nitems_list = np.array([len(variable_dic["variable"]) * (365.25 * len(variable_dic["month"]) / 12
-                                                             * len(variable_dic["day"]) / 31)*len(variable_dic["time"])
-                                                             * len(i)
-                            for i in year_list])
-    if (Nitems_list > Nitems_max[dataset]).any():
+    Nitems_list = np.array(
+        [
+            len(variable_dic["variable"])
+            * (365.25 * len(variable_dic["month"]) / 12 * len(variable_dic["day"]) / 31)
+            * len(variable_dic["time"])
+            * len(i)
+            for i in year_list
+        ]
+    )
+    if (Nitems_list > NITEMS_MAX[dataset]).any():
         Nsplit = Nsplit + 1
         year_list = [list(map(str, j)) for j in np.array_split(dates, Nsplit)]
     #
     # filtering year_list
     year_list = [i for i in year_list if len(i) > 0]
+    print(f"The list of year chunks is: {year_list}")
     # Launching requests by year bins
-    file_names = []
-    for years in year_list:
-        variable_dic["year"] = years
-        if len(years) > 0:
-            string = years[0] + "to" + years[-1]
-        else:
-            string = years[0]
-        print(string)
-        file_names.append(Names[dataset] + string +
-                          "_" + name + "." + variable_dic["format"])
-        client = cdsapi.Client()
-        client.retrieve(dataset, variable_dic, file_names[-1])
+    if (not all_requests_directly) | len(year_list) == 1:
+        file_names = _launch_requests_onebyone(variable_dic, year_list, dataset, name)
+    else:
+        file_names = _launch_allrequests_directly(variable_dic, year_list, dataset, name,
+                                                  dt_check=dt_check, dt_print=dt_print)
     # Writing informations to spec file
     _save_spec_to_txt(dataset, variable_dic, file)
     return file_names
 
 
 def load_netcdf(files_list):
-    """ This function loads and concatenate (along the time axis) several NETCDF
+    """This function loads and concatenate (along the time axis) several NETCDF
     files from a list of filenames.
 
     Parameters
@@ -163,8 +274,7 @@ def load_netcdf(files_list):
             if key not in Data.keys():
                 Data[key] = file_temp.variables[key][:]
             elif key not in ["latitude", "longitude"]:
-                Data[key] = np.concatenate(
-                    (Data[key], file_temp.variables[key][:]), axis=0)
+                Data[key] = np.concatenate((Data[key], file_temp.variables[key][:]), axis=0)
     #
     Data["time"] = _convert_time(Data["time"].astype(np.float64))
     # ## sort with respect to time
@@ -185,6 +295,7 @@ def _save_spec_to_txt(dataset, variable_dic, file):
             for key in sorted(variable_dic.keys()):
                 f.write(str(key) + ": " + str(variable_dic[key]) + "\n")
                 f.write("\n")
+
 
 # def Extract_points(points, file_format = 'npy', system_coordinates = 'cartesian'):
 #     ######## function to extract specific points and write (u, v) velocity to <format> files
@@ -237,11 +348,11 @@ def _convert_time(Times):
 
 
 def _sub2ind(array_shape, rows, cols):
-    return rows*array_shape[1] + cols
+    return rows * array_shape[1] + cols
 
 
 def _ind2sub(array_shape, ind):
-    rows = (ind.astype("int") / array_shape[1])
+    rows = ind.astype("int") / array_shape[1]
     # or numpy.mod(ind.astype('int'), array_shape[1])
-    cols = (ind.astype("int") % array_shape[1])
+    cols = ind.astype("int") % array_shape[1]
     return (rows, cols)

@@ -17,16 +17,19 @@ Roughly, the steps are:
     Still experimental, and scarce documentation.
 """
 
-import cdsapi
-import os
-import numpy as np
-import decimal as dc
-import scipy.io as scio
 import datetime as dt
+import decimal as dc
+import os
+
+import cdsapi
+import numpy as np
+import scipy.io as scio
 
 
-def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_grid=True):
+def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file="info.txt", on_grid=True):
     """ This fuction helps to download data from datasets stored in the Climate Data Store.
+         It splits data per integer year and then merge the data back together. This is sufficient at the moment
+         as for most dataset, you can download a whole year of a single variable.
 
     Parameters
     ----------
@@ -74,42 +77,45 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_g
                               on_grid=False)
 
     """
-    Names = {'reanalysis-era5-single-levels': 'ERA5',
-             'reanalysis-era5-land': 'ERA5Land'}
-    Nitems_max = {'reanalysis-era5-single-levels': 120000,
-                  'reanalysis-era5-land': 1000}
+    Names = {"reanalysis-era5-single-levels": "ERA5",
+             "reanalysis-era5-land": "ERA5Land"}
+    Nitems_max = {"reanalysis-era5-single-levels": 121000,
+                  "reanalysis-era5-land": 12000,
+                  "reanalysis-era5-pressure-levels": 60000}
     area_ref = [0, 0]
     #
     if Nsplit < 1:
         Nsplit = 1
-    Nitems = len(variable_dic['variable']) * (365.25 * len(variable_dic['month'])/12 * len(variable_dic['day'])/31) \
-        * len(variable_dic['time']) * len(variable_dic['year'])
+    Nitems = len(variable_dic["variable"]) * (365.25 * len(variable_dic["month"])/12 * len(variable_dic["day"])/31) \
+        * len(variable_dic["time"]) * len(variable_dic["year"])
     if Nitems/Nsplit > Nitems_max[dataset]:
         Nsplit = round(Nitems/Nitems_max[dataset]) + 1
-        print('Request too large. Setting Nsplit =', Nsplit)
+        print("Request too large. Setting Nsplit =", Nsplit)
 
     # Puting the required area on the ERA5 grid
-    area_wanted = variable_dic['area']
+    area_wanted = variable_dic["area"]
     if on_grid:
         area_wanted[0] = area_wanted[0] - float(dc.Decimal(
-            str(area_wanted[0] - area_ref[0])) % dc.Decimal(str(variable_dic['grid'])))
+            str(area_wanted[0] - area_ref[0])) % dc.Decimal(str(variable_dic["grid"])))
         area_wanted[1] = area_wanted[1] - float(dc.Decimal(
-            str(area_wanted[1] - area_ref[1])) % dc.Decimal(str(variable_dic['grid'])))
+            str(area_wanted[1] - area_ref[1])) % dc.Decimal(str(variable_dic["grid"])))
         area_wanted[2] = area_wanted[2] - float(dc.Decimal(
-            str(area_wanted[2] - area_ref[0])) % dc.Decimal(str(variable_dic['grid'])))
+            str(area_wanted[2] - area_ref[0])) % dc.Decimal(str(variable_dic["grid"])))
         area_wanted[3] = area_wanted[3] - float(dc.Decimal(
-            str(area_wanted[3] - area_ref[1])) % dc.Decimal(str(variable_dic['grid'])))
+            str(area_wanted[3] - area_ref[1])) % dc.Decimal(str(variable_dic["grid"])))
         #
-        variable_dic['area'] = area_wanted
+        variable_dic["area"] = area_wanted
 
-    print('Area is :', area_wanted)
+    print("Area is :", area_wanted)
     #
     # Spliting request
-    dates = np.array([int(i) for i in variable_dic['year']])
+    dates = np.array([int(i) for i in variable_dic["year"]])
     year_list = [list(map(str, j)) for j in np.array_split(dates, Nsplit)]
     #
     # checking the Nitems for every Nsplit
-    Nitems_list = np.array([len(variable_dic['variable']) * (365.25 * len(variable_dic['month'])/12 * len(variable_dic['day'])/31)*len(variable_dic['time']) * len(i)
+    Nitems_list = np.array([len(variable_dic["variable"]) * (365.25 * len(variable_dic["month"]) / 12
+                                                             * len(variable_dic["day"]) / 31)*len(variable_dic["time"])
+                                                             * len(i)
                             for i in year_list])
     if (Nitems_list > Nitems_max[dataset]).any():
         Nsplit = Nsplit + 1
@@ -120,16 +126,16 @@ def getting_CDSdata(dataset, variable_dic, name, Nsplit=1, file='info.txt', on_g
     # Launching requests by year bins
     file_names = []
     for years in year_list:
+        variable_dic["year"] = years
         if len(years) > 0:
-            string = years[0] + 'to' + years[-1]
+            string = years[0] + "to" + years[-1]
         else:
             string = years[0]
         print(string)
         file_names.append(Names[dataset] + string +
-                          '_' + name + '.' + variable_dic['format'])
-        c = cdsapi.Client()
-        variable_dic['year'] = years
-        c.retrieve(dataset, variable_dic, file_names[-1])
+                          "_" + name + "." + variable_dic["format"])
+        client = cdsapi.Client()
+        client.retrieve(dataset, variable_dic, file_names[-1])
     # Writing informations to spec file
     _save_spec_to_txt(dataset, variable_dic, file)
     return file_names
@@ -152,33 +158,33 @@ def load_netcdf(files_list):
     """
     Data = {}
     for j, file in enumerate(files_list):
-        file_temp = scio.netcdf.NetCDFFile(file, 'r', maskandscale=True)
+        file_temp = scio.netcdf.NetCDFFile(file, "r", maskandscale=True)
         for key in file_temp.variables.keys():
             if key not in Data.keys():
                 Data[key] = file_temp.variables[key][:]
-            elif key not in ['latitude', 'longitude']:
+            elif key not in ["latitude", "longitude"]:
                 Data[key] = np.concatenate(
                     (Data[key], file_temp.variables[key][:]), axis=0)
     #
-    Data['time'] = _convert_time(Data['time'].astype(np.float64))
+    Data["time"] = _convert_time(Data["time"].astype(np.float64))
     # ## sort with respect to time
-    sortedtime_inds = Data['time'].argsort()
+    sortedtime_inds = Data["time"].argsort()
     for key in Data.keys():
-        if key not in ['latitude', 'longitude']:
+        if key not in ["latitude", "longitude"]:
             Data[key] = Data[key][sortedtime_inds, ...]
     return Data
 
 
 def _save_spec_to_txt(dataset, variable_dic, file):
     if os.path.isfile(file):
-        print(file + ' already exists')
+        print(file + " already exists")
     else:
         with open(file, "w") as f:
-            f.write('dataset: ' + dataset + '\n')
-            f.write('\n')
+            f.write("dataset: " + dataset + "\n")
+            f.write("\n")
             for key in sorted(variable_dic.keys()):
-                f.write(str(key) + ': ' + str(variable_dic[key]) + '\n')
-                f.write('\n')
+                f.write(str(key) + ": " + str(variable_dic[key]) + "\n")
+                f.write("\n")
 
 # def Extract_points(points, file_format = 'npy', system_coordinates = 'cartesian'):
 #     ######## function to extract specific points and write (u, v) velocity to <format> files
@@ -214,7 +220,7 @@ def _save_spec_to_txt(dataset, variable_dic, file):
 
 
 def _format_time(date):
-    return '{:04d}'.format(date[0]) + '-' + '{:02d}'.format(date[1]) + '-' + '{:02d}'.format(date[2])
+    return f"{date[0]:04d}" + "-" + f"{date[1]:02d}" + "-" + f"{date[2]:02d}"
 
 
 def _file_lenght(fname):
@@ -235,7 +241,7 @@ def _sub2ind(array_shape, rows, cols):
 
 
 def _ind2sub(array_shape, ind):
-    rows = (ind.astype('int') / array_shape[1])
+    rows = (ind.astype("int") / array_shape[1])
     # or numpy.mod(ind.astype('int'), array_shape[1])
-    cols = (ind.astype('int') % array_shape[1])
+    cols = (ind.astype("int") % array_shape[1])
     return (rows, cols)

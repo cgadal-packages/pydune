@@ -5,7 +5,7 @@ setup(name="pydune",
       python_requires=">=3",
       install_requires=[
           "numpy", "matplotlib", "cdsapi", "scipy", "datetime",
-          "windrose", "xhistogram", "requests"],
+          "windrose", "xhistogram", "requests", "netCDF4"],
       url="https://cgadal.github.io/pydune/",
       author="Cyril Gadal",
       license="Apache-2.0",

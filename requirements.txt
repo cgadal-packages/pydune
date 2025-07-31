@@ -12,3 +12,4 @@ datetime
 windrose
 xhistogram
 requests
+netCDF4

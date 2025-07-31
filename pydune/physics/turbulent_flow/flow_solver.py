@@ -23,14 +23,14 @@ References
 
 """
 
-import pydune.physics.turbulent_flow.fourriere2010_unbounded as fourriere2010_unbounded
-import pydune.physics.turbulent_flow.fourriere2010_freesurface as fourriere2010_freesurface
 import pydune.physics.turbulent_flow.andreotti2009 as andreotti2009
 import pydune.physics.turbulent_flow.andreotti2011_unbounded as andreotti2011_unbounded
+import pydune.physics.turbulent_flow.fourriere2010_freesurface as fourriere2010_freesurface
+import pydune.physics.turbulent_flow.fourriere2010_unbounded as fourriere2010_unbounded
 
 
 def solve_turbulent_flow(model, parameters, Kappa=0.4, max_z=None,
-                         method='DOP853', atol=1e-10, rtol=1e-10, **kwargs):
+                         method="DOP853", atol=1e-10, rtol=1e-10, **kwargs):
     r"""This function solves the perturbation of the flow induced by a sinusoidal
     bottom in various configurations. The description of each configuration and
     associated parameters is done in the description of the module.
@@ -90,37 +90,37 @@ def solve_turbulent_flow(model, parameters, Kappa=0.4, max_z=None,
         [4] Andreotti, B., Claudin, P., Devauchelle, O., Durán, O., & Fourrière, A. (2012). Bedforms in a turbulent stream: ripples, chevrons and antidunes. Journal of Fluid Mechanics, 690, 94-128.
     """
 
-    if model == '1D_unbounded':
-        solution = fourriere2010_unbounded.calculate_solution(parameters['eta_0'],
-                                                              parameters['eta_H'],
+    if model == "1D_unbounded":
+        solution = fourriere2010_unbounded.calculate_solution(parameters["eta_0"],
+                                                              parameters["eta_H"],
                                                               max_z=max_z,
                                                               Kappa=Kappa,
                                                               atol=atol,
                                                               rtol=rtol,
                                                               **kwargs)
-    elif model == '1D_freesurface':
-        solution = fourriere2010_freesurface.calculate_solution(parameters['eta_0'],
-                                                                parameters['eta_H'],
-                                                                parameters['Fr'],
+    elif model == "1D_freesurface":
+        solution = fourriere2010_freesurface.calculate_solution(parameters["eta_0"],
+                                                                parameters["eta_H"],
+                                                                parameters["Fr"],
                                                                 max_z=max_z,
                                                                 Kappa=Kappa,
                                                                 atol=atol,
                                                                 rtol=rtol,
                                                                 **kwargs)
-    elif model == '2D_unbounded':
-        solution = andreotti2011_unbounded.calculate_solution(parameters['eta_0'],
-                                                              parameters['eta_H'],
-                                                              parameters['alpha'],
+    elif model == "2D_unbounded":
+        solution = andreotti2011_unbounded.calculate_solution(parameters["eta_0"],
+                                                              parameters["eta_H"],
+                                                              parameters["alpha"],
                                                               max_z=max_z,
                                                               Kappa=Kappa,
                                                               atol=atol,
                                                               rtol=rtol,
                                                               **kwargs)
-    elif model == '1D_freeatmosphere':
-        solution = andreotti2009.calculate_solution(parameters['eta_0'],
-                                                    parameters['eta_H'],
-                                                    parameters['eta_B'],
-                                                    parameters['Fr'],
+    elif model == "1D_freeatmosphere":
+        solution = andreotti2009.calculate_solution(parameters["eta_0"],
+                                                    parameters["eta_H"],
+                                                    parameters["eta_B"],
+                                                    parameters["Fr"],
                                                     max_z=max_z,
                                                     Kappa=Kappa,
                                                     atol=atol,

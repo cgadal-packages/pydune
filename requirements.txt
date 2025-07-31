@@ -1,7 +1,7 @@
 sphinx
 sphinx-gallery
 sphinx-autodoc-typehints
-pydata_sphinx_theme
+pydata_sphinx_theme==0.16.1
 numpydoc
 
 numpy 

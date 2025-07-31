@@ -83,9 +83,9 @@ def _func1(eta, X, eta_0, Kappa):
 
 def _solve_system(eta_0, eta_H, Kappa=0.4, max_z=None, dense_output=True, **kwargs):
     eta_span = [0, max_z]
-    X0_vec = [np.array([-mu_prime(0, eta_0, Kappa), 0*1j, 0, 0], dtype='complex_'),
-              np.array([0, 0*1j, 1, 0], dtype='complex_'),
-              np.array([0, 0*1j, 0, 1], dtype='complex_')]
+    X0_vec = [np.array([-mu_prime(0, eta_0, Kappa), 0*1j, 0, 0], dtype="complex"),
+              np.array([0, 0*1j, 1, 0], dtype="complex"),
+              np.array([0, 0*1j, 0, 1], dtype="complex")]
     Results = []
     for i, X0 in enumerate(X0_vec):
         if i == 0:
@@ -99,7 +99,7 @@ def _solve_system(eta_0, eta_H, Kappa=0.4, max_z=None, dense_output=True, **kwar
 
 
 def calculate_solution(eta_0, eta_H, max_z=None, Kappa=0.4, atol=1e-10,
-                       rtol=1e-10, method='DOP853', **kwargs):
+                       rtol=1e-10, method="DOP853", **kwargs):
     if max_z is None:
         max_z = 0.9999*eta_H
     Results = _solve_system(eta_0, eta_H, Kappa=0.4,

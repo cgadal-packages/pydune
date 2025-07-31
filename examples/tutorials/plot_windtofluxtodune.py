@@ -7,15 +7,15 @@ In this tutorial, we show on the use pydune functions to go from wind data,
 to the calculation of sand fluxes, and then to dune properties.
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
-from pydune.data_processing import load_netcdf
-from pydune.data_processing import velocity_to_shear, plot_flux_rose, plot_wind_rose
+import numpy as np
+
+from pydune.data_processing import load_netcdf, plot_flux_rose, plot_wind_rose, velocity_to_shear
 from pydune.math import (
     cartesian_to_polar,
-    tand,
-    make_angular_PDF,
     make_angular_average,
+    make_angular_PDF,
+    tand,
     vector_average,
 )
 
@@ -102,24 +102,22 @@ DP = np.mean(sand_flux)  # Drift potential, [m2/day]
 RDD, RDP = vector_average(orientation, sand_flux)
 
 print(
-    r"""
-     - DP =  {: .1f} [m2/day]
-     - RDP = {: .1f} [m2/day]
-     - RDP/DP = {: .2f}
-     - RDD = {: .0f} [deg.]
+    rf"""
+     - DP =  {DP: .1f} [m2/day]
+     - RDP = {RDP: .1f} [m2/day]
+     - RDP/DP = {RDP / DP: .2f}
+     - RDD = {RDD % 360: .0f} [deg.]
 
-""".format(
-        DP, RDP, RDP / DP, RDD % 360
-    )
+"""
 )
 
 # figure
-bins_flux = [0, 0.3, 0.6, 0.9, 1.2, 1.5]
+bins_flux = [0, 0.1, 0.2, 0.3, 0.4, 0.5]
 fig, axarr = plt.subplots(1, 2, constrained_layout=True)
 a = plot_wind_rose(
     orientation,
     sand_flux,
-    bins,
+    bins_flux,
     axarr[0],
     fig,
     opening=1,
@@ -150,8 +148,8 @@ plt.show()
 #
 # [1] Gadal, C., Narteau, C., Du Pont, S. C., Rozier, O., & Claudin, P. (2019). Incipient bedforms in a bidirectional wind regime. Journal of Fluid Mechanics, 862, 490-516.
 
+from pydune.physics import A0_approx, Ax_geo, Ay_geo, B0_approx, Bx_geo, By_geo
 from pydune.physics import bedinstability_2D as BI2D
-from pydune.physics import Ax_geo, Bx_geo, Ay_geo, By_geo, A0_approx, B0_approx
 
 # parameters
 k = np.linspace(0.001, 0.6, 300)  # range of explored wavelengths, non-dimensional
@@ -233,16 +231,14 @@ ax.set_ylabel(r"Orientation, $\alpha$ [deg.]")
 plt.show()
 
 print(
-    r""" The properties of the most unstable mode are:
-     - orientation: {:.0f} [deg.]
-     - wavenumber :{:.1e}  [/m]
-     - wavelength : {:.1e} [m]
-     - growth rate :  {:.1e} [/day]
-     - migration velocity: {:.1e} [m/day]
+    rf""" The properties of the most unstable mode are:
+     - orientation: {alpha_max + 90:.0f} [deg.]
+     - wavenumber :{k_max:.1e}  [/m]
+     - wavelength : {2 * np.pi / k_max:.1e} [m]
+     - growth rate :  {sigma_max:.1e} [/day]
+     - migration velocity: {c_max:.1e} [m/day]
 
-""".format(
-        alpha_max + 90, k_max, 2 * np.pi / k_max, sigma_max, c_max
-    )
+"""
 )
 
 # %%
@@ -254,20 +250,17 @@ print(
 # [1] Courrech du Pont, S., Narteau, C., & Gao, X. (2014). Two modes for dune orientation. Geology, 42(9), 743-746.
 
 from pydune.physics.dune.courrechdupont2014 import (
-    elongation_direction,
     MGBNT_orientation,
+    elongation_direction,
 )
-
 
 Alpha_E = elongation_direction(angles, angular_PDF)
 Alpha_BI = MGBNT_orientation(angles, angular_PDF)
 
 print(
-    r""" The properties of the mature dunes are:
-     - Elongation direction: {: .0f} [deg]
-     - MGBNT crest orientation: {: .0f} [deg]
+    rf""" The properties of the mature dunes are:
+     - Elongation direction: {Alpha_E: .0f} [deg]
+     - MGBNT crest orientation: {Alpha_BI: .0f} [deg]
 
-""".format(
-        Alpha_E, Alpha_BI
-    )
+"""
 )

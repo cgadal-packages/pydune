@@ -1,6 +1,7 @@
 import numpy as np
-from pydune.math import cosd, sind
 from scipy.integrate import solve_ivp
+
+from pydune.math import cosd, sind
 from pydune.physics.turbulent_flow.fourriere2010_unbounded import mu, mu_prime
 
 # ##################### Solving linear system
@@ -50,7 +51,7 @@ def _solve_system(eta_0, eta_H, alpha, Kappa=0.4, max_z=None,
 
 
 def calculate_solution(eta_0, eta_H, alpha, max_z=None, Kappa=0.4,
-                       atol=1e-10, rtol=1e-10, method='DOP853', **kwargs):
+                       atol=1e-10, rtol=1e-10, method="DOP853", **kwargs):
     if max_z is None:
         max_z = 0.9999*eta_H
     Results = _solve_system(eta_0, eta_H, alpha, Kappa=0.4,

@@ -24,7 +24,7 @@ import time
 
 import cdsapi
 import numpy as np
-import scipy.io as scio
+from netCDF4 import Dataset
 
 SHORT_NAMES = {
     "reanalysis-era5-single-levels": "ERA5",
@@ -253,35 +253,37 @@ def getting_CDSdata(
 
 
 def load_netcdf(files_list):
-    """This function loads and concatenate (along the time axis) several NETCDF
-    files from a list of filenames.
+    """
+    Load and concatenate (along the time axis) several NetCDF files.
 
     Parameters
     ----------
-    files_list : list
-        the list of downloaded file names.
+    files_list : list of str
+        List of NetCDF file paths to load.
 
     Returns
     -------
     data : dict
-        a dictionnary containing all data, concatenated along the time axis.
-
+        Dictionary containing all variables, concatenated along the time axis.
     """
     Data = {}
     for j, file in enumerate(files_list):
-        file_temp = scio.netcdf.NetCDFFile(file, "r", maskandscale=True)
-        for key in file_temp.variables.keys():
-            if key not in Data.keys():
-                Data[key] = file_temp.variables[key][:]
-            elif key not in ["latitude", "longitude"]:
-                Data[key] = np.concatenate((Data[key], file_temp.variables[key][:]), axis=0)
-    #
+        with Dataset(file, mode="r") as ds:
+            for key in ds.variables:
+                var_data = ds.variables[key][:]
+                if key not in Data:
+                    Data[key] = var_data
+                elif key not in ["latitude", "longitude"]:
+                    Data[key] = np.concatenate((Data[key], var_data), axis=0)
+
+    # Convert and sort time
     Data["time"] = _convert_time(Data["time"].astype(np.float64))
-    # ## sort with respect to time
-    sortedtime_inds = Data["time"].argsort()
-    for key in Data.keys():
+    sorted_inds = Data["time"].argsort()
+
+    for key in Data:
         if key not in ["latitude", "longitude"]:
-            Data[key] = Data[key][sortedtime_inds, ...]
+            Data[key] = Data[key][sorted_inds, ...]
+
     return Data
 
 

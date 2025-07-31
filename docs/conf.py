@@ -107,7 +107,8 @@ html_theme = "pydata_sphinx_theme"
 html_theme_options = {"show_prev_next": False,
                       "logo": {
                           "text": "pydune",
-                      }
+                      },
+                        "github_url": "https://github.com/cgadal-packages/pydune",
                       }
 
 # Add any paths that contain custom static files (such as style sheets) here,

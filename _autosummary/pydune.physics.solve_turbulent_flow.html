@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pydune.physics.solve_turbulent_flow &#8212; pydune  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydata-custom.css?v=3bab9780" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/pydune.physics.solve_turbulent_flow';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="pydune.physics.sind" href="pydune.physics.sind.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pydune</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_examples/index.html">
+    Examples and Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="pydune.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cgadal-packages/pydune" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_examples/index.html">
+    Examples and Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="pydune.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cgadal-packages/pydune" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="pydune.data_processing.html">pydune.data_processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.data_processing.meteorological.html">pydune.data_processing.meteorological</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.html">pydune.data_processing.meteorological.downloadCDS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.build_rqst_status.html">pydune.data_processing.meteorological.downloadCDS.build_rqst_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.check_rqst.html">pydune.data_processing.meteorological.downloadCDS.check_rqst</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.getting_CDSdata.html">pydune.data_processing.meteorological.downloadCDS.getting_CDSdata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.load_netcdf.html">pydune.data_processing.meteorological.downloadCDS.load_netcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.print_request_status.html">pydune.data_processing.meteorological.downloadCDS.print_request_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.Dataset.html">pydune.data_processing.meteorological.downloadCDS.Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.html">pydune.data_processing.meteorological.wind_plot</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.create_KMZ.html">pydune.data_processing.meteorological.wind_plot.create_KMZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.make_angular_PDF.html">pydune.data_processing.meteorological.wind_plot.make_angular_PDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.netcdf_to_flux_rose.html">pydune.data_processing.meteorological.wind_plot.netcdf_to_flux_rose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.plot_flux_rose.html">pydune.data_processing.meteorological.wind_plot.plot_flux_rose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.plot_wind_rose.html">pydune.data_processing.meteorological.wind_plot.plot_wind_rose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.shear_to_velocity.html">pydune.data_processing.meteorological.wind_plot.shear_to_velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.velocity_to_shear.html">pydune.data_processing.meteorological.wind_plot.velocity_to_shear</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.topography.html">pydune.data_processing.topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.build_rqst_status.html">pydune.data_processing.build_rqst_status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.check_rqst.html">pydune.data_processing.check_rqst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.create_KMZ.html">pydune.data_processing.create_KMZ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.getting_CDSdata.html">pydune.data_processing.getting_CDSdata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.load_netcdf.html">pydune.data_processing.load_netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.make_angular_PDF.html">pydune.data_processing.make_angular_PDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.netcdf_to_flux_rose.html">pydune.data_processing.netcdf_to_flux_rose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.plot_flux_rose.html">pydune.data_processing.plot_flux_rose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.plot_wind_rose.html">pydune.data_processing.plot_wind_rose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.print_request_status.html">pydune.data_processing.print_request_status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.shear_to_velocity.html">pydune.data_processing.shear_to_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.velocity_to_shear.html">pydune.data_processing.velocity_to_shear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.Dataset.html">pydune.data_processing.Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pydune.math.html">pydune.math</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.arcsind.html">pydune.math.arcsind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.arctan2d.html">pydune.math.arctan2d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.arctand.html">pydune.math.arctand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.cartesian_to_polar.html">pydune.math.cartesian_to_polar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.cosd.html">pydune.math.cosd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.histogram.html">pydune.math.histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.make_angular_PDF.html">pydune.math.make_angular_PDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.make_angular_average.html">pydune.math.make_angular_average</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.sind.html">pydune.math.sind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.tand.html">pydune.math.tand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.vector_average.html">pydune.math.vector_average</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pydune.physics.html">pydune.physics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.physics.dune.html">pydune.physics.dune</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.html">pydune.physics.dune.bedinstability_1D</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.complex_pulsation.html">pydune.physics.dune.bedinstability_1D.complex_pulsation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.complexe_wavenumer.html">pydune.physics.dune.bedinstability_1D.complexe_wavenumer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.spatial_growth_rate.html">pydune.physics.dune.bedinstability_1D.spatial_growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.spatial_wavenumber.html">pydune.physics.dune.bedinstability_1D.spatial_wavenumber</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.temporal_growth_rate.html">pydune.physics.dune.bedinstability_1D.temporal_growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.temporal_pulsation.html">pydune.physics.dune.bedinstability_1D.temporal_pulsation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.temporal_velocity.html">pydune.physics.dune.bedinstability_1D.temporal_velocity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.html">pydune.physics.dune.bedinstability_2D</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.celerity_bidi.html">pydune.physics.dune.bedinstability_2D.celerity_bidi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.cosd.html">pydune.physics.dune.bedinstability_2D.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.growth_rate_bidi.html">pydune.physics.dune.bedinstability_2D.growth_rate_bidi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.sind.html">pydune.physics.dune.bedinstability_2D.sind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_celerity.html">pydune.physics.dune.bedinstability_2D.temporal_celerity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_celerity_multi.html">pydune.physics.dune.bedinstability_2D.temporal_celerity_multi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_growth_rate.html">pydune.physics.dune.bedinstability_2D.temporal_growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_growth_rate_multi.html">pydune.physics.dune.bedinstability_2D.temporal_growth_rate_multi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_pulsation.html">pydune.physics.dune.bedinstability_2D.temporal_pulsation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.html">pydune.physics.dune.courrechdupont2014</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.MGBNT_orientation.html">pydune.physics.dune.courrechdupont2014.MGBNT_orientation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.cosd.html">pydune.physics.dune.courrechdupont2014.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.elongation_direction.html">pydune.physics.dune.courrechdupont2014.elongation_direction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.flux_at_crest.html">pydune.physics.dune.courrechdupont2014.flux_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.growth_rate.html">pydune.physics.dune.courrechdupont2014.growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest.html">pydune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.resultant_flux_at_crest.html">pydune.physics.dune.courrechdupont2014.resultant_flux_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.resultant_flux_perp_crest_at_crest.html">pydune.physics.dune.courrechdupont2014.resultant_flux_perp_crest_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.sind.html">pydune.physics.dune.courrechdupont2014.sind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.vector_average.html">pydune.physics.dune.courrechdupont2014.vector_average</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.physics.sedtransport.html">pydune.physics.sedtransport</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.html">pydune.physics.sedtransport.transport_laws</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.cubic_transport_law.html">pydune.physics.sedtransport.transport_laws.cubic_transport_law</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.quadratic_transport_law.html">pydune.physics.sedtransport.transport_laws.quadratic_transport_law</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.quartic_transport_law.html">pydune.physics.sedtransport.transport_laws.quartic_transport_law</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.html">pydune.physics.turbulent_flow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.html">pydune.physics.turbulent_flow.andreotti2009</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.calculate_solution.html">pydune.physics.turbulent_flow.andreotti2009.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.mu.html">pydune.physics.turbulent_flow.andreotti2009.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.mu_prime.html">pydune.physics.turbulent_flow.andreotti2009.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.solve_ivp.html">pydune.physics.turbulent_flow.andreotti2009.solve_ivp</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.html">pydune.physics.turbulent_flow.andreotti2011_unbounded</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.calculate_solution.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.cosd.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.mu.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.mu_prime.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.sind.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.sind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.solve_ivp.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.solve_ivp</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.flow_solver.html">pydune.physics.turbulent_flow.flow_solver</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.flow_solver.solve_turbulent_flow.html">pydune.physics.turbulent_flow.flow_solver.solve_turbulent_flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.html">pydune.physics.turbulent_flow.fourriere2010_freesurface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.arcsind.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.arcsind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.calculate_solution.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.mu.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.mu_prime.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.solve_ivp.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.solve_ivp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.tand.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.tand</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.html">pydune.physics.turbulent_flow.fourriere2010_unbounded</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.A0_approx.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.A0_approx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.B0_approx.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.B0_approx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.calculate_solution.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.mu.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.mu_prime.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.solve_ivp.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.solve_ivp</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.html">pydune.physics.turbulent_flow.geometrical_model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.Ax_geo.html">pydune.physics.turbulent_flow.geometrical_model.Ax_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.Ay_geo.html">pydune.physics.turbulent_flow.geometrical_model.Ay_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.Bx_geo.html">pydune.physics.turbulent_flow.geometrical_model.Bx_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.By_geo.html">pydune.physics.turbulent_flow.geometrical_model.By_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.basal_shear.html">pydune.physics.turbulent_flow.geometrical_model.basal_shear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.cosd.html">pydune.physics.turbulent_flow.geometrical_model.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.sind.html">pydune.physics.turbulent_flow.geometrical_model.sind</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.A0_approx.html">pydune.physics.A0_approx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.Ax_geo.html">pydune.physics.Ax_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.Ay_geo.html">pydune.physics.Ay_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.B0_approx.html">pydune.physics.B0_approx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.Bx_geo.html">pydune.physics.Bx_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.By_geo.html">pydune.physics.By_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.basal_shear.html">pydune.physics.basal_shear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.cosd.html">pydune.physics.cosd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.cubic_transport_law.html">pydune.physics.cubic_transport_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.mu.html">pydune.physics.mu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.mu_prime.html">pydune.physics.mu_prime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.quadratic_transport_law.html">pydune.physics.quadratic_transport_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.quartic_transport_law.html">pydune.physics.quartic_transport_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.sind.html">pydune.physics.sind</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pydune.physics.solve_turbulent_flow</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="pydune.html" class="nav-link">pydune</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="pydune.physics.html" class="nav-link">pydune.physics</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pydune.physics.solve_turbulent_flow</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pydune-physics-solve-turbulent-flow">
+<h1>pydune.physics.solve_turbulent_flow<a class="headerlink" href="#pydune-physics-solve-turbulent-flow" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pydune.physics.solve_turbulent_flow">
+<span class="sig-name descname"><span class="pre">solve_turbulent_flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kappa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DOP853'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pydune/physics/turbulent_flow/flow_solver.html#solve_turbulent_flow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pydune.physics.solve_turbulent_flow" title="Link to this definition">#</a></dt>
+<dd><p>This function solves the perturbation of the flow induced by a sinusoidal
+bottom in various configurations. The description of each configuration and
+associated parameters is done in the description of the module.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The solver performs poorly for too large integration domains due to accumulation of numerical errors.
+In practice, the user should be carefull when using values of <cite>eta_H</cite> (<span class="math notranslate nohighlight">\(\eta_{H} = k H\)</span>) larger than 10.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Chosen configuration. It can be <code class="docutils literal notranslate"><span class="pre">'1D_unbounded'</span></code>, <code class="docutils literal notranslate"><span class="pre">'1D_freesurface'</span></code>, <code class="docutils literal notranslate"><span class="pre">'1D_freeatmosphere'</span></code> or <code class="docutils literal notranslate"><span class="pre">'2D_unbounded'</span></code>.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – <p>Dictionnary containing the physical parameters necessary for solving each models. For each model, the list of parameters the dictionnary must contain is:</p>
+<ul>
+<li><p>1D_unbounded: <code class="docutils literal notranslate"><span class="pre">eta_0</span></code>, <code class="docutils literal notranslate"><span class="pre">eta_H</span></code></p></li>
+<li><p>1D_freesurface: <code class="docutils literal notranslate"><span class="pre">eta_0</span></code>, <code class="docutils literal notranslate"><span class="pre">eta_H</span></code>, <code class="docutils literal notranslate"><span class="pre">Fr</span></code></p></li>
+<li><p>1D_freeatmosphere: <code class="docutils literal notranslate"><span class="pre">eta_0</span></code>, <code class="docutils literal notranslate"><span class="pre">eta_H</span></code>, <code class="docutils literal notranslate"><span class="pre">eta_B</span></code>, <code class="docutils literal notranslate"><span class="pre">Fr</span></code></p></li>
+<li><p>2D_unbounded: <code class="docutils literal notranslate"><span class="pre">eta_0</span></code>, <code class="docutils literal notranslate"><span class="pre">eta_H</span></code>, <code class="docutils literal notranslate"><span class="pre">Fr</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></li>
+</ul>
+</p></li>
+<li><p><strong>Kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Von Karmàn constant (the default is 0.4).</p></li>
+<li><p><strong>max_z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum vertical position where the system is solved, and also where the boundary conditons are applied.
+Usually set to something slightly smaller than <cite>eta_H</cite> to avoid the very slow resolution close to the top of the boundary layer.
+Usefull when investigating the solution close to the bottom (the default is <code class="docutils literal notranslate"><span class="pre">eta_H</span></code>).</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Numerical method used to solve the equations. It is passed to the solver
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.16.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_ivp</span></code></a> (default is <code class="docutils literal notranslate"><span class="pre">DOP853</span></code>, which corresponds to an Explicit Runge-Kutta method of order 8 with an adaptative time-step).</p></li>
+<li><p><strong>atol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Absolute tolerance. The solver keeps the local error estimate smaller
+than <span class="math notranslate nohighlight">\(atol + rtol*abs(y)\)</span>, where <span class="math notranslate nohighlight">\(y\)</span> is the solution at a given time step.
+More information can be found in the documentation of
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.16.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_ivp</span></code></a> (the default is 1e-10 for both).</p></li>
+<li><p><strong>rtol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Absolute tolerance. The solver keeps the local error estimate smaller
+than <span class="math notranslate nohighlight">\(atol + rtol*abs(y)\)</span>, where <span class="math notranslate nohighlight">\(y\)</span> is the solution at a given time step.
+More information can be found in the documentation of
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.16.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_ivp</span></code></a> (the default is 1e-10 for both).</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional</em>) – Any other optional parameters that can be passed to <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.16.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_ivp</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>solution</strong> – function calculating the solution by taking as argument values of the vertical coordinate
+<span class="math notranslate nohighlight">\(\eta = k z\)</span> (float, array_like). It is built from seleveral
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.OdeSolution.html#scipy.integrate.OdeSolution" title="(in SciPy v1.16.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ODE_solution</span></code></a>. See corresponding
+documentation for more information about the interpolation algorithm. If
+<code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">'1D_freeatmosphere'</span></code>, return also a function calculating the
+streamfunction above eta_H. Its arguments are, in this order:
+- vertical coordinate <span class="math notranslate nohighlight">\(\eta = k z\)</span>, numpy array
+- the horizontal coordinate <span class="math notranslate nohighlight">\(\eta = k x\)</span>, numpy array,
+-   aspect ratio the bottom perturbation <span class="math notranslate nohighlight">\(\eta = k \xi\)</span> (float)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>func, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a> of func</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<div class="line-block">
+<div class="line">[1] Fourrière, A. (2009). Morphodynamique des rivières: Sélection de la largeur, rides et dunes (Doctoral dissertation, Université Paris-Diderot-Paris VII).</div>
+<div class="line">[2] Fourriere, A., Claudin, P., &amp; Andreotti, B. (2010). Bedforms in a turbulent stream: formation of ripples by primary linear instability and of dunes by nonlinear pattern coarsening. Journal of Fluid Mechanics, 649, 287-328.</div>
+<div class="line">[3] Andreotti, B., Fourriere, A., Ould-Kaddour, F., Murray, B., &amp; Claudin, P. (2009). Giant aeolian dune size determined by the average depth of the atmospheric boundary layer. Nature, 457(7233), 1120-1123.</div>
+<div class="line">[4] Andreotti, B., Claudin, P., Devauchelle, O., Durán, O., &amp; Fourrière, A. (2012). Bedforms in a turbulent stream: ripples, chevrons and antidunes. Journal of Fluid Mechanics, 690, 94-128.</div>
+</div>
+</dd></dl>
+
+<section id="examples-using-pydune-physics-solve-turbulent-flow">
+<span id="sphx-glr-backreferences-pydune-physics-solve-turbulent-flow"></span><h2>Examples using <code class="docutils literal notranslate"><span class="pre">pydune.physics.solve_turbulent_flow</span></code><a class="headerlink" href="#examples-using-pydune-physics-solve-turbulent-flow" title="Link to this heading">#</a></h2>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="In this tutorial, we show exemples using the PyDune.physics.turbulent_flow.flow_solver.solve_turbulent_flow solver."><img alt="" src="../_images/sphx_glr_plot_turbulent_flow_sinusoidal_bottom_thumb.png" />
+<p><a class="reference internal" href="../_examples/plot_turbulent_flow_sinusoidal_bottom.html#sphx-glr-examples-plot-turbulent-flow-sinusoidal-bottom-py"><span class="std std-ref">Properties of a turbulent flow on a sinusoidal bottom</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Properties of a turbulent flow on a sinusoidal bottom</div>
+</div></div></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.physics.solve_turbulent_flow"><code class="docutils literal notranslate"><span class="pre">solve_turbulent_flow()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-using-pydune-physics-solve-turbulent-flow">Examples using <code class="docutils literal notranslate"><span class="pre">pydune.physics.solve_turbulent_flow</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2021, Cyril Gadal.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

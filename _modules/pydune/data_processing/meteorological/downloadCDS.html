@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pydune.data_processing.meteorological.downloadCDS &#8212; pydune  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pydata-custom.css?v=3bab9780" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pydune/data_processing/meteorological/downloadCDS';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pydune</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_examples/index.html">
+    Examples and Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_autosummary/pydune.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cgadal-packages/pydune" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_examples/index.html">
+    Examples and Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../_autosummary/pydune.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cgadal-packages/pydune" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pydune.data_processing.meteorological.downloadCDS</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pydune.data_processing.meteorological.downloadCDS</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module allows to dowload data from the ERA5 and ERA5Land datasets hosted at</span>
+<span class="sd">the `Climate Data Store &lt;https://cds.climate.copernicus.eu/#!/home&gt;`_ . Before</span>
+<span class="sd">using this module, please read the corresponding documentation</span>
+<span class="sd">`here &lt;https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5&gt;`_,</span>
+<span class="sd">and especially the `part 4 &lt;https://confluence.ecmwf.int/display/CKB/How+to+download+ERA5#HowtodownloadERA5-4-DownloadERA5familydatathroughtheCDSAPI&gt;`_.</span>
+
+<span class="sd">Roughly, the steps are:</span>
+
+<span class="sd">.. line-block::</span>
+<span class="sd">    - create a CDS account `here &lt;https://cds.climate.copernicus.eu/user/register&gt;`_</span>
+<span class="sd">    - install the CDS API, typically using `pip3 install cdsapi`</span>
+<span class="sd">    - install the CDS API key corresponding to your account on your computer,</span>
+<span class="sd">    following the steps described `here &lt;https://confluence.ecmwf.int/display/CKB/How+to+install+and+use+CDS+API+on+macOS&gt;`_</span>
+
+<span class="sd">..warning:</span>
+<span class="sd">    Still experimental, and scarce documentation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cdsapi</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="n">SHORT_NAMES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;reanalysis-era5-single-levels&quot;</span><span class="p">:</span> <span class="s2">&quot;ERA5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;reanalysis-era5-pressure-levels&quot;</span><span class="p">:</span> <span class="s2">&quot;ERA5_PLEVELS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;reanalysis-era5-land&quot;</span><span class="p">:</span> <span class="s2">&quot;ERA5Land&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">NITEMS_MAX</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;reanalysis-era5-single-levels&quot;</span><span class="p">:</span> <span class="mi">121000</span><span class="p">,</span>
+    <span class="s2">&quot;reanalysis-era5-land&quot;</span><span class="p">:</span> <span class="mi">12000</span><span class="p">,</span>
+    <span class="s2">&quot;reanalysis-era5-pressure-levels&quot;</span><span class="p">:</span> <span class="mi">60000</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">AREA_REF</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_item_number</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">])</span>
+        <span class="o">*</span> <span class="p">(</span><span class="mf">365.25</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">31</span><span class="p">)</span>
+        <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+        <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">])</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_area_ongrid</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">):</span>
+    <span class="n">area_wanted</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">AREA_REF</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">]))</span> <span class="o">%</span> <span class="n">dc</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">])))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">area_wanted</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_launch_requests_onebyone</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">,</span> <span class="n">year_list</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">cdsapi</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">file_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">years</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+        <span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">years</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">to</span><span class="si">{</span><span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SHORT_NAMES</span><span class="p">[</span><span class="n">dataset</span><span class="p">]</span><span class="si">}{</span><span class="n">key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">variable_dic</span><span class="p">[</span><span class="s1">&#39;data_format&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">variable_dic</span><span class="p">)</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="c1">#</span>
+        <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">file_names</span>
+
+
+<div class="viewcode-block" id="build_rqst_status">
+<a class="viewcode-back" href="../../../../_autosummary/pydune.data_processing.meteorological.downloadCDS.build_rqst_status.html#pydune.data_processing.build_rqst_status">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_rqst_status</span><span class="p">(</span><span class="n">requests</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">rqst</span><span class="o">.</span><span class="n">reply</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rqst</span> <span class="ow">in</span> <span class="n">requests</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span></div>
+
+
+
+<div class="viewcode-block" id="check_rqst">
+<a class="viewcode-back" href="../../../../_autosummary/pydune.data_processing.meteorological.downloadCDS.check_rqst.html#pydune.data_processing.check_rqst">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_rqst</span><span class="p">(</span><span class="n">requests</span><span class="p">):</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">build_rqst_status</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span>
+    <span class="n">status_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">states</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="n">finished</span> <span class="o">=</span> <span class="p">(</span><span class="n">status_array</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">status_array</span> <span class="o">==</span> <span class="s2">&quot;failed&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">finished</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="print_request_status">
+<a class="viewcode-back" href="../../../../_autosummary/pydune.data_processing.print_request_status.html#pydune.data_processing.print_request_status">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">print_request_status</span><span class="p">(</span><span class="n">requests</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;---- Request Status </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">ctime</span><span class="p">()</span><span class="si">}</span><span class="s2"> ----&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rqst</span> <span class="ow">in</span> <span class="n">requests</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">rqst</span><span class="o">.</span><span class="n">reply</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;failed&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Message: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rqst</span><span class="o">.</span><span class="n">reply</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     Reason:  </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rqst</span><span class="o">.</span><span class="n">reply</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;-&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">))])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_launch_allrequests_directly</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">,</span> <span class="n">year_list</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">dt_check</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">dt_print</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Launches multiple CDS API requests and downloads results once all are completed.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        variable_dic (dict): CDS API variable dictionary.</span>
+<span class="sd">        year_list (list): List of lists of years (e.g., [[&quot;2020&quot;], [&quot;2021&quot;, &quot;2022&quot;]]).</span>
+<span class="sd">        dataset (str): Dataset name for the CDS API.</span>
+<span class="sd">        name (str): Custom name for output files.</span>
+<span class="sd">        dt_check (int): Interval (in seconds) to check request status.</span>
+<span class="sd">        dt_print (int): Interval (in seconds) to print status updates.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">cdsapi</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">wait_until_complete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">requests</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># ### launch all requests directly on the sever without waiting for them to complete</span>
+    <span class="k">for</span> <span class="n">years</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+        <span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">years</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">to</span><span class="si">{</span><span class="n">years</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="n">requests</span><span class="p">[</span><span class="n">string</span><span class="p">]</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">variable_dic</span><span class="p">)</span>
+
+    <span class="c1"># ### check periodically if the request is finished or not</span>
+    <span class="n">last_print_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">check_rqst</span><span class="p">(</span><span class="n">requests</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">dt_check</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rqst</span> <span class="ow">in</span> <span class="n">requests</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">rqst</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dt_print</span> <span class="ow">and</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">last_print_time</span> <span class="o">&gt;=</span> <span class="n">dt_print</span><span class="p">:</span>
+            <span class="n">print_request_status</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span>
+            <span class="n">last_print_time</span> <span class="o">=</span> <span class="n">current_time</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All requests completed.&quot;</span><span class="p">)</span>
+    <span class="c1"># ### once everything is finished, download all files</span>
+    <span class="n">file_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">rqst</span> <span class="ow">in</span> <span class="n">requests</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SHORT_NAMES</span><span class="p">[</span><span class="n">dataset</span><span class="p">]</span><span class="si">}{</span><span class="n">key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">variable_dic</span><span class="p">[</span><span class="s1">&#39;data_format&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">rqst</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">file_names</span>
+
+
+<div class="viewcode-block" id="getting_CDSdata">
+<a class="viewcode-back" href="../../../../_autosummary/pydune.data_processing.meteorological.downloadCDS.getting_CDSdata.html#pydune.data_processing.getting_CDSdata">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">getting_CDSdata</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">,</span>
+    <span class="n">variable_dic</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">,</span>
+    <span class="n">Nsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">file</span><span class="o">=</span><span class="s2">&quot;info.txt&quot;</span><span class="p">,</span>
+    <span class="n">on_grid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">all_requests_directly</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">dt_check</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">dt_print</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This fuction helps to download data from datasets stored in the Climate Data Store.</span>
+<span class="sd">         It splits data per integer year and then merge the data back together. This is sufficient at the moment</span>
+<span class="sd">         as for most dataset you can download a whole year of a single variable.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataset : int</span>
+<span class="sd">        dataset in which downloading the data.</span>
+<span class="sd">        It can be &#39;reanalysis-era5-single-levels&#39;, &#39;reanalysis-era5-land&#39; or &quot;reanalysis-era5-pressure-levels&quot; for now.</span>
+<span class="sd">    variable_dic : dic</span>
+<span class="sd">        variable dictionnary to provide as a request.</span>
+<span class="sd">    name : str</span>
+<span class="sd">        name used to label the downloaded files.</span>
+<span class="sd">    Nsplit : int</span>
+<span class="sd">        number of requests in which the main request is split (the default is 1).</span>
+<span class="sd">        If too small, will be corrected automatically.</span>
+<span class="sd">    file : str</span>
+<span class="sd">        filename under which some information about the request will be saved (the default is &#39;info.txt&#39;).</span>
+<span class="sd">    on_grid : bool</span>
+<span class="sd">        if True, the required coordinates will be matched with the native grid</span>
+<span class="sd">        of the requested dataset. Otherwise, the dataset will be downloaded at</span>
+<span class="sd">        the requested coordinates, using the interpolation of the CDS server (the default is False).</span>
+<span class="sd">    all_requests_directly : bool</span>
+<span class="sd">        if True, all requests are sent at once, and then status is checked periodically every `dt_check` until completion,</span>
+<span class="sd">        and then all files are downloaded. If False, requests are processed and downloaded one by one (the default is True).</span>
+<span class="sd">    dt_check : float</span>
+<span class="sd">        seconds between every status check when `all_requests_directly` is True. (the default is 30)</span>
+<span class="sd">    dt_print : float</span>
+<span class="sd">        seconds between every status print when `all_requests_directly` is True. (the default is 120)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    file_names : list</span>
+<span class="sd">        the list of downloaded file names</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; month = [i for i in range(1, 13)]</span>
+<span class="sd">    &gt;&gt;&gt; day = [i for i in range(1, 32)]</span>
+<span class="sd">    &gt;&gt;&gt; time = [i for i in range(0, 24)]</span>
+<span class="sd">    &gt;&gt;&gt; year = [i for i in range(1950, 2023)]</span>
+<span class="sd">    &gt;&gt;&gt; area = [-16.65, 11.9, -16.66, 11.91]</span>
+<span class="sd">    &gt;&gt;&gt; variable_dic = {&#39;format&#39;: &#39;netcdf&#39;,</span>
+<span class="sd">                    &#39;variable&#39;: [&#39;v10&#39;],</span>
+<span class="sd">                    &#39;month&#39;: month,</span>
+<span class="sd">                    &#39;day&#39;: day,</span>
+<span class="sd">                    &#39;time&#39;: time,</span>
+<span class="sd">                    &#39;year&#39;: year,</span>
+<span class="sd">                    &#39;area&#39;: area,</span>
+<span class="sd">                    &#39;grid&#39;: [1.0, 1.0]}</span>
+<span class="sd">    &gt;&gt;&gt; a = CDS.Getting_wind_data(&#39;reanalysis-era5-land&#39;,</span>
+<span class="sd">                              variable_dic, &#39;Angola_coast_v10&#39;,</span>
+<span class="sd">                              Nsplit=6,</span>
+<span class="sd">                              file=&#39;info.txt&#39;,</span>
+<span class="sd">                              on_grid=False)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#</span>
+    <span class="n">Nsplit</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Nsplit</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Nitems</span> <span class="o">=</span> <span class="n">_compute_item_number</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Nitems</span> <span class="o">/</span> <span class="n">Nsplit</span> <span class="o">&gt;</span> <span class="n">NITEMS_MAX</span><span class="p">[</span><span class="n">dataset</span><span class="p">]:</span>
+        <span class="n">Nsplit</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">Nitems</span> <span class="o">/</span> <span class="n">NITEMS_MAX</span><span class="p">[</span><span class="n">dataset</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Request too large. Setting Nsplit =&quot;</span><span class="p">,</span> <span class="n">Nsplit</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1"># Puting the required area on the ERA5 grid</span>
+    <span class="k">if</span> <span class="n">on_grid</span><span class="p">:</span>
+        <span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_compute_area_ongrid</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Area has been modified to be on native grid.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Area is :&quot;</span><span class="p">,</span> <span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">])</span>
+    <span class="c1">#</span>
+    <span class="c1"># Spliting request</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]])</span>
+    <span class="n">year_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">Nsplit</span><span class="p">)]</span>
+    <span class="c1">#</span>
+    <span class="c1"># checking the Nitems for every Nsplit</span>
+    <span class="n">Nitems_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">])</span>
+            <span class="o">*</span> <span class="p">(</span><span class="mf">365.25</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">12</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">31</span><span class="p">)</span>
+            <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+            <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">year_list</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Nitems_list</span> <span class="o">&gt;</span> <span class="n">NITEMS_MAX</span><span class="p">[</span><span class="n">dataset</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">Nsplit</span> <span class="o">=</span> <span class="n">Nsplit</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">year_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">Nsplit</span><span class="p">)]</span>
+    <span class="c1">#</span>
+    <span class="c1"># filtering year_list</span>
+    <span class="n">year_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">year_list</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The list of year chunks is: </span><span class="si">{</span><span class="n">year_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Launching requests by year bins</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">all_requests_directly</span><span class="p">)</span> <span class="o">|</span> <span class="nb">len</span><span class="p">(</span><span class="n">year_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">file_names</span> <span class="o">=</span> <span class="n">_launch_requests_onebyone</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">,</span> <span class="n">year_list</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">file_names</span> <span class="o">=</span> <span class="n">_launch_allrequests_directly</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">,</span> <span class="n">year_list</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
+                                                  <span class="n">dt_check</span><span class="o">=</span><span class="n">dt_check</span><span class="p">,</span> <span class="n">dt_print</span><span class="o">=</span><span class="n">dt_print</span><span class="p">)</span>
+    <span class="c1"># Writing informations to spec file</span>
+    <span class="n">_save_spec_to_txt</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">variable_dic</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">file_names</span></div>
+
+
+
+<div class="viewcode-block" id="load_netcdf">
+<a class="viewcode-back" href="../../../../_autosummary/pydune.data_processing.meteorological.downloadCDS.load_netcdf.html#pydune.data_processing.load_netcdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_netcdf</span><span class="p">(</span><span class="n">files_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load and concatenate (along the time axis) several NetCDF files.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    files_list : list of str</span>
+<span class="sd">        List of NetCDF file paths to load.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : dict</span>
+<span class="sd">        Dictionary containing all variables, concatenated along the time axis.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">files_list</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+                <span class="n">var_data</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">key</span><span class="p">][:]</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Data</span><span class="p">:</span>
+                    <span class="n">Data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">var_data</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">]:</span>
+                    <span class="n">Data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">var_data</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Convert and sort time</span>
+    <span class="n">Data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_convert_time</span><span class="p">(</span><span class="n">Data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+    <span class="n">sorted_inds</span> <span class="o">=</span> <span class="n">Data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">Data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;longitude&quot;</span><span class="p">]:</span>
+            <span class="n">Data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">Data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">sorted_inds</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Data</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_save_spec_to_txt</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">variable_dic</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">file</span> <span class="o">+</span> <span class="s2">&quot; already exists&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;dataset: &quot;</span> <span class="o">+</span> <span class="n">dataset</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">variable_dic</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">variable_dic</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># def Extract_points(points, file_format = &#39;npy&#39;, system_coordinates = &#39;cartesian&#39;):</span>
+<span class="c1">#     ######## function to extract specific points and write (u, v) velocity to &lt;format&gt; files</span>
+<span class="c1">#     # points can either be a list of integers (1 is top left of the grid), or a list of coordinates (lat, lon)</span>
+<span class="c1">#     # file_format is &#39;npy&#39; or &#39;txt&#39;</span>
+<span class="c1">#     # system_coordinates is cartesian or polar</span>
+<span class="c1">#     points = np.array(points)</span>
+<span class="c1">#     if system_coordinates == &#39;polar&#39;:</span>
+<span class="c1">#         self.Cartesian_to_polar()</span>
+<span class="c1">#     for i, coords in points:</span>
+<span class="c1">#         ## if for referencing point system</span>
+<span class="c1">#         if ((len(points.shape) == 2) &amp; (points.shape[-1] == 2)):</span>
+<span class="c1">#             lat_ind = np.argwhere(coords[0] == self.latitude)[0][0]</span>
+<span class="c1">#             lon_ind = np.argwhere(coords[1] == self.longitude)[0][0]</span>
+<span class="c1">#             indexes = _sub2ind(self.Uwind[:-1], lat_ind, lon_ind)</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             lat_ind, lon_ind = _ind2sub(self.Uwind[:-1], coords)</span>
+<span class="c1">#             indexes = coords</span>
+<span class="c1">#         #</span>
+<span class="c1">#         # if for data coordinate system</span>
+<span class="c1">#         if system_coordinates == &#39;cartesian&#39;:</span>
+<span class="c1">#             data_to_write = [self.Uwind[lat_ind, lon_ind, :], self.Vwind[lat_ind, lon_ind, :]]</span>
+<span class="c1">#         elif system_coordinates == &#39;polar&#39;:</span>
+<span class="c1">#             data_to_write = [self.Ustrength[lat_ind, lon_ind, :], self.Uorientation[lat_ind, lon_ind, :]]</span>
+<span class="c1">#         #</span>
+<span class="c1">#         # if for saved file format</span>
+<span class="c1">#         if file_format == &#39;npy&#39;:</span>
+<span class="c1">#             np.save(&#39;Point_&#39; + str(indexes) + &#39;.npy&#39;, )</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             np.savetxt(&#39;Point_&#39; + str(indexes) + &#39;.txt&#39;, [self.Uwind[lat_ind, lon_ind, :], self.Vwind[lat_ind, lon_ind, :]])</span>
+
+<span class="c1">#############################################################################################</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_format_time</span><span class="p">(</span><span class="n">date</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_file_lenght</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_time</span><span class="p">(</span><span class="n">Times</span><span class="p">):</span>
+    <span class="n">atmos_epoch</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">dt</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+    <span class="c1"># convert array of times in hours from epoch to dates</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atmos_epoch</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Times</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_sub2ind</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">rows</span> <span class="o">*</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">cols</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_ind2sub</span><span class="p">(</span><span class="n">array_shape</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># or numpy.mod(ind.astype(&#39;int&#39;), array_shape[1])</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">ind</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span> <span class="o">%</span> <span class="n">array_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2021, Cyril Gadal.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

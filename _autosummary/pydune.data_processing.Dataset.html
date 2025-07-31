@@ -1,0 +1,1736 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pydune.data_processing.Dataset &#8212; pydune  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydata-custom.css?v=3bab9780" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=7f41d439"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/pydune.data_processing.Dataset';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pydune.math" href="pydune.math.html" />
+    <link rel="prev" title="pydune.data_processing.velocity_to_shear" href="pydune.data_processing.velocity_to_shear.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pydune</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_examples/index.html">
+    Examples and Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="pydune.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cgadal-packages/pydune" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Home page
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../_examples/index.html">
+    Examples and Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="pydune.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cgadal-packages/pydune" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pydune.data_processing.html">pydune.data_processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.data_processing.meteorological.html">pydune.data_processing.meteorological</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.html">pydune.data_processing.meteorological.downloadCDS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.build_rqst_status.html">pydune.data_processing.meteorological.downloadCDS.build_rqst_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.check_rqst.html">pydune.data_processing.meteorological.downloadCDS.check_rqst</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.getting_CDSdata.html">pydune.data_processing.meteorological.downloadCDS.getting_CDSdata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.load_netcdf.html">pydune.data_processing.meteorological.downloadCDS.load_netcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.print_request_status.html">pydune.data_processing.meteorological.downloadCDS.print_request_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.downloadCDS.Dataset.html">pydune.data_processing.meteorological.downloadCDS.Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.html">pydune.data_processing.meteorological.wind_plot</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.create_KMZ.html">pydune.data_processing.meteorological.wind_plot.create_KMZ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.make_angular_PDF.html">pydune.data_processing.meteorological.wind_plot.make_angular_PDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.netcdf_to_flux_rose.html">pydune.data_processing.meteorological.wind_plot.netcdf_to_flux_rose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.plot_flux_rose.html">pydune.data_processing.meteorological.wind_plot.plot_flux_rose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.plot_wind_rose.html">pydune.data_processing.meteorological.wind_plot.plot_wind_rose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.shear_to_velocity.html">pydune.data_processing.meteorological.wind_plot.shear_to_velocity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.data_processing.meteorological.wind_plot.velocity_to_shear.html">pydune.data_processing.meteorological.wind_plot.velocity_to_shear</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.topography.html">pydune.data_processing.topography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.build_rqst_status.html">pydune.data_processing.build_rqst_status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.check_rqst.html">pydune.data_processing.check_rqst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.create_KMZ.html">pydune.data_processing.create_KMZ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.getting_CDSdata.html">pydune.data_processing.getting_CDSdata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.load_netcdf.html">pydune.data_processing.load_netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.make_angular_PDF.html">pydune.data_processing.make_angular_PDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.netcdf_to_flux_rose.html">pydune.data_processing.netcdf_to_flux_rose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.plot_flux_rose.html">pydune.data_processing.plot_flux_rose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.plot_wind_rose.html">pydune.data_processing.plot_wind_rose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.print_request_status.html">pydune.data_processing.print_request_status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.shear_to_velocity.html">pydune.data_processing.shear_to_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.data_processing.velocity_to_shear.html">pydune.data_processing.velocity_to_shear</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pydune.data_processing.Dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pydune.math.html">pydune.math</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.arcsind.html">pydune.math.arcsind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.arctan2d.html">pydune.math.arctan2d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.arctand.html">pydune.math.arctand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.cartesian_to_polar.html">pydune.math.cartesian_to_polar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.cosd.html">pydune.math.cosd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.histogram.html">pydune.math.histogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.make_angular_PDF.html">pydune.math.make_angular_PDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.make_angular_average.html">pydune.math.make_angular_average</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.sind.html">pydune.math.sind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.tand.html">pydune.math.tand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.math.vector_average.html">pydune.math.vector_average</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pydune.physics.html">pydune.physics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.physics.dune.html">pydune.physics.dune</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.html">pydune.physics.dune.bedinstability_1D</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.complex_pulsation.html">pydune.physics.dune.bedinstability_1D.complex_pulsation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.complexe_wavenumer.html">pydune.physics.dune.bedinstability_1D.complexe_wavenumer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.spatial_growth_rate.html">pydune.physics.dune.bedinstability_1D.spatial_growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.spatial_wavenumber.html">pydune.physics.dune.bedinstability_1D.spatial_wavenumber</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.temporal_growth_rate.html">pydune.physics.dune.bedinstability_1D.temporal_growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.temporal_pulsation.html">pydune.physics.dune.bedinstability_1D.temporal_pulsation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_1D.temporal_velocity.html">pydune.physics.dune.bedinstability_1D.temporal_velocity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.html">pydune.physics.dune.bedinstability_2D</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.celerity_bidi.html">pydune.physics.dune.bedinstability_2D.celerity_bidi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.cosd.html">pydune.physics.dune.bedinstability_2D.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.growth_rate_bidi.html">pydune.physics.dune.bedinstability_2D.growth_rate_bidi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.sind.html">pydune.physics.dune.bedinstability_2D.sind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_celerity.html">pydune.physics.dune.bedinstability_2D.temporal_celerity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_celerity_multi.html">pydune.physics.dune.bedinstability_2D.temporal_celerity_multi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_growth_rate.html">pydune.physics.dune.bedinstability_2D.temporal_growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_growth_rate_multi.html">pydune.physics.dune.bedinstability_2D.temporal_growth_rate_multi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.bedinstability_2D.temporal_pulsation.html">pydune.physics.dune.bedinstability_2D.temporal_pulsation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.html">pydune.physics.dune.courrechdupont2014</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.MGBNT_orientation.html">pydune.physics.dune.courrechdupont2014.MGBNT_orientation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.cosd.html">pydune.physics.dune.courrechdupont2014.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.elongation_direction.html">pydune.physics.dune.courrechdupont2014.elongation_direction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.flux_at_crest.html">pydune.physics.dune.courrechdupont2014.flux_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.growth_rate.html">pydune.physics.dune.courrechdupont2014.growth_rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest.html">pydune.physics.dune.courrechdupont2014.resultant_flux_aligned_crest_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.resultant_flux_at_crest.html">pydune.physics.dune.courrechdupont2014.resultant_flux_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.resultant_flux_perp_crest_at_crest.html">pydune.physics.dune.courrechdupont2014.resultant_flux_perp_crest_at_crest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.sind.html">pydune.physics.dune.courrechdupont2014.sind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.dune.courrechdupont2014.vector_average.html">pydune.physics.dune.courrechdupont2014.vector_average</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.physics.sedtransport.html">pydune.physics.sedtransport</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.html">pydune.physics.sedtransport.transport_laws</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.cubic_transport_law.html">pydune.physics.sedtransport.transport_laws.cubic_transport_law</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.quadratic_transport_law.html">pydune.physics.sedtransport.transport_laws.quadratic_transport_law</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.sedtransport.transport_laws.quartic_transport_law.html">pydune.physics.sedtransport.transport_laws.quartic_transport_law</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.html">pydune.physics.turbulent_flow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.html">pydune.physics.turbulent_flow.andreotti2009</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.calculate_solution.html">pydune.physics.turbulent_flow.andreotti2009.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.mu.html">pydune.physics.turbulent_flow.andreotti2009.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.mu_prime.html">pydune.physics.turbulent_flow.andreotti2009.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2009.solve_ivp.html">pydune.physics.turbulent_flow.andreotti2009.solve_ivp</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.html">pydune.physics.turbulent_flow.andreotti2011_unbounded</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.calculate_solution.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.cosd.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.mu.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.mu_prime.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.sind.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.sind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.andreotti2011_unbounded.solve_ivp.html">pydune.physics.turbulent_flow.andreotti2011_unbounded.solve_ivp</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.flow_solver.html">pydune.physics.turbulent_flow.flow_solver</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.flow_solver.solve_turbulent_flow.html">pydune.physics.turbulent_flow.flow_solver.solve_turbulent_flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.html">pydune.physics.turbulent_flow.fourriere2010_freesurface</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.arcsind.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.arcsind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.calculate_solution.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.mu.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.mu_prime.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.solve_ivp.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.solve_ivp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_freesurface.tand.html">pydune.physics.turbulent_flow.fourriere2010_freesurface.tand</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.html">pydune.physics.turbulent_flow.fourriere2010_unbounded</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.A0_approx.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.A0_approx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.B0_approx.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.B0_approx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.calculate_solution.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.calculate_solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.mu.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.mu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.mu_prime.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.mu_prime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.fourriere2010_unbounded.solve_ivp.html">pydune.physics.turbulent_flow.fourriere2010_unbounded.solve_ivp</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.html">pydune.physics.turbulent_flow.geometrical_model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.Ax_geo.html">pydune.physics.turbulent_flow.geometrical_model.Ax_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.Ay_geo.html">pydune.physics.turbulent_flow.geometrical_model.Ay_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.Bx_geo.html">pydune.physics.turbulent_flow.geometrical_model.Bx_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.By_geo.html">pydune.physics.turbulent_flow.geometrical_model.By_geo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.basal_shear.html">pydune.physics.turbulent_flow.geometrical_model.basal_shear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.cosd.html">pydune.physics.turbulent_flow.geometrical_model.cosd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pydune.physics.turbulent_flow.geometrical_model.sind.html">pydune.physics.turbulent_flow.geometrical_model.sind</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.A0_approx.html">pydune.physics.A0_approx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.Ax_geo.html">pydune.physics.Ax_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.Ay_geo.html">pydune.physics.Ay_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.B0_approx.html">pydune.physics.B0_approx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.Bx_geo.html">pydune.physics.Bx_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.By_geo.html">pydune.physics.By_geo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.basal_shear.html">pydune.physics.basal_shear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.cosd.html">pydune.physics.cosd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.cubic_transport_law.html">pydune.physics.cubic_transport_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.mu.html">pydune.physics.mu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.mu_prime.html">pydune.physics.mu_prime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.quadratic_transport_law.html">pydune.physics.quadratic_transport_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.quartic_transport_law.html">pydune.physics.quartic_transport_law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.sind.html">pydune.physics.sind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydune.physics.solve_turbulent_flow.html">pydune.physics.solve_turbulent_flow</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="pydune.html" class="nav-link">pydune</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="pydune.data_processing.html" class="nav-link">pydune.data_processing</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pydune.data_processing.Dataset</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pydune-data-processing-dataset">
+<h1>pydune.data_processing.Dataset<a class="headerlink" href="#pydune-data-processing-dataset" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Dataset</span></span><a class="headerlink" href="#pydune.data_processing.Dataset" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A netCDF <cite>Dataset</cite> is a collection of dimensions, groups, variables and
+attributes. Together they describe the meaning of data and relations among
+data fields stored in a netCDF file. See <cite>Dataset.__init__</cite> for more
+details.</p>
+<p>A list of attribute names corresponding to global netCDF attributes
+defined for the <cite>Dataset</cite> can be obtained with the
+<cite>Dataset.ncattrs</cite> method.
+These attributes can be created by assigning to an attribute of the
+<cite>Dataset</cite> instance. A dictionary containing all the netCDF attribute
+name/value pairs is provided by the <cite>__dict__</cite> attribute of a
+<cite>Dataset</cite> instance.</p>
+<p>The following class variables are read-only and should not be
+modified by the user.</p>
+<p><strong>`dimensions`</strong>: The <cite>dimensions</cite> dictionary maps the names of
+dimensions defined for the <cite>Group</cite> or <cite>Dataset</cite> to instances of the
+<cite>Dimension</cite> class.</p>
+<p><strong>`variables`</strong>: The <cite>variables</cite> dictionary maps the names of variables
+defined for this <cite>Dataset</cite> or <cite>Group</cite> to instances of the
+<cite>Variable</cite> class.</p>
+<p><strong>`groups`</strong>: The groups dictionary maps the names of groups created for
+this <cite>Dataset</cite> or <cite>Group</cite> to instances of the <cite>Group</cite> class (the
+<cite>Dataset</cite> class is simply a special case of the <cite>Group</cite> class which
+describes the root group in the netCDF4 file).</p>
+<p><strong>`cmptypes`</strong>: The <cite>cmptypes</cite> dictionary maps the names of
+compound types defined for the <cite>Group</cite> or <cite>Dataset</cite> to instances of the
+<cite>CompoundType</cite> class.</p>
+<p><strong>`vltypes`</strong>: The <cite>vltypes</cite> dictionary maps the names of
+variable-length types defined for the <cite>Group</cite> or <cite>Dataset</cite> to instances
+of the <cite>VLType</cite> class.</p>
+<p><strong>`enumtypes`</strong>: The <cite>enumtypes</cite> dictionary maps the names of
+Enum types defined for the <cite>Group</cite> or <cite>Dataset</cite> to instances
+of the <cite>EnumType</cite> class.</p>
+<p><strong>`data_model`</strong>: <cite>data_model</cite> describes the netCDF
+data model version, one of <cite>NETCDF3_CLASSIC</cite>, <cite>NETCDF4</cite>,
+<cite>NETCDF4_CLASSIC</cite>, <cite>NETCDF3_64BIT_OFFSET</cite> or <cite>NETCDF3_64BIT_DATA</cite>.</p>
+<p><strong>`file_format`</strong>: same as <cite>data_model</cite>, retained for backwards compatibility.</p>
+<p><strong>`disk_format`</strong>: <cite>disk_format</cite> describes the underlying
+file format, one of <cite>NETCDF3</cite>, <cite>HDF5</cite>, <cite>HDF4</cite>,
+<cite>PNETCDF</cite>, <cite>DAP2</cite>, <cite>DAP4</cite> or <cite>UNDEFINED</cite>. Only available if using
+netcdf C library version &gt;= 4.3.1, otherwise will always return
+<cite>UNDEFINED</cite>.</p>
+<p><strong>`parent`</strong>: <cite>parent</cite> is a reference to the parent
+<cite>Group</cite> instance. <cite>None</cite> for the root group or <cite>Dataset</cite>
+instance.</p>
+<p><strong>`path`</strong>: <cite>path</cite> shows the location of the <cite>Group</cite> in
+the <cite>Dataset</cite> in a unix directory format (the names of groups in the
+hierarchy separated by backslashes). A <cite>Dataset</cite> instance is the root
+group, so the path is simply <cite>‘/’</cite>.</p>
+<p><strong>`keepweakref`</strong>: If <cite>True</cite>, child Dimension and Variables objects only keep weak
+references to the parent Dataset or Group.</p>
+<p><strong>`_ncstring_attrs__`</strong>: If <cite>True</cite>, all text attributes will be written as variable-length
+strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>auto_complex</strong></dt><dd></dd>
+<dt><strong>cmptypes</strong></dt><dd></dd>
+<dt><strong>data_model</strong></dt><dd></dd>
+<dt><strong>dimensions</strong></dt><dd></dd>
+<dt><strong>disk_format</strong></dt><dd></dd>
+<dt><strong>enumtypes</strong></dt><dd></dd>
+<dt><strong>file_format</strong></dt><dd></dd>
+<dt><strong>groups</strong></dt><dd></dd>
+<dt><strong>keepweakref</strong></dt><dd></dd>
+<dt><a class="reference internal" href="#pydune.data_processing.Dataset.name" title="pydune.data_processing.Dataset.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></dt><dd><p>string name of Group instance</p>
+</dd>
+<dt><strong>parent</strong></dt><dd></dd>
+<dt><strong>path</strong></dt><dd></dd>
+<dt><strong>variables</strong></dt><dd></dd>
+<dt><strong>vltypes</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.close" title="pydune.data_processing.Dataset.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a>()</p></td>
+<td><p><strong>`close(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createCompoundType" title="pydune.data_processing.Dataset.createCompoundType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createCompoundType</span></code></a>(datatype, datatype_name)</p></td>
+<td><p><strong>`createCompoundType(self, datatype, datatype_name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createDimension" title="pydune.data_processing.Dataset.createDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createDimension</span></code></a>(dimname[, size])</p></td>
+<td><p><strong>`createDimension(self, dimname, size=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createEnumType" title="pydune.data_processing.Dataset.createEnumType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createEnumType</span></code></a>(datatype, datatype_name, ...)</p></td>
+<td><p><strong>`createEnumType(self, datatype, datatype_name, enum_dict)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createGroup" title="pydune.data_processing.Dataset.createGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createGroup</span></code></a>(groupname)</p></td>
+<td><p><strong>`createGroup(self, groupname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createVLType" title="pydune.data_processing.Dataset.createVLType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVLType</span></code></a>(datatype, datatype_name)</p></td>
+<td><p><strong>`createVLType(self, datatype, datatype_name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createVariable" title="pydune.data_processing.Dataset.createVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVariable</span></code></a>(varname, datatype[, ...])</p></td>
+<td><p><strong>`createVariable(self, varname, datatype, dimensions=(), compression=None, zlib=False, complevel=4, shuffle=True, fletcher32=False, contiguous=False, chunksizes=None, szip_coding='nn', szip_pixels_per_block=8, blosc_shuffle=1, endian='native', least_significant_digit=None, significant_digits=None, quantize_mode='BitGroom', fill_value=None, chunk_cache=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.delncattr" title="pydune.data_processing.Dataset.delncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delncattr</span></code></a>(name)</p></td>
+<td><p><strong>`delncattr(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.filepath" title="pydune.data_processing.Dataset.filepath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filepath</span></code></a>([encoding])</p></td>
+<td><p><strong>`filepath(self,encoding=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.fromcdl" title="pydune.data_processing.Dataset.fromcdl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromcdl</span></code></a>(cdlfilename[, ncfilename, mode, format])</p></td>
+<td><p><strong>`fromcdl(cdlfilename, ncfilename=None, mode='a',format='NETCDF4')`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.get_variables_by_attributes" title="pydune.data_processing.Dataset.get_variables_by_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables_by_attributes</span></code></a>(**kwargs)</p></td>
+<td><p><strong>`get_variables_by_attributes(self, **kwargs)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.getncattr" title="pydune.data_processing.Dataset.getncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getncattr</span></code></a>(name[, encoding])</p></td>
+<td><p><strong>`getncattr(self,name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_blosc_filter" title="pydune.data_processing.Dataset.has_blosc_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_blosc_filter</span></code></a>()</p></td>
+<td><p><strong>`has_blosc_filter(self)`</strong> returns True if blosc compression filter is available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_bzip2_filter" title="pydune.data_processing.Dataset.has_bzip2_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_bzip2_filter</span></code></a>()</p></td>
+<td><p><strong>`has_bzip2_filter(self)`</strong> returns True if bzip2 compression filter is available</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_szip_filter" title="pydune.data_processing.Dataset.has_szip_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_szip_filter</span></code></a>()</p></td>
+<td><p><strong>`has_szip_filter(self)`</strong> returns True if szip compression filter is available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_zstd_filter" title="pydune.data_processing.Dataset.has_zstd_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_zstd_filter</span></code></a>()</p></td>
+<td><p><strong>`has_zstd_filter(self)`</strong> returns True if zstd compression filter is available</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.isopen" title="pydune.data_processing.Dataset.isopen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isopen</span></code></a>()</p></td>
+<td><p><strong>`isopen(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.ncattrs" title="pydune.data_processing.Dataset.ncattrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncattrs</span></code></a>()</p></td>
+<td><p><strong>`ncattrs(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameAttribute" title="pydune.data_processing.Dataset.renameAttribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameAttribute</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameAttribute(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameDimension" title="pydune.data_processing.Dataset.renameDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameDimension</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameDimension(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameGroup" title="pydune.data_processing.Dataset.renameGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameGroup</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameGroup(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameVariable" title="pydune.data_processing.Dataset.renameVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameVariable</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameVariable(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_always_mask" title="pydune.data_processing.Dataset.set_always_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_always_mask</span></code></a>(value)</p></td>
+<td><p><strong>`set_always_mask(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_chartostring" title="pydune.data_processing.Dataset.set_auto_chartostring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_chartostring</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_chartostring(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_mask" title="pydune.data_processing.Dataset.set_auto_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_mask</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_mask(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_maskandscale" title="pydune.data_processing.Dataset.set_auto_maskandscale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_maskandscale</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_maskandscale(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_scale" title="pydune.data_processing.Dataset.set_auto_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_scale</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_scale(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_fill_off" title="pydune.data_processing.Dataset.set_fill_off"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fill_off</span></code></a>()</p></td>
+<td><p><strong>`set_fill_off(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_fill_on" title="pydune.data_processing.Dataset.set_fill_on"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fill_on</span></code></a>()</p></td>
+<td><p><strong>`set_fill_on(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_ncstring_attrs" title="pydune.data_processing.Dataset.set_ncstring_attrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_ncstring_attrs</span></code></a>(value)</p></td>
+<td><p><strong>`set_ncstring_attrs(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncattr" title="pydune.data_processing.Dataset.setncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncattr</span></code></a>(name, value)</p></td>
+<td><p><strong>`setncattr(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncattr_string" title="pydune.data_processing.Dataset.setncattr_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncattr_string</span></code></a>(name, value)</p></td>
+<td><p><strong>`setncattr_string(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncatts" title="pydune.data_processing.Dataset.setncatts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncatts</span></code></a>(attdict)</p></td>
+<td><p><strong>`setncatts(self,attdict)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.sync" title="pydune.data_processing.Dataset.sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sync</span></code></a>()</p></td>
+<td><p><strong>`sync(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.tocdl" title="pydune.data_processing.Dataset.tocdl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocdl</span></code></a>([coordvars, data, outfile])</p></td>
+<td><p><strong>`tocdl(self, coordvars=False, data=False, outfile=None)`</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>`__init__(self, filename, mode=”r”, clobber=True, diskless=False,
+persist=False, keepweakref=False, memory=None, encoding=None,
+parallel=False, comm=None, info=None, format=’NETCDF4’)`</strong></p>
+<p><cite>Dataset</cite> constructor.</p>
+<p><strong>`filename`</strong>: Name of netCDF file to hold dataset. Can also
+be a python 3 pathlib instance or the URL of an OpenDAP dataset.  When memory is
+set this is just used to set the <cite>filepath()</cite>.</p>
+<p><strong>`mode`</strong>: access mode. <cite>r</cite> means read-only; no data can be
+modified. <cite>w</cite> means write; a new file is created, an existing file with
+the same name is deleted. <cite>x</cite> means write, but fail if an existing
+file with the same name already exists. <cite>a</cite> and <cite>r+</cite> mean append;
+an existing file is opened for reading and writing, if
+file does not exist already, one is created.
+Appending <cite>s</cite> to modes <cite>r</cite>, <cite>w</cite>, <cite>r+</cite> or <cite>a</cite> will enable unbuffered shared
+access to <cite>NETCDF3_CLASSIC</cite>, <cite>NETCDF3_64BIT_OFFSET</cite> or
+<cite>NETCDF3_64BIT_DATA</cite> formatted files.
+Unbuffered access may be useful even if you don’t need shared
+access, since it may be faster for programs that don’t access data
+sequentially. This option is ignored for <cite>NETCDF4</cite> and <cite>NETCDF4_CLASSIC</cite>
+formatted files.</p>
+<p><strong>`clobber`</strong>: if <cite>True</cite> (default), opening a file with <cite>mode=’w’</cite>
+will clobber an existing file with the same name.  if <cite>False</cite>, an
+exception will be raised if a file with the same name already exists.
+mode=`x` is identical to mode=`w` with clobber=False.</p>
+<p><strong>`format`</strong>: underlying file format (one of <cite>‘NETCDF4’,
+‘NETCDF4_CLASSIC’, ‘NETCDF3_CLASSIC’</cite>, <cite>‘NETCDF3_64BIT_OFFSET’</cite> or
+<cite>‘NETCDF3_64BIT_DATA’</cite>.
+Only relevant if <cite>mode = ‘w’</cite> (if <cite>mode = ‘r’,’a’</cite> or <cite>‘r+’</cite> the file format
+is automatically detected). Default <cite>‘NETCDF4’</cite>, which means the data is
+stored in an HDF5 file, using netCDF 4 API features.  Setting
+<cite>format=’NETCDF4_CLASSIC’</cite> will create an HDF5 file, using only netCDF 3
+compatible API features. netCDF 3 clients must be recompiled and linked
+against the netCDF 4 library to read files in <cite>NETCDF4_CLASSIC</cite> format.
+<cite>‘NETCDF3_CLASSIC’</cite> is the classic netCDF 3 file format that does not
+handle 2+ Gb files. <cite>‘NETCDF3_64BIT_OFFSET’</cite> is the 64-bit offset
+version of the netCDF 3 file format, which fully supports 2+ GB files, but
+is only compatible with clients linked against netCDF version 3.6.0 or
+later. <cite>‘NETCDF3_64BIT_DATA’</cite> is the 64-bit data version of the netCDF 3
+file format, which supports 64-bit dimension sizes plus unsigned and
+64 bit integer data types, but is only compatible with clients linked against
+netCDF version 4.4.0 or later.</p>
+<p><strong>`diskless`</strong>: If <cite>True</cite>, create diskless (in-core) file.
+This is a feature added to the C library after the
+netcdf-4.2 release. If you need to access the memory buffer directly,
+use the in-memory feature instead (see <cite>memory</cite> kwarg).</p>
+<p><strong>`persist`</strong>: if <cite>diskless=True</cite>, persist file to disk when closed
+(default <cite>False</cite>).</p>
+<p><strong>`keepweakref`</strong>: if <cite>True</cite>, child Dimension and Variable instances will keep weak
+references to the parent Dataset or Group object.  Default is <cite>False</cite>, which
+means strong references will be kept.  Having Dimension and Variable instances
+keep a strong reference to the parent Dataset instance, which in turn keeps a
+reference to child Dimension and Variable instances, creates circular references.
+Circular references complicate garbage collection, which may mean increased
+memory usage for programs that create may Dataset instances with lots of
+Variables. It also will result in the Dataset object never being deleted, which
+means it may keep open files alive as well. Setting <cite>keepweakref=True</cite> allows
+Dataset instances to be garbage collected as soon as they go out of scope, potentially
+reducing memory usage and open file handles.  However, in many cases this is not
+desirable, since the associated Variable instances may still be needed, but are
+rendered unusable when the parent Dataset instance is garbage collected.</p>
+<p><strong>`memory`</strong>: if not <cite>None</cite>, create or open an in-memory Dataset.
+If mode = <cite>r</cite>, the memory kwarg must contain a memory buffer object
+(an object that supports the python buffer interface).
+The Dataset will then be created with contents taken from this block of memory.
+If mode = <cite>w</cite>, the memory kwarg should contain the anticipated size
+of the Dataset in bytes (used only for NETCDF3 files).  A memory
+buffer containing a copy of the Dataset is returned by the
+<cite>Dataset.close</cite> method. Requires netcdf-c version 4.4.1 for mode=`r`
+netcdf-c 4.6.2 for mode=`w`. To persist the file to disk, the raw
+bytes from the returned buffer can be written into a binary file.
+The Dataset can also be re-opened using this memory buffer.</p>
+<p><strong>`encoding`</strong>: encoding used to encode filename string into bytes.
+Default is None (<cite>sys.getdefaultfileencoding()</cite> is used).</p>
+<p><strong>`parallel`</strong>: open for parallel access using MPI (requires mpi4py and
+parallel-enabled netcdf-c and hdf5 libraries).  Default is <cite>False</cite>. If
+<cite>True</cite>, <cite>comm</cite> and <cite>info</cite> kwargs may also be specified.</p>
+<p><strong>`comm`</strong>: MPI_Comm object for parallel access. Default <cite>None</cite>, which
+means MPI_COMM_WORLD will be used.  Ignored if <cite>parallel=False</cite>.</p>
+<p><strong>`info`</strong>: MPI_Info object for parallel access. Default <cite>None</cite>, which
+means MPI_INFO_NULL will be used.  Ignored if <cite>parallel=False</cite>.</p>
+<p><strong>`auto_complex`</strong>: if <cite>True</cite>, then automatically convert complex number types</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>auto_complex</strong></dt><dd></dd>
+<dt><strong>cmptypes</strong></dt><dd></dd>
+<dt><strong>data_model</strong></dt><dd></dd>
+<dt><strong>dimensions</strong></dt><dd></dd>
+<dt><strong>disk_format</strong></dt><dd></dd>
+<dt><strong>enumtypes</strong></dt><dd></dd>
+<dt><strong>file_format</strong></dt><dd></dd>
+<dt><strong>groups</strong></dt><dd></dd>
+<dt><strong>keepweakref</strong></dt><dd></dd>
+<dt><a class="reference internal" href="#pydune.data_processing.Dataset.name" title="pydune.data_processing.Dataset.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></dt><dd><p>string name of Group instance</p>
+</dd>
+<dt><strong>parent</strong></dt><dd></dd>
+<dt><strong>path</strong></dt><dd></dd>
+<dt><strong>variables</strong></dt><dd></dd>
+<dt><strong>vltypes</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.close" title="pydune.data_processing.Dataset.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a>()</p></td>
+<td><p><strong>`close(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createCompoundType" title="pydune.data_processing.Dataset.createCompoundType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createCompoundType</span></code></a>(datatype, datatype_name)</p></td>
+<td><p><strong>`createCompoundType(self, datatype, datatype_name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createDimension" title="pydune.data_processing.Dataset.createDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createDimension</span></code></a>(dimname[, size])</p></td>
+<td><p><strong>`createDimension(self, dimname, size=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createEnumType" title="pydune.data_processing.Dataset.createEnumType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createEnumType</span></code></a>(datatype, datatype_name, ...)</p></td>
+<td><p><strong>`createEnumType(self, datatype, datatype_name, enum_dict)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createGroup" title="pydune.data_processing.Dataset.createGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createGroup</span></code></a>(groupname)</p></td>
+<td><p><strong>`createGroup(self, groupname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createVLType" title="pydune.data_processing.Dataset.createVLType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVLType</span></code></a>(datatype, datatype_name)</p></td>
+<td><p><strong>`createVLType(self, datatype, datatype_name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createVariable" title="pydune.data_processing.Dataset.createVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVariable</span></code></a>(varname, datatype[, ...])</p></td>
+<td><p><strong>`createVariable(self, varname, datatype, dimensions=(), compression=None, zlib=False, complevel=4, shuffle=True, fletcher32=False, contiguous=False, chunksizes=None, szip_coding='nn', szip_pixels_per_block=8, blosc_shuffle=1, endian='native', least_significant_digit=None, significant_digits=None, quantize_mode='BitGroom', fill_value=None, chunk_cache=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.delncattr" title="pydune.data_processing.Dataset.delncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delncattr</span></code></a>(name)</p></td>
+<td><p><strong>`delncattr(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.filepath" title="pydune.data_processing.Dataset.filepath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filepath</span></code></a>([encoding])</p></td>
+<td><p><strong>`filepath(self,encoding=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.fromcdl" title="pydune.data_processing.Dataset.fromcdl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromcdl</span></code></a>(cdlfilename[, ncfilename, mode, format])</p></td>
+<td><p><strong>`fromcdl(cdlfilename, ncfilename=None, mode='a',format='NETCDF4')`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.get_variables_by_attributes" title="pydune.data_processing.Dataset.get_variables_by_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables_by_attributes</span></code></a>(**kwargs)</p></td>
+<td><p><strong>`get_variables_by_attributes(self, **kwargs)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.getncattr" title="pydune.data_processing.Dataset.getncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getncattr</span></code></a>(name[, encoding])</p></td>
+<td><p><strong>`getncattr(self,name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_blosc_filter" title="pydune.data_processing.Dataset.has_blosc_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_blosc_filter</span></code></a>()</p></td>
+<td><p><strong>`has_blosc_filter(self)`</strong> returns True if blosc compression filter is available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_bzip2_filter" title="pydune.data_processing.Dataset.has_bzip2_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_bzip2_filter</span></code></a>()</p></td>
+<td><p><strong>`has_bzip2_filter(self)`</strong> returns True if bzip2 compression filter is available</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_szip_filter" title="pydune.data_processing.Dataset.has_szip_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_szip_filter</span></code></a>()</p></td>
+<td><p><strong>`has_szip_filter(self)`</strong> returns True if szip compression filter is available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_zstd_filter" title="pydune.data_processing.Dataset.has_zstd_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_zstd_filter</span></code></a>()</p></td>
+<td><p><strong>`has_zstd_filter(self)`</strong> returns True if zstd compression filter is available</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.isopen" title="pydune.data_processing.Dataset.isopen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isopen</span></code></a>()</p></td>
+<td><p><strong>`isopen(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.ncattrs" title="pydune.data_processing.Dataset.ncattrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncattrs</span></code></a>()</p></td>
+<td><p><strong>`ncattrs(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameAttribute" title="pydune.data_processing.Dataset.renameAttribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameAttribute</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameAttribute(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameDimension" title="pydune.data_processing.Dataset.renameDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameDimension</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameDimension(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameGroup" title="pydune.data_processing.Dataset.renameGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameGroup</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameGroup(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameVariable" title="pydune.data_processing.Dataset.renameVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameVariable</span></code></a>(oldname, newname)</p></td>
+<td><p><strong>`renameVariable(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_always_mask" title="pydune.data_processing.Dataset.set_always_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_always_mask</span></code></a>(value)</p></td>
+<td><p><strong>`set_always_mask(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_chartostring" title="pydune.data_processing.Dataset.set_auto_chartostring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_chartostring</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_chartostring(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_mask" title="pydune.data_processing.Dataset.set_auto_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_mask</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_mask(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_maskandscale" title="pydune.data_processing.Dataset.set_auto_maskandscale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_maskandscale</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_maskandscale(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_scale" title="pydune.data_processing.Dataset.set_auto_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_scale</span></code></a>(value)</p></td>
+<td><p><strong>`set_auto_scale(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_fill_off" title="pydune.data_processing.Dataset.set_fill_off"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fill_off</span></code></a>()</p></td>
+<td><p><strong>`set_fill_off(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_fill_on" title="pydune.data_processing.Dataset.set_fill_on"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fill_on</span></code></a>()</p></td>
+<td><p><strong>`set_fill_on(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_ncstring_attrs" title="pydune.data_processing.Dataset.set_ncstring_attrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_ncstring_attrs</span></code></a>(value)</p></td>
+<td><p><strong>`set_ncstring_attrs(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncattr" title="pydune.data_processing.Dataset.setncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncattr</span></code></a>(name, value)</p></td>
+<td><p><strong>`setncattr(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncattr_string" title="pydune.data_processing.Dataset.setncattr_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncattr_string</span></code></a>(name, value)</p></td>
+<td><p><strong>`setncattr_string(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncatts" title="pydune.data_processing.Dataset.setncatts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncatts</span></code></a>(attdict)</p></td>
+<td><p><strong>`setncatts(self,attdict)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.sync" title="pydune.data_processing.Dataset.sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sync</span></code></a>()</p></td>
+<td><p><strong>`sync(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.tocdl" title="pydune.data_processing.Dataset.tocdl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocdl</span></code></a>([coordvars, data, outfile])</p></td>
+<td><p><strong>`tocdl(self, coordvars=False, data=False, outfile=None)`</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.close" title="pydune.data_processing.Dataset.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a></p></td>
+<td><p><strong>`close(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createCompoundType" title="pydune.data_processing.Dataset.createCompoundType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createCompoundType</span></code></a></p></td>
+<td><p><strong>`createCompoundType(self, datatype, datatype_name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createDimension" title="pydune.data_processing.Dataset.createDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createDimension</span></code></a></p></td>
+<td><p><strong>`createDimension(self, dimname, size=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createEnumType" title="pydune.data_processing.Dataset.createEnumType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createEnumType</span></code></a></p></td>
+<td><p><strong>`createEnumType(self, datatype, datatype_name, enum_dict)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createGroup" title="pydune.data_processing.Dataset.createGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createGroup</span></code></a></p></td>
+<td><p><strong>`createGroup(self, groupname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createVLType" title="pydune.data_processing.Dataset.createVLType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVLType</span></code></a></p></td>
+<td><p><strong>`createVLType(self, datatype, datatype_name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.createVariable" title="pydune.data_processing.Dataset.createVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createVariable</span></code></a></p></td>
+<td><p><strong>`createVariable(self, varname, datatype, dimensions=(), compression=None, zlib=False, complevel=4, shuffle=True, fletcher32=False, contiguous=False, chunksizes=None, szip_coding='nn', szip_pixels_per_block=8, blosc_shuffle=1, endian='native', least_significant_digit=None, significant_digits=None, quantize_mode='BitGroom', fill_value=None, chunk_cache=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.delncattr" title="pydune.data_processing.Dataset.delncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delncattr</span></code></a></p></td>
+<td><p><strong>`delncattr(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.filepath" title="pydune.data_processing.Dataset.filepath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filepath</span></code></a></p></td>
+<td><p><strong>`filepath(self,encoding=None)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.fromcdl" title="pydune.data_processing.Dataset.fromcdl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromcdl</span></code></a></p></td>
+<td><p><strong>`fromcdl(cdlfilename, ncfilename=None, mode='a',format='NETCDF4')`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.get_variables_by_attributes" title="pydune.data_processing.Dataset.get_variables_by_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables_by_attributes</span></code></a></p></td>
+<td><p><strong>`get_variables_by_attributes(self, **kwargs)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.getncattr" title="pydune.data_processing.Dataset.getncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getncattr</span></code></a></p></td>
+<td><p><strong>`getncattr(self,name)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_blosc_filter" title="pydune.data_processing.Dataset.has_blosc_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_blosc_filter</span></code></a></p></td>
+<td><p><strong>`has_blosc_filter(self)`</strong> returns True if blosc compression filter is available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_bzip2_filter" title="pydune.data_processing.Dataset.has_bzip2_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_bzip2_filter</span></code></a></p></td>
+<td><p><strong>`has_bzip2_filter(self)`</strong> returns True if bzip2 compression filter is available</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_szip_filter" title="pydune.data_processing.Dataset.has_szip_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_szip_filter</span></code></a></p></td>
+<td><p><strong>`has_szip_filter(self)`</strong> returns True if szip compression filter is available</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.has_zstd_filter" title="pydune.data_processing.Dataset.has_zstd_filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_zstd_filter</span></code></a></p></td>
+<td><p><strong>`has_zstd_filter(self)`</strong> returns True if zstd compression filter is available</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.isopen" title="pydune.data_processing.Dataset.isopen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isopen</span></code></a></p></td>
+<td><p><strong>`isopen(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.ncattrs" title="pydune.data_processing.Dataset.ncattrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ncattrs</span></code></a></p></td>
+<td><p><strong>`ncattrs(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameAttribute" title="pydune.data_processing.Dataset.renameAttribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameAttribute</span></code></a></p></td>
+<td><p><strong>`renameAttribute(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameDimension" title="pydune.data_processing.Dataset.renameDimension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameDimension</span></code></a></p></td>
+<td><p><strong>`renameDimension(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameGroup" title="pydune.data_processing.Dataset.renameGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameGroup</span></code></a></p></td>
+<td><p><strong>`renameGroup(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.renameVariable" title="pydune.data_processing.Dataset.renameVariable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renameVariable</span></code></a></p></td>
+<td><p><strong>`renameVariable(self, oldname, newname)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_always_mask" title="pydune.data_processing.Dataset.set_always_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_always_mask</span></code></a></p></td>
+<td><p><strong>`set_always_mask(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_chartostring" title="pydune.data_processing.Dataset.set_auto_chartostring"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_chartostring</span></code></a></p></td>
+<td><p><strong>`set_auto_chartostring(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_mask" title="pydune.data_processing.Dataset.set_auto_mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_mask</span></code></a></p></td>
+<td><p><strong>`set_auto_mask(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_maskandscale" title="pydune.data_processing.Dataset.set_auto_maskandscale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_maskandscale</span></code></a></p></td>
+<td><p><strong>`set_auto_maskandscale(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_auto_scale" title="pydune.data_processing.Dataset.set_auto_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_scale</span></code></a></p></td>
+<td><p><strong>`set_auto_scale(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_fill_off" title="pydune.data_processing.Dataset.set_fill_off"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fill_off</span></code></a></p></td>
+<td><p><strong>`set_fill_off(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_fill_on" title="pydune.data_processing.Dataset.set_fill_on"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fill_on</span></code></a></p></td>
+<td><p><strong>`set_fill_on(self)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.set_ncstring_attrs" title="pydune.data_processing.Dataset.set_ncstring_attrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_ncstring_attrs</span></code></a></p></td>
+<td><p><strong>`set_ncstring_attrs(self, True_or_False)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncattr" title="pydune.data_processing.Dataset.setncattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncattr</span></code></a></p></td>
+<td><p><strong>`setncattr(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncattr_string" title="pydune.data_processing.Dataset.setncattr_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncattr_string</span></code></a></p></td>
+<td><p><strong>`setncattr_string(self,name,value)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.setncatts" title="pydune.data_processing.Dataset.setncatts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setncatts</span></code></a></p></td>
+<td><p><strong>`setncatts(self,attdict)`</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.sync" title="pydune.data_processing.Dataset.sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sync</span></code></a></p></td>
+<td><p><strong>`sync(self)`</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.tocdl" title="pydune.data_processing.Dataset.tocdl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocdl</span></code></a></p></td>
+<td><p><strong>`tocdl(self, coordvars=False, data=False, outfile=None)`</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Attributes</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">auto_complex</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cmptypes</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">data_model</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dimensions</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">disk_format</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">enumtypes</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">file_format</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">groups</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">keepweakref</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pydune.data_processing.Dataset.name" title="pydune.data_processing.Dataset.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>string name of Group instance</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">path</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variables</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vltypes</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.close" title="Link to this definition">#</a></dt>
+<dd><p><strong>`close(self)`</strong></p>
+<p>Close the Dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.createCompoundType">
+<span class="sig-name descname"><span class="pre">createCompoundType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.createCompoundType" title="Link to this definition">#</a></dt>
+<dd><p><strong>`createCompoundType(self, datatype, datatype_name)`</strong></p>
+<p>Creates a new compound data type named <cite>datatype_name</cite> from the numpy
+dtype object <cite>datatype</cite>.</p>
+<p><strong>*Note*</strong>: If the new compound data type contains other compound data types
+(i.e. it is a ‘nested’ compound type, where not all of the elements
+are homogeneous numeric data types), then the ‘inner’ compound types <strong>must</strong> be
+created first.</p>
+<p>The return value is the <cite>CompoundType</cite> class instance describing the new
+datatype.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.createDimension">
+<span class="sig-name descname"><span class="pre">createDimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.createDimension" title="Link to this definition">#</a></dt>
+<dd><p><strong>`createDimension(self, dimname, size=None)`</strong></p>
+<p>Creates a new dimension with the given <cite>dimname</cite> and <cite>size</cite>.</p>
+<p><cite>size</cite> must be a positive integer or <cite>None</cite>, which stands for
+“unlimited” (default is <cite>None</cite>). Specifying a size of 0 also
+results in an unlimited dimension. The return value is the <cite>Dimension</cite>
+class instance describing the new dimension.  To determine the current
+maximum size of the dimension, use the <cite>len</cite> function on the <cite>Dimension</cite>
+instance. To determine if a dimension is ‘unlimited’, use the
+<cite>Dimension.isunlimited</cite> method of the <cite>Dimension</cite> instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.createEnumType">
+<span class="sig-name descname"><span class="pre">createEnumType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.createEnumType" title="Link to this definition">#</a></dt>
+<dd><p><strong>`createEnumType(self, datatype, datatype_name, enum_dict)`</strong></p>
+<p>Creates a new Enum data type named <cite>datatype_name</cite> from a numpy
+integer dtype object <cite>datatype</cite>, and a python dictionary
+defining the enum fields and values.</p>
+<p>The return value is the <cite>EnumType</cite> class instance describing the new
+datatype.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.createGroup">
+<span class="sig-name descname"><span class="pre">createGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.createGroup" title="Link to this definition">#</a></dt>
+<dd><p><strong>`createGroup(self, groupname)`</strong></p>
+<p>Creates a new <cite>Group</cite> with the given <cite>groupname</cite>.</p>
+<p>If <cite>groupname</cite> is specified as a path, using forward slashes as in unix to
+separate components, then intermediate groups will be created as necessary
+(analogous to <cite>mkdir -p</cite> in unix).  For example,
+<cite>createGroup(‘/GroupA/GroupB/GroupC’)</cite> will create <cite>GroupA</cite>,
+<cite>GroupA/GroupB</cite>, and <cite>GroupA/GroupB/GroupC</cite>, if they don’t already exist.
+If the specified path describes a group that already exists, no error is
+raised.</p>
+<p>The return value is a <cite>Group</cite> class instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.createVLType">
+<span class="sig-name descname"><span class="pre">createVLType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.createVLType" title="Link to this definition">#</a></dt>
+<dd><p><strong>`createVLType(self, datatype, datatype_name)`</strong></p>
+<p>Creates a new VLEN data type named <cite>datatype_name</cite> from a numpy
+dtype object <cite>datatype</cite>.</p>
+<p>The return value is the <cite>VLType</cite> class instance describing the new
+datatype.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.createVariable">
+<span class="sig-name descname"><span class="pre">createVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">varname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">szip_coding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">szip_pixels_per_block</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blosc_shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fletcher32</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contiguous</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunksizes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'native'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">least_significant_digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">significant_digits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantize_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BitGroom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.createVariable" title="Link to this definition">#</a></dt>
+<dd><p><strong>`createVariable(self, varname, datatype, dimensions=(), compression=None, zlib=False,
+complevel=4, shuffle=True, fletcher32=False, contiguous=False, chunksizes=None,
+szip_coding=’nn’, szip_pixels_per_block=8, blosc_shuffle=1,
+endian=’native’, least_significant_digit=None, significant_digits=None, quantize_mode=’BitGroom’,
+fill_value=None, chunk_cache=None)`</strong></p>
+<p>Creates a new variable with the given <cite>varname</cite>, <cite>datatype</cite>, and
+<cite>dimensions</cite>. If dimensions are not given, the variable is assumed to be
+a scalar.</p>
+<p>If <cite>varname</cite> is specified as a path, using forward slashes as in unix to
+separate components, then intermediate groups will be created as necessary
+For example, <cite>createVariable(‘/GroupA/GroupB/VarC’, float, (‘x’,’y’))</cite> will create groups <cite>GroupA</cite>
+and <cite>GroupA/GroupB</cite>, plus the variable <cite>GroupA/GroupB/VarC</cite>, if the preceding
+groups don’t already exist.</p>
+<p>The <cite>datatype</cite> can be a numpy datatype object, or a string that describes
+a numpy dtype object (like the <cite>dtype.str</cite> attribute of a numpy array).
+Supported specifiers include: <cite>‘S1’ or ‘c’ (NC_CHAR), ‘i1’ or ‘b’ or ‘B’
+(NC_BYTE), ‘u1’ (NC_UBYTE), ‘i2’ or ‘h’ or ‘s’ (NC_SHORT), ‘u2’
+(NC_USHORT), ‘i4’ or ‘i’ or ‘l’ (NC_INT), ‘u4’ (NC_UINT), ‘i8’ (NC_INT64),
+‘u8’ (NC_UINT64), ‘f4’ or ‘f’ (NC_FLOAT), ‘f8’ or ‘d’ (NC_DOUBLE)</cite>.
+<cite>datatype</cite> can also be a <cite>CompoundType</cite> instance
+(for a structured, or compound array), a <cite>VLType</cite> instance
+(for a variable-length array), or the python <cite>str</cite> builtin
+(for a variable-length string array). Numpy string and unicode datatypes with
+length greater than one are aliases for <cite>str</cite>.</p>
+<p>Data from netCDF variables is presented to python as numpy arrays with
+the corresponding data type.</p>
+<p><cite>dimensions</cite> must be a tuple containing <cite>Dimension</cite> instances and/or
+dimension names (strings) that have been defined
+previously using <cite>Dataset.createDimension</cite>. The default value
+is an empty tuple, which means the variable is a scalar.</p>
+<p>If the optional keyword argument <cite>compression</cite> is set, the data will be
+compressed in the netCDF file using the specified compression algorithm.
+Currently <cite>zlib</cite>,`szip`,`zstd`,`bzip2`,`blosc_lz`,`blosc_lz4`,`blosc_lz4hc`,
+<cite>blosc_zlib</cite> and <cite>blosc_zstd</cite> are supported.
+Default is <cite>None</cite> (no compression).  All of the compressors except
+<cite>zlib</cite> and <cite>szip</cite> use the HDF5 plugin architecture.</p>
+<p>If the optional keyword <cite>zlib</cite> is <cite>True</cite>, the data will be compressed in
+the netCDF file using zlib compression (default <cite>False</cite>).  The use of this option is
+deprecated in favor of <cite>compression=’zlib’</cite>.</p>
+<p>The optional keyword <cite>complevel</cite> is an integer between 0 and 9 describing
+the level of compression desired (default 4). Ignored if <cite>compression=None</cite>.
+A value of zero disables compression.</p>
+<p>If the optional keyword <cite>shuffle</cite> is <cite>True</cite>, the HDF5 shuffle filter
+will be applied before compressing the data with zlib (default <cite>True</cite>).  This
+significantly improves compression. Default is <cite>True</cite>. Ignored if
+<cite>zlib=False</cite>.</p>
+<p>The optional kwarg <cite>blosc_shuffle`is  ignored
+unless the blosc compressor is used. `blosc_shuffle</cite> can be 0 (no shuffle),
+1 (byte-wise shuffle) or 2 (bit-wise shuffle). Default is 1.</p>
+<p>The optional kwargs <cite>szip_coding</cite> and <cite>szip_pixels_per_block</cite> are ignored
+unless the szip compressor is used. <cite>szip_coding</cite> can be <cite>ec</cite> (entropy coding)
+or <cite>nn</cite> (nearest neighbor coding). Default is <cite>nn</cite>. <cite>szip_pixels_per_block</cite>
+can be 4, 8, 16 or 32 (default 8).</p>
+<p>If the optional keyword <cite>fletcher32</cite> is <cite>True</cite>, the Fletcher32 HDF5
+checksum algorithm is activated to detect errors. Default <cite>False</cite>.</p>
+<p>If the optional keyword <cite>contiguous</cite> is <cite>True</cite>, the variable data is
+stored contiguously on disk.  Default <cite>False</cite>. Setting to <cite>True</cite> for
+a variable with an unlimited dimension will trigger an error.
+Fixed size variables (with no unlimited dimension) with no compression filters
+are contiguous by default.</p>
+<p>The optional keyword <cite>chunksizes</cite> can be used to manually specify the
+HDF5 chunksizes for each dimension of the variable.
+A detailed discussion of HDF chunking and I/O performance is available
+[here](<a class="reference external" href="https://support.hdfgroup.org/HDF5/doc/Advanced/Chunking">https://support.hdfgroup.org/HDF5/doc/Advanced/Chunking</a>).
+The default chunking scheme in the netcdf-c library is discussed
+[here](<a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/documentation/NUG/netcdf_perf_chunking.html">https://www.unidata.ucar.edu/software/netcdf/documentation/NUG/netcdf_perf_chunking.html</a>).
+Basically, you want the chunk size for each dimension to match as
+closely as possible the size of the data block that users will read
+from the file. <cite>chunksizes</cite> cannot be set if <cite>contiguous=True</cite>.</p>
+<p>The optional keyword <cite>endian</cite> can be used to control whether the
+data is stored in little or big endian format on disk. Possible
+values are <cite>little, big</cite> or <cite>native</cite> (default). The library
+will automatically handle endian conversions when the data is read,
+but if the data is always going to be read on a computer with the
+opposite format as the one used to create the file, there may be
+some performance advantage to be gained by setting the endian-ness.</p>
+<p>The optional keyword <cite>fill_value</cite> can be used to override the default
+netCDF <cite>_FillValue</cite> (the value that the variable gets filled with before
+any data is written to it, defaults given in the dict <cite>netCDF4.default_fillvals</cite>).
+If fill_value is set to <cite>False</cite>, then the variable is not pre-filled.</p>
+<p>If the optional keyword parameters <cite>least_significant_digit</cite> or <cite>significant_digits</cite> are
+specified, variable data will be truncated (quantized). In conjunction
+with <cite>compression=’zlib’</cite> this produces ‘lossy’, but significantly more
+efficient compression. For example, if <cite>least_significant_digit=1</cite>,
+data will be quantized using <cite>numpy.around(scale*data)/scale</cite>, where
+scale = 2**bits, and bits is determined so that a precision of 0.1 is
+retained (in this case bits=4). From the
+[PSL metadata conventions](<a class="reference external" href="http://www.esrl.noaa.gov/psl/data/gridded/conventions/cdc_netcdf_standard.shtml">http://www.esrl.noaa.gov/psl/data/gridded/conventions/cdc_netcdf_standard.shtml</a>):
+“least_significant_digit – power of ten of the smallest decimal place
+in unpacked data that is a reliable value.” Default is <cite>None</cite>, or no
+quantization, or ‘lossless’ compression.  If <cite>significant_digits=3</cite>
+then the data will be quantized so that three significant digits are retained, independent
+of the floating point exponent. The keyword argument <cite>quantize_mode</cite> controls
+the quantization algorithm (default ‘BitGroom’, ‘BitRound’ and
+‘GranularBitRound’ also available).  The ‘GranularBitRound’
+algorithm may result in better compression for typical geophysical datasets.
+This <cite>significant_digits</cite> kwarg is only available  with netcdf-c &gt;= 4.9.0, and
+only works with <cite>NETCDF4</cite> or <cite>NETCDF4_CLASSIC</cite> formatted files.</p>
+<p>When creating variables in a <cite>NETCDF4</cite> or <cite>NETCDF4_CLASSIC</cite> formatted file,
+HDF5 creates something called a ‘chunk cache’ for each variable.  The
+default size of the chunk cache may be large enough to completely fill
+available memory when creating thousands of variables.  The optional
+keyword <cite>chunk_cache</cite> allows you to reduce (or increase) the size of
+the default chunk cache when creating a variable.  The setting only
+persists as long as the Dataset is open - you can use the set_var_chunk_cache
+method to change it the next time the Dataset is opened.
+Warning - messing with this parameter can seriously degrade performance.</p>
+<p>The return value is the <cite>Variable</cite> class instance describing the new
+variable.</p>
+<p>A list of names corresponding to netCDF variable attributes can be
+obtained with the <cite>Variable</cite> method <cite>Variable.ncattrs</cite>. A dictionary
+containing all the netCDF attribute name/value pairs is provided by
+the <cite>__dict__</cite> attribute of a <cite>Variable</cite> instance.</p>
+<p><cite>Variable</cite> instances behave much like array objects. Data can be
+assigned to or retrieved from a variable with indexing and slicing
+operations on the <cite>Variable</cite> instance. A <cite>Variable</cite> instance has six
+Dataset standard attributes: <cite>dimensions, dtype, shape, ndim, name</cite> and
+<cite>least_significant_digit</cite>. Application programs should never modify
+these attributes. The <cite>dimensions</cite> attribute is a tuple containing the
+names of the dimensions associated with this variable. The <cite>dtype</cite>
+attribute is a string describing the variable’s data type (<cite>i4, f8,
+S1,</cite> etc). The <cite>shape</cite> attribute is a tuple describing the current
+sizes of all the variable’s dimensions. The <cite>name</cite> attribute is a
+string containing the name of the Variable instance.
+The <cite>least_significant_digit</cite>
+attributes describes the power of ten of the smallest decimal place in
+the data the contains a reliable value.  assigned to the <cite>Variable</cite>
+instance. The <cite>ndim</cite> attribute
+is the number of variable dimensions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.delncattr">
+<span class="sig-name descname"><span class="pre">delncattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.delncattr" title="Link to this definition">#</a></dt>
+<dd><p><strong>`delncattr(self,name,value)`</strong></p>
+<p>delete a netCDF dataset or group attribute.  Use if you need to delete a
+netCDF attribute with the same name as one of the reserved python
+attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.filepath">
+<span class="sig-name descname"><span class="pre">filepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.filepath" title="Link to this definition">#</a></dt>
+<dd><p><strong>`filepath(self,encoding=None)`</strong></p>
+<p>Get the file system path (or the opendap URL) which was used to
+open/create the Dataset. Requires netcdf &gt;= 4.1.2.  The path
+is decoded into a string using <cite>sys.getfilesystemencoding()</cite> by default, this can be
+changed using the <cite>encoding</cite> kwarg.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.fromcdl">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromcdl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cdlfilename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncfilename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'a'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NETCDF4'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.fromcdl" title="Link to this definition">#</a></dt>
+<dd><p><strong>`fromcdl(cdlfilename, ncfilename=None, mode=’a’,format=’NETCDF4’)`</strong></p>
+<p>call [ncgen][ncgen] via subprocess to create Dataset from [CDL][cdl]
+text representation. Requires [ncgen][ncgen] to be installed and in <cite>$PATH</cite>.</p>
+<p><strong>`cdlfilename`</strong>:  CDL file.</p>
+<p><strong>`ncfilename`</strong>: netCDF file to create. If not given, CDL filename with
+suffix replaced by <cite>.nc</cite> is used..</p>
+<p><strong>`mode`</strong>:  Access mode to open Dataset (Default <cite>‘a’</cite>).</p>
+<p><strong>`format`</strong>: underlying file format to use (one of <cite>‘NETCDF4’,
+‘NETCDF4_CLASSIC’, ‘NETCDF3_CLASSIC’</cite>, <cite>‘NETCDF3_64BIT_OFFSET’</cite> or
+<cite>‘NETCDF3_64BIT_DATA’</cite>. Default <cite>‘NETCDF4’</cite>.</p>
+<p>Dataset instance for <cite>ncfilename</cite> is returned.</p>
+<p>[ncgen]: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#ncgen_guide">https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#ncgen_guide</a>
+[cdl]: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#cdl_guide">https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#cdl_guide</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.get_variables_by_attributes">
+<span class="sig-name descname"><span class="pre">get_variables_by_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.get_variables_by_attributes" title="Link to this definition">#</a></dt>
+<dd><p><strong>`get_variables_by_attributes(self, **kwargs)`</strong></p>
+<p>Returns a list of variables that match specific conditions.</p>
+<p>Can pass in key=value parameters and variables are returned that
+contain all of the matches. For example,</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">#</span> <span class="pre">Get</span> <span class="pre">variables</span> <span class="pre">with</span> <span class="pre">x-axis</span> <span class="pre">attribute.</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">vs</span> <span class="pre">=</span> <span class="pre">nc.get_variables_by_attributes(axis='X')</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">#</span> <span class="pre">Get</span> <span class="pre">variables</span> <span class="pre">with</span> <span class="pre">matching</span> <span class="pre">&quot;standard_name&quot;</span> <span class="pre">attribute</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">vs</span> <span class="pre">=</span> <span class="pre">nc.get_variables_by_attributes(standard_name='northward_sea_water_velocity')</span>
+<span class="pre">`</span></code></p>
+<p>Can pass in key=callable parameter and variables are returned if the
+callable returns True.  The callable should accept a single parameter,
+the attribute value.  None is given as the attribute value when the
+attribute does not exist on the variable. For example,</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">#</span> <span class="pre">Get</span> <span class="pre">Axis</span> <span class="pre">variables</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">vs</span> <span class="pre">=</span> <span class="pre">nc.get_variables_by_attributes(axis=lambda</span> <span class="pre">v:</span> <span class="pre">v</span> <span class="pre">in</span> <span class="pre">['X',</span> <span class="pre">'Y',</span> <span class="pre">'Z',</span> <span class="pre">'T'])</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">#</span> <span class="pre">Get</span> <span class="pre">variables</span> <span class="pre">that</span> <span class="pre">don't</span> <span class="pre">have</span> <span class="pre">an</span> <span class="pre">&quot;axis&quot;</span> <span class="pre">attribute</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">vs</span> <span class="pre">=</span> <span class="pre">nc.get_variables_by_attributes(axis=lambda</span> <span class="pre">v:</span> <span class="pre">v</span> <span class="pre">is</span> <span class="pre">None)</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">#</span> <span class="pre">Get</span> <span class="pre">variables</span> <span class="pre">that</span> <span class="pre">have</span> <span class="pre">a</span> <span class="pre">&quot;grid_mapping&quot;</span> <span class="pre">attribute</span>
+<span class="pre">&gt;&gt;&gt;</span> <span class="pre">vs</span> <span class="pre">=</span> <span class="pre">nc.get_variables_by_attributes(grid_mapping=lambda</span> <span class="pre">v:</span> <span class="pre">v</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None)</span>
+<span class="pre">`</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.getncattr">
+<span class="sig-name descname"><span class="pre">getncattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.getncattr" title="Link to this definition">#</a></dt>
+<dd><p><strong>`getncattr(self,name)`</strong></p>
+<p>retrieve a netCDF dataset or group attribute.
+Use if you need to get a netCDF attribute with the same
+name as one of the reserved python attributes.</p>
+<p>option kwarg <cite>encoding</cite> can be used to specify the
+character encoding of a string attribute (default is <cite>utf-8</cite>).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.has_blosc_filter">
+<span class="sig-name descname"><span class="pre">has_blosc_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.has_blosc_filter" title="Link to this definition">#</a></dt>
+<dd><p><strong>`has_blosc_filter(self)`</strong>
+returns True if blosc compression filter is available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.has_bzip2_filter">
+<span class="sig-name descname"><span class="pre">has_bzip2_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.has_bzip2_filter" title="Link to this definition">#</a></dt>
+<dd><p><strong>`has_bzip2_filter(self)`</strong>
+returns True if bzip2 compression filter is available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.has_szip_filter">
+<span class="sig-name descname"><span class="pre">has_szip_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.has_szip_filter" title="Link to this definition">#</a></dt>
+<dd><p><strong>`has_szip_filter(self)`</strong>
+returns True if szip compression filter is available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.has_zstd_filter">
+<span class="sig-name descname"><span class="pre">has_zstd_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.has_zstd_filter" title="Link to this definition">#</a></dt>
+<dd><p><strong>`has_zstd_filter(self)`</strong>
+returns True if zstd compression filter is available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.isopen">
+<span class="sig-name descname"><span class="pre">isopen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.isopen" title="Link to this definition">#</a></dt>
+<dd><p><strong>`isopen(self)`</strong></p>
+<p>Is the Dataset open or closed?</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pydune.data_processing.Dataset.name" title="Link to this definition">#</a></dt>
+<dd><p>string name of Group instance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.ncattrs">
+<span class="sig-name descname"><span class="pre">ncattrs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.ncattrs" title="Link to this definition">#</a></dt>
+<dd><p><strong>`ncattrs(self)`</strong></p>
+<p>return netCDF global attribute names for this <cite>Dataset</cite> or <cite>Group</cite> in a list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.renameAttribute">
+<span class="sig-name descname"><span class="pre">renameAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.renameAttribute" title="Link to this definition">#</a></dt>
+<dd><p><strong>`renameAttribute(self, oldname, newname)`</strong></p>
+<p>rename a <cite>Dataset</cite> or <cite>Group</cite> attribute named <cite>oldname</cite> to <cite>newname</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.renameDimension">
+<span class="sig-name descname"><span class="pre">renameDimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.renameDimension" title="Link to this definition">#</a></dt>
+<dd><p><strong>`renameDimension(self, oldname, newname)`</strong></p>
+<p>rename a <cite>Dimension</cite> named <cite>oldname</cite> to <cite>newname</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.renameGroup">
+<span class="sig-name descname"><span class="pre">renameGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.renameGroup" title="Link to this definition">#</a></dt>
+<dd><p><strong>`renameGroup(self, oldname, newname)`</strong></p>
+<p>rename a <cite>Group</cite> named <cite>oldname</cite> to <cite>newname</cite> (requires netcdf &gt;= 4.3.1).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.renameVariable">
+<span class="sig-name descname"><span class="pre">renameVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.renameVariable" title="Link to this definition">#</a></dt>
+<dd><p><strong>`renameVariable(self, oldname, newname)`</strong></p>
+<p>rename a <cite>Variable</cite> named <cite>oldname</cite> to <cite>newname</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_always_mask">
+<span class="sig-name descname"><span class="pre">set_always_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_always_mask" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_always_mask(self, True_or_False)`</strong></p>
+<p>Call <cite>Variable.set_always_mask</cite> for all variables contained in
+this <cite>Dataset</cite> or <cite>Group</cite>, as well as for all
+variables in all its subgroups.</p>
+<p><strong>`True_or_False`</strong>: Boolean determining if automatic conversion of
+masked arrays with no missing values to regular numpy arrays shall be
+applied for all variables. Default True. Set to False to restore the default behaviour
+in versions prior to 1.4.1 (numpy array returned unless missing values are present,
+otherwise masked array returned).</p>
+<p><strong>*Note*</strong>: Calling this function only affects existing
+variables. Variables created after calling this function will follow
+the default behaviour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_auto_chartostring">
+<span class="sig-name descname"><span class="pre">set_auto_chartostring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_auto_chartostring" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_auto_chartostring(self, True_or_False)`</strong></p>
+<p>Call <cite>Variable.set_auto_chartostring</cite> for all variables contained in this <cite>Dataset</cite> or
+<cite>Group</cite>, as well as for all variables in all its subgroups.</p>
+<p><strong>`True_or_False`</strong>: Boolean determining if automatic conversion of
+all character arrays &lt;–&gt; string arrays should be performed for
+character variables (variables of type <cite>NC_CHAR</cite> or <cite>S1</cite>) with the
+<cite>_Encoding</cite> attribute set.</p>
+<p><strong>*Note*</strong>: Calling this function only affects existing variables. Variables created
+after calling this function will follow the default behaviour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_auto_mask">
+<span class="sig-name descname"><span class="pre">set_auto_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_auto_mask" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_auto_mask(self, True_or_False)`</strong></p>
+<p>Call <cite>Variable.set_auto_mask</cite> for all variables contained in this <cite>Dataset</cite> or
+<cite>Group</cite>, as well as for all variables in all its subgroups. Only affects
+Variables with primitive or enum types (not compound or vlen Variables).</p>
+<p><strong>`True_or_False`</strong>: Boolean determining if automatic conversion to masked arrays
+shall be applied for all variables.</p>
+<p><strong>*Note*</strong>: Calling this function only affects existing variables. Variables created
+after calling this function will follow the default behaviour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_auto_maskandscale">
+<span class="sig-name descname"><span class="pre">set_auto_maskandscale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_auto_maskandscale" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_auto_maskandscale(self, True_or_False)`</strong></p>
+<p>Call <cite>Variable.set_auto_maskandscale</cite> for all variables contained in this <cite>Dataset</cite> or
+<cite>Group</cite>, as well as for all variables in all its subgroups.</p>
+<p><strong>`True_or_False`</strong>: Boolean determining if automatic conversion to masked arrays
+and variable scaling shall be applied for all variables.</p>
+<p><strong>*Note*</strong>: Calling this function only affects existing variables. Variables created
+after calling this function will follow the default behaviour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_auto_scale">
+<span class="sig-name descname"><span class="pre">set_auto_scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_auto_scale" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_auto_scale(self, True_or_False)`</strong></p>
+<p>Call <cite>Variable.set_auto_scale</cite> for all variables contained in this <cite>Dataset</cite> or
+<cite>Group</cite>, as well as for all variables in all its subgroups.</p>
+<p><strong>`True_or_False`</strong>: Boolean determining if automatic variable scaling
+shall be applied for all variables.</p>
+<p><strong>*Note*</strong>: Calling this function only affects existing variables. Variables created
+after calling this function will follow the default behaviour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_fill_off">
+<span class="sig-name descname"><span class="pre">set_fill_off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_fill_off" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_fill_off(self)`</strong></p>
+<p>Sets the fill mode for a <cite>Dataset</cite> open for writing to <cite>off</cite>.</p>
+<p>This will prevent the data from being pre-filled with fill values, which
+may result in some performance improvements. However, you must then make
+sure the data is actually written before being read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_fill_on">
+<span class="sig-name descname"><span class="pre">set_fill_on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_fill_on" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_fill_on(self)`</strong></p>
+<p>Sets the fill mode for a <cite>Dataset</cite> open for writing to <cite>on</cite>.</p>
+<p>This causes data to be pre-filled with fill values. The fill values can be
+controlled by the variable’s <cite>_Fill_Value</cite> attribute, but is usually
+sufficient to the use the netCDF default <cite>_Fill_Value</cite> (defined
+separately for each variable type). The default behavior of the netCDF
+library corresponds to <cite>set_fill_on</cite>.  Data which are equal to the
+<cite>_Fill_Value</cite> indicate that the variable was created, but never written
+to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.set_ncstring_attrs">
+<span class="sig-name descname"><span class="pre">set_ncstring_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.set_ncstring_attrs" title="Link to this definition">#</a></dt>
+<dd><p><strong>`set_ncstring_attrs(self, True_or_False)`</strong></p>
+<p>Call <cite>Variable.set_ncstring_attrs</cite> for all variables contained in
+this <cite>Dataset</cite> or <cite>Group</cite>, as well as for all its
+subgroups and their variables.</p>
+<p><strong>`True_or_False`</strong>: Boolean determining if all string attributes are
+created as variable-length NC_STRINGs, (if True), or if ascii text
+attributes are stored as NC_CHARs (if False; default)</p>
+<p><strong>*Note*</strong>: Calling this function only affects newly created attributes
+of existing (sub-) groups and their variables.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.setncattr">
+<span class="sig-name descname"><span class="pre">setncattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.setncattr" title="Link to this definition">#</a></dt>
+<dd><p><strong>`setncattr(self,name,value)`</strong></p>
+<p>set a netCDF dataset or group attribute using name,value pair.
+Use if you need to set a netCDF attribute with the
+with the same name as one of the reserved python attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.setncattr_string">
+<span class="sig-name descname"><span class="pre">setncattr_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.setncattr_string" title="Link to this definition">#</a></dt>
+<dd><p><strong>`setncattr_string(self,name,value)`</strong></p>
+<p>set a netCDF dataset or group string attribute using name,value pair.
+Use if you need to ensure that a netCDF attribute is created with type
+<cite>NC_STRING</cite> if the file format is <cite>NETCDF4</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.setncatts">
+<span class="sig-name descname"><span class="pre">setncatts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.setncatts" title="Link to this definition">#</a></dt>
+<dd><p><strong>`setncatts(self,attdict)`</strong></p>
+<p>set a bunch of netCDF dataset or group attributes at once using a python dictionary.
+This may be faster when setting a lot of attributes for a <cite>NETCDF3</cite>
+formatted file, since nc_redef/nc_enddef is not called in between setting
+each attribute</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.sync" title="Link to this definition">#</a></dt>
+<dd><p><strong>`sync(self)`</strong></p>
+<p>Writes all buffered data in the <cite>Dataset</cite> to the disk file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pydune.data_processing.Dataset.tocdl">
+<span class="sig-name descname"><span class="pre">tocdl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordvars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pydune.data_processing.Dataset.tocdl" title="Link to this definition">#</a></dt>
+<dd><p><strong>`tocdl(self, coordvars=False, data=False, outfile=None)`</strong></p>
+<p>call [ncdump][ncdump] via subprocess to create [CDL][cdl]
+text representation of Dataset. Requires [ncdump][ncdump]
+to be installed and in <cite>$PATH</cite>.</p>
+<p><strong>`coordvars`</strong>: include coordinate variable data (via <cite>ncdump -c</cite>). Default False</p>
+<p><strong>`data`</strong>: if True, write out variable data (Default False).</p>
+<p><strong>`outfile`</strong>: If not None, file to output ncdump to. Default is to return a string.</p>
+<p>[ncdump]: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#ncdump_guide">https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#ncdump_guide</a>
+[cdl]: <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#cdl_guide">https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_utilities_guide.html#cdl_guide</a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.close"><code class="docutils literal notranslate"><span class="pre">Dataset.close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.createCompoundType"><code class="docutils literal notranslate"><span class="pre">Dataset.createCompoundType()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.createDimension"><code class="docutils literal notranslate"><span class="pre">Dataset.createDimension()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.createEnumType"><code class="docutils literal notranslate"><span class="pre">Dataset.createEnumType()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.createGroup"><code class="docutils literal notranslate"><span class="pre">Dataset.createGroup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.createVLType"><code class="docutils literal notranslate"><span class="pre">Dataset.createVLType()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.createVariable"><code class="docutils literal notranslate"><span class="pre">Dataset.createVariable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.delncattr"><code class="docutils literal notranslate"><span class="pre">Dataset.delncattr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.filepath"><code class="docutils literal notranslate"><span class="pre">Dataset.filepath()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.fromcdl"><code class="docutils literal notranslate"><span class="pre">Dataset.fromcdl()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.get_variables_by_attributes"><code class="docutils literal notranslate"><span class="pre">Dataset.get_variables_by_attributes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.getncattr"><code class="docutils literal notranslate"><span class="pre">Dataset.getncattr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.has_blosc_filter"><code class="docutils literal notranslate"><span class="pre">Dataset.has_blosc_filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.has_bzip2_filter"><code class="docutils literal notranslate"><span class="pre">Dataset.has_bzip2_filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.has_szip_filter"><code class="docutils literal notranslate"><span class="pre">Dataset.has_szip_filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.has_zstd_filter"><code class="docutils literal notranslate"><span class="pre">Dataset.has_zstd_filter()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.isopen"><code class="docutils literal notranslate"><span class="pre">Dataset.isopen()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.name"><code class="docutils literal notranslate"><span class="pre">Dataset.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.ncattrs"><code class="docutils literal notranslate"><span class="pre">Dataset.ncattrs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.renameAttribute"><code class="docutils literal notranslate"><span class="pre">Dataset.renameAttribute()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.renameDimension"><code class="docutils literal notranslate"><span class="pre">Dataset.renameDimension()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.renameGroup"><code class="docutils literal notranslate"><span class="pre">Dataset.renameGroup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.renameVariable"><code class="docutils literal notranslate"><span class="pre">Dataset.renameVariable()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_always_mask"><code class="docutils literal notranslate"><span class="pre">Dataset.set_always_mask()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_auto_chartostring"><code class="docutils literal notranslate"><span class="pre">Dataset.set_auto_chartostring()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_auto_mask"><code class="docutils literal notranslate"><span class="pre">Dataset.set_auto_mask()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_auto_maskandscale"><code class="docutils literal notranslate"><span class="pre">Dataset.set_auto_maskandscale()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_auto_scale"><code class="docutils literal notranslate"><span class="pre">Dataset.set_auto_scale()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_fill_off"><code class="docutils literal notranslate"><span class="pre">Dataset.set_fill_off()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_fill_on"><code class="docutils literal notranslate"><span class="pre">Dataset.set_fill_on()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.set_ncstring_attrs"><code class="docutils literal notranslate"><span class="pre">Dataset.set_ncstring_attrs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.setncattr"><code class="docutils literal notranslate"><span class="pre">Dataset.setncattr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.setncattr_string"><code class="docutils literal notranslate"><span class="pre">Dataset.setncattr_string()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.setncatts"><code class="docutils literal notranslate"><span class="pre">Dataset.setncatts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.sync"><code class="docutils literal notranslate"><span class="pre">Dataset.sync()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pydune.data_processing.Dataset.tocdl"><code class="docutils literal notranslate"><span class="pre">Dataset.tocdl()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2021, Cyril Gadal.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
